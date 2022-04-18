@@ -3,11 +3,17 @@ import { App, Plugin, PluginSettingTab} from 'obsidian';
 // Remember to rename these classes and interfaces!
 
 interface LocalQuotesSettings {
-	mySetting: string;
+	quoteTag: string;
+	lastReload: number;
+	reloadInterval: number;
+	quotes: Map<string,string[]>;
 }
 
 const DEFAULT_SETTINGS: LocalQuotesSettings = {
-	mySetting: 'default'
+	quoteTag: 'quotes',
+	lastReload: Date.now(),
+	reloadInterval: 86400,
+	quotes: null,
 }
 
 export default class LocalQuotes extends Plugin {
