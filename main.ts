@@ -1,4 +1,5 @@
-import { App, Plugin, PluginSettingTab} from 'obsidian';
+import {App, Notice, Plugin, PluginSettingTab} from 'obsidian';
+import findTaggedFiles from "./utils";
 
 // Remember to rename these classes and interfaces!
 
