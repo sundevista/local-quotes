@@ -30,7 +30,7 @@ export default class LocalQuotes extends Plugin {
 
 	async onload() {
 		await this.loadSettings();
-		await this.addSettingTab(new LocalQuotesSettingTab(this.app, this));
+		this.addSettingTab(new LocalQuotesSettingTab(this.app, this));
 		console.log('LOADED');
 		console.log(findTaggedFiles(this.app, this.settings.quoteTag));
 	}
