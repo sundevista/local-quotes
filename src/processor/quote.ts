@@ -1,9 +1,10 @@
 import LocalQuotes from "../main";
 import {TFile} from "obsidian";
 import {author_regexp, quote_regexp} from "../consts";
+import {getAuthorIdx} from "../util/scan";
 
 export async function uploadQuote(plugin: LocalQuotes, author: string, quote: string): Promise<void> {
-	const idx = plugin.quoteVault.findIndex((e) => e.author === author);
+	const idx = getAuthorIdx(plugin, author);
 
 	if (idx >= 0) {
 		if (!plugin.quoteVault[idx].quotes.contains(quote)) {

@@ -1,4 +1,9 @@
 import {App, TFile} from "obsidian";
+import LocalQuotes from "../main";
+
+export function getAuthorIdx(plugin: LocalQuotes, author: string): number {
+	return plugin.quoteVault.findIndex((e) => e.author === author);
+}
 
 export function findTaggedFiles(app: App, tag: string): TFile[] {
 	let result: TFile[] = [];
