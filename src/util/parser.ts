@@ -3,7 +3,7 @@ import {
 	codeblock_author_regexp,
 	codeblock_customClass_regexp,
 	codeblock_id_regexp,
-	codeblock_reloadInterval_regexp
+	codeblock_reloadInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
 } from "../consts";
 
 export function parseCodeBlock(content: string): BlockMetadata {
@@ -26,4 +26,29 @@ export function parseCodeBlock(content: string): BlockMetadata {
 		lastUpdate: 0,
 		reloadInterval: reloadInterval,
 	};
+}
+
+function parseTime(str: string): number {
+	// Last letter
+	const letter = str.slice(-1);
+
+	// Number value
+	const value = parseInt(str.slice(0, -1));
+
+	switch (letter) {
+		case 's':
+			return value;
+		case 'm':
+			return value * sec_in_minute;
+		case 'h':
+			return value * sec_in_hour;
+		case 'd':
+			return value * sec_in_day;
+		case 'w':
+			return value * sec_in_week;
+		case 'M':
+			return value * sec_in_month;
+		case 'y':
+			return value * sec_in_year;
+	}
 }
