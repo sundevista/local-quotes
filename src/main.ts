@@ -1,10 +1,12 @@
 import {App, Plugin, PluginSettingTab, Setting} from 'obsidian';
 import {findTaggedFiles} from "./util/scan";
 import {updateQuotesVault} from "./processor/quote";
+import {parseCodeBlock} from "./util/parser";
 
 export interface BlockMetadata {
 	id: string;
 	author: string;
+	text: string;
 	lastUpdate: number;
 	reloadInterval: number;
 	customClass: string;
@@ -42,6 +44,8 @@ export default class LocalQuotes extends Plugin {
 		await this.loadSettings();
 
 		this.addSettingTab(new LocalQuotesSettingTab(this.app, this));
+
+		console.log(parseCodeBlock("```\nid dsgbkj4jk\nauthor Simon Dziha\n```"));
 
 		this.addCommand({
 			id: 'rescan-local-quotes',
