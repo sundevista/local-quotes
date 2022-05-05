@@ -84,6 +84,7 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 			.setName('Quote tag')
 			.setDesc('Tag name that will be used for searching notes with quotes')
 			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.quoteTag)
 				.setValue(this.plugin.settings.quoteTag)
 				.onChange(async (value) => {
 					this.plugin.settings.quoteTag = value;
@@ -94,6 +95,7 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 			.setName('Reload interval')
 			.setDesc('You can set default reload interval and miss corresponding field in codeblock (in seconds)')
 			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.defaultReloadInterval.toString())
 				.setValue(this.plugin.settings.defaultReloadInterval.toString())
 				.onChange(async (value) => {
 					this.plugin.settings.defaultReloadInterval = parseInt(value);
@@ -117,6 +119,7 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 			.setName('Event check interval')
 			.setDesc('How often plugin should check time to update quote codeblocks (in seconds)')
 			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.eventCheckInterval.toString())
 				.setValue(this.plugin.settings.eventCheckInterval.toString())
 				.onChange(async (value) => {
 					this.plugin.settings.eventCheckInterval = parseInt(value);
@@ -127,6 +130,7 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 			.setName('Minimal quote length')
 			.setDesc('If quote shorten it\'ll be skipped during scan (in characters)')
 			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.minimalQuoteLength.toString())
 				.setValue(this.plugin.settings.minimalQuoteLength.toString())
 				.onChange(async (value) => {
 					this.plugin.settings.minimalQuoteLength = parseInt(value);
