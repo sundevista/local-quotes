@@ -2,8 +2,8 @@ import {App, Plugin, PluginSettingTab, Setting} from 'obsidian';
 import {findTaggedFiles} from "./util/scan";
 import {updateQuotesVault} from "./processor/quote";
 
-interface BlockMetadata {
-	id: number;
+export interface BlockMetadata {
+	id: string;
 	author: string;
 	lastUpdate: number;
 	reloadInterval: number;
