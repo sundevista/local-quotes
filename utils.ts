@@ -14,21 +14,22 @@ export function findTaggedFiles(app: App, tag: string): TFile[] {
 }
 
 export async function uploadQuote(plugin: LocalQuotes, author: string, quote: string): Promise<void> {
-	const idx = plugin.settings.quoteVault.findIndex((e) => e.author === author);
+	const idx = plugin.quoteVault.findIndex((e) => e.author === author);
 
 	if (idx >= 0) {
-		if (!plugin.settings.quoteVault[idx].quotes.contains(quote)) {
-			plugin.settings.quoteVault[idx].quotes.push(quote);
+		if (!plugin.quoteVault[idx].quotes.contains(quote)) {
+			plugin.quoteVault[idx].quotes.push(quote);
 		}
 	} else {
-		plugin.settings.quoteVault.push({author: author, quotes: [quote]});
+		plugin.quoteVault.push({author: author, quotes: [quote]});
 	}
 
 	await plugin.saveSettings();
 }
 
 export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Promise<void> {
-	console.log('up')
+	plugin.quoteVault = [];
+
 	const author_regexp = /:::\w+:::/gm;
 	const quote_regexp = /(- \w+)|(\d. \w+)/gm;
 

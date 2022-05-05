@@ -17,21 +17,22 @@ interface Quote {
 interface LocalQuotesSettings {
 	quoteTag: string;
 	defaultReloadInterval: number;
+	eventCheckInterval: number;
 	showReloadButton: boolean;
-	quoteVault: Quote[];
 	blockMetadata: BlockMetadata[];
 }
 
 const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteTag: 'quotes',
 	defaultReloadInterval: 86400,
+	eventCheckInterval: 120,
 	showReloadButton: false,
-	quoteVault: new Array<Quote>(),
 	blockMetadata: new Array<BlockMetadata>(),
 }
 
 export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;
+	quoteVault: Quote[];
 
 	async onload() {
 		console.log('loading Local Quotes...')
@@ -109,5 +110,15 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 				}));
 
 		containerEl.createEl('h2', {text: 'Advanced'});
+
+		new Setting(containerEl)
+			.setName('Event check interval')
+			.setDesc('How often plugin should check time to update quote codeblocks (in seconds)')
+			.addText(text => text
+				.setValue(this.plugin.settings.eventCheckInterval.toString())
+				.onChange(async (value) => {
+					this.plugin.settings.eventCheckInterval = parseInt(value);
+					await this.plugin.saveSettings();
+				}));
 	}
 }
