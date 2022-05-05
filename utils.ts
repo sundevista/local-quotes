@@ -1,6 +1,6 @@
 import {App, TFile} from "obsidian";
 
-export default function findTaggedFiles(app: App, tag: string): TFile[] {
+export function findTaggedFiles(app: App, tag: string): TFile[] {
 	let result: TFile[] = [];
 
 	for (let p of app.vault.getMarkdownFiles()) {
