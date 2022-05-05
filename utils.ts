@@ -28,6 +28,7 @@ export async function uploadQuote(plugin: LocalQuotes, author: string, quote: st
 }
 
 export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Promise<void> {
+	console.log('up')
 	const author_regexp = /:::\w+:::/gm;
 	const quote_regexp = /(- \w+)|(\d. \w+)/gm;
 

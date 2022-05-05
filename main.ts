@@ -17,7 +17,6 @@ interface Quote {
 interface LocalQuotesSettings {
 	quoteTag: string;
 	defaultReloadInterval: number;
-	rescanInterval: number;
 	showReloadButton: boolean;
 	quoteVault: Quote[];
 	blockMetadata: BlockMetadata[];
@@ -26,7 +25,6 @@ interface LocalQuotesSettings {
 const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteTag: 'quotes',
 	defaultReloadInterval: 86400,
-	rescanInterval: 120,
 	showReloadButton: false,
 	quoteVault: new Array<Quote>(),
 	blockMetadata: new Array<BlockMetadata>(),
@@ -36,10 +34,18 @@ export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;
 
 	async onload() {
+		console.log('loading Local Quotes...')
 		await this.loadSettings();
+
 		this.addSettingTab(new LocalQuotesSettingTab(this.app, this));
-		console.log('LOADED');
-		await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag));
+
+		this.addCommand({
+			id: 'rescan-local-quotes',
+			name: 'Rescan vault for local quotes',
+			callback: async() => {
+				await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag))
+			}
+		});
 	}
 
 	async onunload() {
@@ -103,15 +109,5 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 				}));
 
 		containerEl.createEl('h2', {text: 'Advanced'});
-
-		new Setting(containerEl)
-			.setName('Rescan interval')
-			.setDesc('How often plugin should rescan vault for the new quotes (in seconds)')
-			.addText(text => text
-				.setValue(this.plugin.settings.rescanInterval.toString())
-				.onChange(async (value) => {
-					this.plugin.settings.rescanInterval = parseInt(value);
-					await this.plugin.saveSettings();
-				}));
 	}
 }
