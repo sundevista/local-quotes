@@ -39,7 +39,7 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 		current_author = '';
 
 		for (let line of (await plugin.app.vault.cachedRead(file)).split('\n')) {
-			if (current_author && line.match(quote_regexp)) {
+			if (current_author && line.match(quote_regexp) && line.length >= plugin.settings.minimalQuoteLength) {
 				// Quote case
 				await uploadQuote(plugin, current_author, line.slice(2))
 			} else if (line.match(author_regexp)) {

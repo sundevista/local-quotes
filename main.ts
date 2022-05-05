@@ -18,6 +18,7 @@ interface LocalQuotesSettings {
 	quoteTag: string;
 	defaultReloadInterval: number;
 	eventCheckInterval: number;
+	minimalQuoteLength: number;
 	showReloadButton: boolean;
 	blockMetadata: BlockMetadata[];
 }
@@ -26,6 +27,7 @@ const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteTag: 'quotes',
 	defaultReloadInterval: 86400,
 	eventCheckInterval: 120,
+	minimalQuoteLength: 5,
 	showReloadButton: false,
 	blockMetadata: new Array<BlockMetadata>(),
 }
@@ -118,6 +120,16 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 				.setValue(this.plugin.settings.eventCheckInterval.toString())
 				.onChange(async (value) => {
 					this.plugin.settings.eventCheckInterval = parseInt(value);
+					await this.plugin.saveSettings();
+				}));
+
+		new Setting(containerEl)
+			.setName('Minimal quote length')
+			.setDesc('If quote shorten it\'ll be skipped during scan (in characters)')
+			.addText(text => text
+				.setValue(this.plugin.settings.minimalQuoteLength.toString())
+				.onChange(async (value) => {
+					this.plugin.settings.minimalQuoteLength = parseInt(value);
 					await this.plugin.saveSettings();
 				}));
 	}
