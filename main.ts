@@ -17,6 +17,7 @@ interface Quote {
 interface LocalQuotesSettings {
 	quoteTag: string;
 	defaultReloadInterval: number;
+	rescanInterval: number;
 	showReloadButton: boolean;
 	quoteVault: Quote[];
 	blockMetadata: BlockMetadata[];
@@ -25,6 +26,7 @@ interface LocalQuotesSettings {
 const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteTag: 'quotes',
 	defaultReloadInterval: 86400,
+	rescanInterval: 120,
 	showReloadButton: false,
 	quoteVault: new Array<Quote>(),
 	blockMetadata: new Array<BlockMetadata>(),
@@ -67,6 +69,8 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 
 		containerEl.empty();
 
+		containerEl.createEl('h2', {text: 'General'});
+
 		new Setting(containerEl)
 			.setName('Quote tag')
 			.setDesc('Tag name that will be used for searching notes with quotes')
@@ -79,7 +83,7 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Reload interval')
-			.setDesc('You can set default reload interval and miss corresponding field in codeblock')
+			.setDesc('You can set default reload interval and miss corresponding field in codeblock (in seconds)')
 			.addText(text => text
 				.setValue(this.plugin.settings.defaultReloadInterval.toString())
 				.onChange(async (value) => {
@@ -94,6 +98,18 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 				.setValue(this.plugin.settings.showReloadButton)
 				.onChange(async (value) => {
 					this.plugin.settings.showReloadButton = value;
+					await this.plugin.saveSettings();
+				}));
+
+		containerEl.createEl('h2', {text: 'Advanced'});
+
+		new Setting(containerEl)
+			.setName('Rescan interval')
+			.setDesc('How often plugin should rescan vault for the new quotes (in seconds)')
+			.addText(text => text
+				.setValue(this.plugin.settings.rescanInterval.toString())
+				.onChange(async (value) => {
+					this.plugin.settings.rescanInterval = parseInt(value);
 					await this.plugin.saveSettings();
 				}));
 	}
