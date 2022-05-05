@@ -1,5 +1,5 @@
 import {App, Plugin, PluginSettingTab, Setting} from 'obsidian';
-import {findTaggedFiles} from "./utils";
+import {findTaggedFiles, updateQuotesVault} from "./utils";
 
 interface BlockMetadata {
 	id: number;
@@ -9,11 +9,16 @@ interface BlockMetadata {
 	customClass: string;
 }
 
+interface Quote {
+	author: string;
+	quotes: string[];
+}
+
 interface LocalQuotesSettings {
 	quoteTag: string;
 	defaultReloadInterval: number;
 	showReloadButton: boolean;
-	quoteVault: Map<string,string[]>;
+	quoteVault: Quote[];
 	blockMetadata: BlockMetadata[];
 }
 
@@ -21,7 +26,7 @@ const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteTag: 'quotes',
 	defaultReloadInterval: 86400,
 	showReloadButton: false,
-	quoteVault: new Map<string, string[]>(),
+	quoteVault: new Array<Quote>(),
 	blockMetadata: new Array<BlockMetadata>(),
 }
 
@@ -32,7 +37,7 @@ export default class LocalQuotes extends Plugin {
 		await this.loadSettings();
 		this.addSettingTab(new LocalQuotesSettingTab(this.app, this));
 		console.log('LOADED');
-		console.log(findTaggedFiles(this.app, this.settings.quoteTag));
+		await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag));
 	}
 
 	async onunload() {
