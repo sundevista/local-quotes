@@ -1,6 +1,7 @@
 import {App, Plugin, PluginSettingTab, Setting} from 'obsidian';
 import {findTaggedFiles} from "./util/scan";
 import {updateQuotesVault} from "./processor/quote";
+import {sec_in_day} from "./consts";
 
 export interface BlockMetadata {
 	id: string;
@@ -27,7 +28,7 @@ interface LocalQuotesSettings {
 
 const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteTag: 'quotes',
-	defaultReloadInterval: 86400,
+	defaultReloadInterval: sec_in_day,
 	eventCheckInterval: 120,
 	minimalQuoteLength: 5,
 	showReloadButton: false,
