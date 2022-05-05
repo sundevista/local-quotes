@@ -1,5 +1,6 @@
 import LocalQuotes from "../main";
 import {TFile} from "obsidian";
+import {author_regexp, quote_regexp} from "../consts";
 
 export async function uploadQuote(plugin: LocalQuotes, author: string, quote: string): Promise<void> {
 	const idx = plugin.quoteVault.findIndex((e) => e.author === author);
@@ -17,9 +18,6 @@ export async function uploadQuote(plugin: LocalQuotes, author: string, quote: st
 
 export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Promise<void> {
 	plugin.quoteVault = [];
-
-	const author_regexp = /:::\w+:::/gm;
-	const quote_regexp = /(- \w+)|(\d. \w+)/gm;
 
 	let current_author;
 
