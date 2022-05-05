@@ -1,5 +1,5 @@
 import {App, TFile} from "obsidian";
-import LocalQuotes from "./main";
+import LocalQuotes from "./../main";
 
 export function findTaggedFiles(app: App, tag: string): TFile[] {
 	let result: TFile[] = [];
