@@ -2,15 +2,8 @@ import {App, Plugin, PluginSettingTab, Setting} from 'obsidian';
 import {findTaggedFiles} from "./util/scan";
 import {updateQuotesVault} from "./processor/quote";
 import {sec_in_day} from "./consts";
-
-export interface BlockMetadata {
-	id: string;
-	author: string;
-	text: string;
-	lastUpdate: number;
-	reloadInterval: number;
-	customClass: string;
-}
+import {processCodeblock} from "./processor/codeblock";
+import {BlockMetadata} from "./processor/blockmetadata";
 
 interface Quote {
 	author: string;
@@ -32,7 +25,7 @@ const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	eventCheckInterval: 120,
 	minimalQuoteLength: 5,
 	showReloadButton: false,
-	blockMetadata: new Array<BlockMetadata>(),
+	blockMetadata: [],
 }
 
 export default class LocalQuotes extends Plugin {
@@ -42,6 +35,11 @@ export default class LocalQuotes extends Plugin {
 	async onload() {
 		console.log('loading Local Quotes...')
 		await this.loadSettings();
+
+
+		this.registerMarkdownCodeBlockProcessor(
+			'localquote',
+			(src, el, ctx) => processCodeblock(this, src, el, ctx));
 
 		this.addSettingTab(new LocalQuotesSettingTab(this.app, this));
 
@@ -66,6 +64,7 @@ export default class LocalQuotes extends Plugin {
 		await this.saveData(this.settings);
 	}
 }
+
 
 
 class LocalQuotesSettingTab extends PluginSettingTab {

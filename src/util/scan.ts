@@ -5,6 +5,10 @@ export function getAuthorIdx(plugin: LocalQuotes, author: string): number {
 	return plugin.quoteVault.findIndex((e) => e.author === author);
 }
 
+export function getBlockMetadataIdx(plugin: LocalQuotes, id: string): number {
+	return plugin.settings.blockMetadata.findIndex((e) => e.id === id);
+}
+
 export function findTaggedFiles(app: App, tag: string): TFile[] {
 	let result: TFile[] = [];
 
