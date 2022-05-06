@@ -3,6 +3,11 @@ import {TFile} from "obsidian";
 import {author_regexp, quote_regexp} from "../consts";
 import {getAuthorIdx} from "../util/scan";
 
+export interface Quote {
+	author: string;
+	quotes: string[];
+}
+
 export async function uploadQuote(plugin: LocalQuotes, author: string, quote: string): Promise<void> {
 	const idx = getAuthorIdx(plugin, author);
 

@@ -1,19 +1,13 @@
 import {App, Plugin, PluginSettingTab, Setting} from 'obsidian';
 import {findTaggedFiles} from "./util/scan";
-import {updateQuotesVault} from "./processor/quote";
+import {Quote, updateQuotesVault} from "./types/quote";
 import {sec_in_day} from "./consts";
 import {processCodeblock} from "./processor/codeblock";
-import {BlockMetadata} from "./processor/blockmetadata";
-
-interface Quote {
-	author: string;
-	quotes: string[];
-}
+import {BlockMetadata} from "./types/blockmetadata";
 
 interface LocalQuotesSettings {
 	quoteTag: string;
 	defaultReloadInterval: number;
-	eventCheckInterval: number;
 	minimalQuoteLength: number;
 	showReloadButton: boolean;
 	blockMetadata: BlockMetadata[];
@@ -22,7 +16,6 @@ interface LocalQuotesSettings {
 const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteTag: 'quotes',
 	defaultReloadInterval: sec_in_day,
-	eventCheckInterval: 120,
 	minimalQuoteLength: 5,
 	showReloadButton: false,
 	blockMetadata: [],
@@ -39,7 +32,7 @@ export default class LocalQuotes extends Plugin {
 
 		this.registerMarkdownCodeBlockProcessor(
 			'localquote',
-			(src, el, ctx) => processCodeblock(this, src, el, ctx));
+			(src, el, _) => processCodeblock(this, src, el));
 
 		this.addSettingTab(new LocalQuotesSettingTab(this.app, this));
 
@@ -116,17 +109,6 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 				}));
 
 		containerEl.createEl('h2', {text: 'Advanced'});
-
-		new Setting(containerEl)
-			.setName('Event check interval')
-			.setDesc('How often plugin should check time to update quote codeblocks (in seconds)')
-			.addText(text => text
-				.setPlaceholder(DEFAULT_SETTINGS.eventCheckInterval.toString())
-				.setValue(this.plugin.settings.eventCheckInterval.toString())
-				.onChange(async (value) => {
-					this.plugin.settings.eventCheckInterval = parseInt(value);
-					await this.plugin.saveSettings();
-				}));
 
 		new Setting(containerEl)
 			.setName('Minimal quote length')

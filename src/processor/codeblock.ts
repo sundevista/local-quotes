@@ -1,15 +1,13 @@
-import {MarkdownPostProcessorContext} from "obsidian";
 import LocalQuotes from "../main";
-import {selectBlockMetadata} from "./blockmetadata";
+import {selectBlockMetadata} from "../types/blockmetadata";
 import {quote_format} from "../consts";
-import {updateQuotesVault} from "./quote";
+import {updateQuotesVault} from "../types/quote";
 import {findTaggedFiles} from "../util/scan";
 
 export async function processCodeblock(
 	plugin: LocalQuotes,
 	source: string,
-	el: HTMLElement,
-	ctx: MarkdownPostProcessorContext): Promise<void>
+	el: HTMLElement): Promise<void>
 {
 	await updateQuotesVault(plugin, findTaggedFiles(plugin.app, plugin.settings.quoteTag))
 

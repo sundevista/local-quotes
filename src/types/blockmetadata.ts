@@ -2,6 +2,7 @@ import LocalQuotes from "../main";
 import {parseCodeBlock} from "../util/parser";
 import {getRandomQuoteOfAuthor} from "../util/random";
 import {getBlockMetadataIdx} from "../util/scan";
+import {getCurrentSeconds} from "../util/date";
 
 export interface BlockMetadata {
 	id: string;
@@ -14,7 +15,7 @@ export interface BlockMetadata {
 
 function makeBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata): BlockMetadata {
 	rawBlockMetadata.text = getRandomQuoteOfAuthor(plugin, rawBlockMetadata.author);
-	rawBlockMetadata.lastUpdate = Date.now();
+	rawBlockMetadata.lastUpdate = getCurrentSeconds();
 
 	plugin.settings.blockMetadata.push(rawBlockMetadata);
 
@@ -43,8 +44,9 @@ function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadat
 			? plugin.settings.defaultReloadInterval
 			: plugin.settings.blockMetadata[bmIdx].reloadInterval;
 
-	if ((plugin.settings.blockMetadata[bmIdx].lastUpdate + reloadInterval) < Date.now()) {
+	if ((plugin.settings.blockMetadata[bmIdx].lastUpdate + reloadInterval) < getCurrentSeconds()) {
 		plugin.settings.blockMetadata[bmIdx].text = getRandomQuoteOfAuthor(plugin, rawBlockMetadata.author);
+		plugin.settings.blockMetadata[bmIdx].lastUpdate = getCurrentSeconds();
 	}
 
 	return plugin.settings.blockMetadata[bmIdx];

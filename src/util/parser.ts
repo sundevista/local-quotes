@@ -1,4 +1,4 @@
-import {BlockMetadata} from "../processor/blockmetadata";
+import {BlockMetadata} from "../types/blockmetadata";
 import {
 	codeblock_author_regexp,
 	codeblock_customClass_regexp,
