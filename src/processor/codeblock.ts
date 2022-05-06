@@ -16,7 +16,7 @@ export async function processCodeblock(
 	await plugin.saveSettings();
 
 	el.addClass('el-blockquote');
-	if (mb.customClass) el.addClass(mb.customClass);
+	if (mb.customClass !== null) el.addClass(mb.customClass);
 	const bq = el.createEl('blockquote');
 	el.appendChild(bq);
 

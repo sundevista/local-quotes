@@ -13,7 +13,7 @@ export function parseCodeBlock(content: string): BlockMetadata {
 		if (line.match(codeblock_id_regexp)) id = line.split('id ')[1];
 		if (line.match(codeblock_author_regexp)) author = line.split('author ')[1];
 		if (line.match(codeblock_reloadInterval_regexp)) reloadInterval = parseTime(line.split('reload ')[1]);
-		if (line.match(codeblock_customClass_regexp)) customClass = line.split('class ')[1];
+		if (line.match(codeblock_customClass_regexp)) customClass = line.split('customClass ')[1];
 	}
 
 	return {

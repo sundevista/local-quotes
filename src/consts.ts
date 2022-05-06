@@ -4,7 +4,7 @@ export const quote_regexp = /(- .+)|(\d. .+)/gm;
 export const codeblock_id_regexp = /id \w+/gm;
 export const codeblock_author_regexp = /author .+/gm;
 export const codeblock_reloadInterval_regexp = /reload \d+\w/gm;
-export const codeblock_customClass_regexp = /class \w+/gm;
+export const codeblock_customClass_regexp = /customClass \w+/gm;
 
 export const sec_in_minute = 60;
 export const sec_in_hour = 3600;
