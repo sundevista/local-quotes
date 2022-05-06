@@ -120,5 +120,15 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 					this.plugin.settings.minimalQuoteLength = parseInt(value);
 					await this.plugin.saveSettings();
 				}));
+
+		new Setting(containerEl)
+			.setName('Clear block metadata')
+			.setDesc('Set blockMetadata property to empty array (use if you have problems with old quote occurrence)')
+			.addButton(btn => btn
+				.setButtonText('Clear')
+				.onClick(async () => {
+					this.plugin.settings.blockMetadata = [];
+					await this.plugin.saveSettings();
+				}));
 	}
 }
