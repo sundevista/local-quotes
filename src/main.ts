@@ -1,4 +1,4 @@
-import {App, Plugin, PluginSettingTab, Setting} from 'obsidian';
+import {App, Notice, Plugin, PluginSettingTab, Setting} from 'obsidian';
 import {findTaggedFiles} from "./util/scan";
 import {Quote, updateQuotesVault} from "./types/quote";
 import {sec_in_day} from "./consts";
@@ -40,7 +40,8 @@ export default class LocalQuotes extends Plugin {
 			id: 'rescan-local-quotes',
 			name: 'Rescan vault for local quotes',
 			callback: async() => {
-				await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag))
+				await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag));
+				new Notice('Your quote listings successfully updated!');
 			}
 		});
 	}
@@ -129,6 +130,7 @@ class LocalQuotesSettingTab extends PluginSettingTab {
 				.onClick(async () => {
 					this.plugin.settings.blockMetadata = [];
 					await this.plugin.saveSettings();
+					new Notice('Your block metadata successfully cleared!')
 				}));
 	}
 }
