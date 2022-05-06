@@ -46,7 +46,7 @@ variants (case-sensitive):
 ### Help
 If you have any question, feature idea, or you caught a bug, you can create 
 [Issue](https://github.com/ka1tzyu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
-experience you can also so [Pull Request](https://https://github.com/ka1tzyu/local-quotes/pulls.com).
+experience you can also so [Pull Request](https://github.com/ka1tzyu/local-quotes/pulls.com).
 
 If you want to donate, you can use it:
 
