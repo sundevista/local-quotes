@@ -27,7 +27,7 @@ your note must have `quotes` tag (can be changed in settings).
 Remember that these listings updating only when you open quote codeblock,
 but you can also use command `Rescan vault for local quotes`.
 
-## ⚒️Quote Maker
+## ⚒️ Quote Maker
 The simplest way to create quote block is 'Quote Maker' modal. You can summon it with
 `Open Quote Maker` command (`Make quote block` for 0.2.0). Then just follow instruction and press `Insert Quote`
 button. Then your quote block'll be inserted in your cursor position (remember that
@@ -35,7 +35,7 @@ you need be in **Editing** mode).
 
 ![modal](assets/modal.gif)
 
-## ✍️Making quote block yourself
+## ✍️ Making quote block yourself
 Plugin using codeblock and special codeblock language (`localquote`) to
 represent your quote block. There are some settings those allow you to
 configure quote block:
@@ -67,7 +67,7 @@ variants (case-sensitive):
 - `2M` - equals 2 months
 - `1y` - equals 1 year
 
-## ℹ️Help
+## ℹ️ Help
 If you have any question, feature idea, or you caught a bug, you can create 
 [Issue](https://github.com/ka1tzyu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
 experience you can also do [Pull Request](https://github.com/ka1tzyu/local-quotes/pulls.com).
