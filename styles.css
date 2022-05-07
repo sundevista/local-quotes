@@ -1,0 +1,9 @@
+.local-quote-modal-button-container {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.local-quote-modal-button-container > .setting-item {
+	display: inline-block;
+	border: none;
+}
