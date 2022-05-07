@@ -26,7 +26,7 @@ export function parseCodeBlock(content: string): BlockMetadata {
 	};
 }
 
-function parseTime(str: string): number {
+export function parseTime(str: string): number {
 	// Last letter
 	const letter = str.slice(-1);
 
