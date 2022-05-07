@@ -1,4 +1,4 @@
-# Local Quotes
+# 📜 Local Quotes
 
 Collect your quotes from all over the vault and embed them in different locations.
 
@@ -10,7 +10,7 @@ This plugin allows you to:
 
 ![demo](assets/demo.gif)
 
-## Purpose
+## 🎯 Purpose
 I started to create this plugin with only one idea — I wanted to see in my Index note
 quote, that reloads every day. I have a lot of quotes those written myself, so I 
 wanted plugin that allows to create lists of quotes and simple way to insert them
@@ -19,7 +19,7 @@ with specified interval, from seconds to years.
 You can create daily note, 'every minute' quote and everything that you need. For now
 quote need to reopen block quote for reload, I'm trying to find a way to solve it. 
 
-## Quote listing
+## 🗒️ Quote listing
 It's a simple way to collect your quotes. Just surround quote's author's name with
 `:::` and start to write the quotes below using list (unordered/ordered). Also, 
 your note must have `quotes` tag (can be changed in settings).
@@ -27,7 +27,7 @@ your note must have `quotes` tag (can be changed in settings).
 Remember that these listings updating only when you open quote codeblock,
 but you can also use command `Rescan vault for local quotes`.
 
-## Quote Maker
+## ⚒️Quote Maker
 The simplest way to create quote block is 'Quote Maker' modal. You can summon it with
 `Open Quote Maker` command (`Make quote block` for 0.2.0). Then just follow instruction and press `Insert Quote`
 button. Then your quote block'll be inserted in your cursor position (remember that
@@ -35,7 +35,7 @@ you need be in **Editing** mode).
 
 ![modal](assets/modal.gif)
 
-## Making quote block
+## ✍️Making quote block yourself
 Plugin using codeblock and special codeblock language (`localquote`) to
 represent your quote block. There are some settings those allow you to
 configure quote block:
@@ -44,7 +44,7 @@ configure quote block:
 - `author` (required) - author of quote that you want to see.
 - `reload` (optional) - renew interval, when this time passes plugin
 will update quote text with another random one (`1m`, `2d`, `30s`, [more 
-examples](#reload-intervals))
+examples](#-reload-intervals))
 - `customClass` (optional) - class that can be added to parent div
 
 ````
@@ -56,7 +56,7 @@ customClass my-quote-class
 ```
 ````
 
-### Reload intervals
+### 🔃 Reload intervals
 `reload` property uses custom moment.js like syntax. There is all possible
 variants (case-sensitive):
 - `10s` - equals 10 seconds
@@ -67,7 +67,7 @@ variants (case-sensitive):
 - `2M` - equals 2 months
 - `1y` - equals 1 year
 
-## Help
+## ℹ️Help
 If you have any question, feature idea, or you caught a bug, you can create 
 [Issue](https://github.com/ka1tzyu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
 experience you can also do [Pull Request](https://github.com/ka1tzyu/local-quotes/pulls.com).
