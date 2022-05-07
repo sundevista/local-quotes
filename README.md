@@ -67,12 +67,14 @@ variants (case-sensitive):
 - `2M` - equals 2 months
 - `1y` - equals 1 year
 
+## ⏫ Future updates
+You can see what I am doint at the moment [here](https://github.com/users/ka1tzyu/projects/1). If you want some feature to be made first, like the first message in
+this feature's issue, I'll pay attention.
+
 ## ℹ️ Help
 If you have any question, feature idea, or you caught a bug, you can create 
 [Issue](https://github.com/ka1tzyu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
 experience you can also do [Pull Request](https://github.com/ka1tzyu/local-quotes/pulls.com).
-
-You can see what I am doint at the moment in this [project](https://github.com/users/ka1tzyu/projects/1).
 
 If you want to donate, you can use it:
 
