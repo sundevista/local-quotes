@@ -8,6 +8,7 @@ export interface LocalQuotesSettings {
 	defaultReloadInterval: number;
 	minimalQuoteLength: number;
 	showReloadButton: boolean;
+	quoteBlockFormat: string;
 	blockMetadata: BlockMetadata[];
 }
 
@@ -16,6 +17,7 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	defaultReloadInterval: sec_in_day,
 	minimalQuoteLength: 5,
 	showReloadButton: false,
+	quoteBlockFormat: '{{content}}\n— {{author}}',
 	blockMetadata: [],
 }
 
@@ -77,6 +79,17 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 				.setValue(this.plugin.settings.minimalQuoteLength.toString())
 				.onChange(async (value) => {
 					this.plugin.settings.minimalQuoteLength = parseInt(value);
+					await this.plugin.saveSettings();
+				}));
+
+		new Setting(containerEl)
+			.setName('Quote block format')
+			.setDesc('Set your own format for quote blocks. Use {{content}} and {{author}} placeholders to place data')
+			.addTextArea(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.quoteBlockFormat)
+				.setValue(this.plugin.settings.quoteBlockFormat)
+				.onChange(async (value) => {
+					this.plugin.settings.quoteBlockFormat = value;
 					await this.plugin.saveSettings();
 				}));
 

@@ -1,6 +1,5 @@
 import LocalQuotes from "../main";
 import {selectBlockMetadata} from "../types/blockmetadata";
-import {quote_format} from "../consts";
 import {updateQuotesVault} from "../types/quote";
 import {findTaggedFiles} from "../util/scan";
 
@@ -20,7 +19,7 @@ export async function processCodeblock(
 	const bq = el.createEl('blockquote');
 	el.appendChild(bq);
 
-	for (let p of quote_format.split('\n')) {
+	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
 		bq.appendChild(el.createEl(
 			'p',
 			{
