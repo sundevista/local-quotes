@@ -35,7 +35,7 @@ you need be in **Editing** mode).
 
 ![modal](assets/modal.gif)
 
-## ✍️ Making quote block yourself
+## ✍️ Making quote block by yourself
 Plugin using codeblock and special codeblock language (`localquote`) to
 represent your quote block. There are some settings those allow you to
 configure quote block:
