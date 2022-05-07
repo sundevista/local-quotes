@@ -1,4 +1,4 @@
-## Local Quotes
+# Local Quotes
 
 Collect your quotes from all over the vault and embed them in different locations.
 
@@ -10,7 +10,7 @@ This plugin allows you to:
 
 ![demo](assets/demo.gif)
 
-### Quote listing
+## Quote listing
 It's a simple way to collect your quotes. Just surround quote's author's name with
 `:::` and start to write the quotes below using list (unordered/ordered). Also, 
 your note must have `quotes` tag (can be changed in settings).
@@ -18,7 +18,7 @@ your note must have `quotes` tag (can be changed in settings).
 Remember that these listings updating only when you open quote codeblock,
 but you can also use command `Rescan vault for local quotes`.
 
-### Making quote block
+## Making quote block
 Plugin using codeblock and special codeblock language (`localquote`) to
 represent your quote block. There are some settings those allow you to
 configure quote block:
@@ -39,7 +39,7 @@ customClass my-quote-class
 ```
 ````
 
-#### Reload intervals
+### Reload intervals
 `reload` property uses custom moment.js like syntax. There is all possible
 variants (case-sensitive):
 - `10s` - equals 10 seconds
@@ -50,7 +50,7 @@ variants (case-sensitive):
 - `2M` - equals 2 months
 - `1y` - equals 1 year
 
-### Help
+## Help
 If you have any question, feature idea, or you caught a bug, you can create 
 [Issue](https://github.com/ka1tzyu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
 experience you can also do [Pull Request](https://github.com/ka1tzyu/local-quotes/pulls.com).
