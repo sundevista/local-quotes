@@ -1,6 +1,17 @@
 import LocalQuotes from "../main";
 import {getAuthorIdx} from "./scan";
 
+export function getRandomQuoteId(length: number = 5): string {
+	const characters = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890';
+	let result = '';
+
+	for (let i = 0; i < length; i++) {
+		result += characters[getRandomInt(characters.length)];
+	}
+
+	return result;
+}
+
 function getRandomInt(max: number): number {
 	return Math.floor(Math.random() * max);
 }
