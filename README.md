@@ -5,7 +5,7 @@ Collect your quotes from all over the vault and embed them in different location
 This plugin allows you to:
 - Create quote listings
 - Renew your quotes by any interval (minute, day, week, month)
-- Apply custom classes to every quote (N/A)
+- Apply custom classes to every quote
 - Choose your own quote's format (N/A)
 
 ![demo](assets/demo.gif)
@@ -30,7 +30,14 @@ will update quote text with another random one (`1m`, `2d`, `30s`, [more
 examples](#reload-intervals))
 - `customClass` (optional) - class that can be added to parent div
 
-![codeblock](assets/codeblock.png)
+````
+```localquote
+id 1
+author Kamina, TTGL
+reload 1d
+customClass my-quote-class
+```
+````
 
 #### Reload intervals
 `reload` property uses custom moment.js like syntax. There is all possible
@@ -46,7 +53,7 @@ variants (case-sensitive):
 ### Help
 If you have any question, feature idea, or you caught a bug, you can create 
 [Issue](https://github.com/ka1tzyu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
-experience you can also so [Pull Request](https://github.com/ka1tzyu/local-quotes/pulls.com).
+experience you can also do [Pull Request](https://github.com/ka1tzyu/local-quotes/pulls.com).
 
 If you want to donate, you can use it:
 
