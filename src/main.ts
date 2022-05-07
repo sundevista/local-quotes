@@ -3,6 +3,7 @@ import {findTaggedFiles} from "./util/scan";
 import {Quote, updateQuotesVault} from "./types/quote";
 import {processCodeblock} from "./processor/codeblock";
 import {DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab} from "./settings";
+import {QuoteMakerModal} from "./processor/modal";
 
 export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;
@@ -25,6 +26,15 @@ export default class LocalQuotes extends Plugin {
 			callback: async() => {
 				await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag));
 				new Notice('Your quote listings successfully updated!');
+			}
+		});
+
+		this.addCommand({
+			id: 'open-local-quote-block-maker',
+			name: 'Make quote block',
+			callback: async () => {
+				await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag));
+				new QuoteMakerModal(this).open();
 			}
 		});
 	}
