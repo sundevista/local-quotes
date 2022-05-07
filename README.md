@@ -29,7 +29,7 @@ but you can also use command `Rescan vault for local quotes`.
 
 ## Quote Maker
 The simplest way to create quote block is 'Quote Maker' modal. You can summon it with
-`Open Quote Maker` command. Then just follow instruction and press `Insert Quote`
+`Open Quote Maker` command (`Make quote block` for 0.2.0). Then just follow instruction and press `Insert Quote`
 button. Then your quote block'll be inserted in your cursor position (remember that
 you need be in **Editing** mode).
 
