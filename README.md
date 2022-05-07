@@ -21,8 +21,10 @@ quote need to reopen block quote for reload, I'm trying to find a way to solve i
 
 ## 🗒️ Quote listing
 It's a simple way to collect your quotes. Just surround quote's author's name with
-`:::` and start to write the quotes below using list (unordered/ordered). Also, 
-your note must have `quotes` tag (can be changed in settings).
+`:::` and start to write the quotes below using list (unordered/ordered, using `-` or `1.`).
+It's important to write quotes line by line, because when empty line appears
+your quote series is breaking. Also, your note must have `quotes` tag (can be 
+changed in settings).
 
 Remember that these listings updating only when you open quote codeblock,
 but you can also use command `Rescan vault for local quotes`.
