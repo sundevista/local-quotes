@@ -6,6 +6,19 @@ import {
 	codeblock_reloadInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
 } from "../consts";
 
+export function parseBlockMetadataToCodeBlock(blockMetadata: BlockMetadata, reloadStr: string): string {
+	let result: Array<string> = [];
+
+	result.push('```localquote');
+	result.push(`id ${blockMetadata.id}`);
+	result.push(`author ${blockMetadata.author}`);
+	result.push(`reload ${reloadStr}`);
+	blockMetadata.customClass && result.push(`customClass ${blockMetadata.customClass}`);
+	result.push('```');
+
+	return result.join('\n');
+}
+
 export function parseCodeBlock(content: string): BlockMetadata {
 	let id = null, author = null, reloadInterval = null, customClass = null;
 
