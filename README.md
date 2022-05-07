@@ -6,14 +6,14 @@ This plugin allows you to:
 - Create quote listings
 - Renew your quotes by any interval (minute, day, week, month)
 - Apply custom classes to every quote
-- Choose your own quote's format (N/A)
+- Choose your own quote's format
 
 ![demo](assets/demo.gif)
 
 ### Quote listing
-It's a simple way to collect your quotes. Just use `:::` around author and
-start to write the quotes below using list (unordered/ordered). Also, your note 
-must have `quotes` tag (can be changed in settings).
+It's a simple way to collect your quotes. Just surround quote's author's name with
+`:::` and start to write the quotes below using list (unordered/ordered). Also, 
+your note must have `quotes` tag (can be changed in settings).
 
 Remember that these listings updating only when you open quote codeblock,
 but you can also use command `Rescan vault for local quotes`.
