@@ -12,11 +12,11 @@ This plugin allows you to:
 
 ## 🎯 Purpose
 I started to create this plugin with only one idea — I wanted to see in my Index note
-quote, that reloads every day. I have a lot of quotes those written myself, so I 
+the quote, that reloads every day automatically. I have a lot of quotes those written myself, so I 
 wanted plugin that allows to create lists of quotes and simple way to insert them
 with specified interval, from seconds to years.
 
-You can create daily note, 'every minute' quote and everything that you need. For now
+You can create daily note, 'every minute' quote and everything that you need. For now,
 quote need to reopen block quote for reload, I'm trying to find a way to solve it. 
 
 ## 🗒️ Quote listing
@@ -28,10 +28,10 @@ Remember that these listings updating only when you open quote codeblock,
 but you can also use command `Rescan vault for local quotes`.
 
 ## ⚒️ Quote Maker
-The simplest way to create quote block is 'Quote Maker' modal. You can summon it with
+The simplest way to create a quote block is 'Quote Maker' modal. You can summon it with
 `Open Quote Maker` command (`Make quote block` for 0.2.0). Then just follow instruction and press `Insert Quote`
 button. Then your quote block'll be inserted in your cursor position (remember that
-you need be in **Editing** mode).
+you need to be in **Editing** mode).
 
 ![modal](assets/modal.gif)
 
@@ -57,7 +57,7 @@ customClass my-quote-class
 ````
 
 ### 🔃 Reload intervals
-`reload` property uses custom moment.js like syntax. There is all possible
+`reload` property uses custom moment.js like syntax. There are all possible
 variants (case-sensitive):
 - `10s` - equals 10 seconds
 - `10m` - equals 10 minutes
@@ -68,7 +68,7 @@ variants (case-sensitive):
 - `1y` - equals 1 year
 
 ## ⏫ Future updates
-You can see what I am doint at the moment [here](https://github.com/users/ka1tzyu/projects/1). If you want some feature to be made first, like the first message in
+You can see what I am doing at the moment [here](https://github.com/users/ka1tzyu/projects/1). If you want some feature to be made first, like the first message in
 this feature's issue, I'll pay attention.
 
 ## ℹ️ Help
