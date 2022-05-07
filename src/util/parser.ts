@@ -31,7 +31,9 @@ export function parseTime(str: string): number {
 	const letter = str.slice(-1);
 
 	// Number value
-	const value = parseInt(str.slice(0, -1));
+	const value = parseInt(str);
+
+	if (Number.isNaN(value)) return null;
 
 	switch (letter) {
 		case 's':
