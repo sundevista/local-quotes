@@ -27,6 +27,14 @@ your note must have `quotes` tag (can be changed in settings).
 Remember that these listings updating only when you open quote codeblock,
 but you can also use command `Rescan vault for local quotes`.
 
+## Quote Maker
+The simplest way to create quote block is 'Quote Maker' modal. You can summon it with
+`Open Quote Maker` command. Then just follow instruction and press `Insert Quote`
+button. Then your quote block'll be inserted in your cursor position (remember that
+you need be in **Editing** mode).
+
+![modal](assets/modal.gif)
+
 ## Making quote block
 Plugin using codeblock and special codeblock language (`localquote`) to
 represent your quote block. There are some settings those allow you to
