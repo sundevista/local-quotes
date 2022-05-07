@@ -72,6 +72,8 @@ If you have any question, feature idea, or you caught a bug, you can create
 [Issue](https://github.com/ka1tzyu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
 experience you can also do [Pull Request](https://github.com/ka1tzyu/local-quotes/pulls.com).
 
+You can see what I am doint at the moment in this [project](https://github.com/users/ka1tzyu/projects/1).
+
 If you want to donate, you can use it:
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/ka1tzyu)
