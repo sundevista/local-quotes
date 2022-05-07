@@ -10,6 +10,15 @@ This plugin allows you to:
 
 ![demo](assets/demo.gif)
 
+## Purpose
+I started to create this plugin with only one idea — I wanted to see in my Index note
+quote, that reloads every day. I have a lot of quotes those written myself, so I 
+wanted plugin that allows to create lists of quotes and simple way to insert them
+with specified interval, from seconds to years.
+
+You can create daily note, 'every minute' quote and everything that you need. For now
+quote need to reopen block quote for reload, I'm trying to find a way to solve it. 
+
 ## Quote listing
 It's a simple way to collect your quotes. Just surround quote's author's name with
 `:::` and start to write the quotes below using list (unordered/ordered). Also, 
