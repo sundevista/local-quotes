@@ -31,7 +31,7 @@ export default class LocalQuotes extends Plugin {
 
 		this.addCommand({
 			id: 'open-local-quote-block-maker',
-			name: 'Make quote block',
+			name: 'Open Quote Maker',
 			callback: async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag));
 				new QuoteMakerModal(this).open();
