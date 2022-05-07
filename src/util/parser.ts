@@ -48,5 +48,7 @@ export function parseTime(str: string): number {
 			return value * sec_in_month;
 		case 'y':
 			return value * sec_in_year;
+		default:
+			return value;
 	}
 }
