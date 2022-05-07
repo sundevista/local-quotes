@@ -10,5 +10,5 @@ export const sec_in_minute = 60;
 export const sec_in_hour = 3600;
 export const sec_in_day = 86400;
 export const sec_in_week = 604800;
-export const sec_in_month = 2592000;
-export const sec_in_year = 31536000;
+export const sec_in_month = 2629746;
+export const sec_in_year = 31556952;
