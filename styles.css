@@ -7,3 +7,7 @@
 	display: inline-block;
 	border: none;
 }
+
+.local-quote-modal-button-container > .setting-item:first-child {
+	margin-right: 10px;
+}
