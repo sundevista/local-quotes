@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Error model that occurs when you summon `Quote Maker` with no quote listings
 
+### Changed
+- Modal styling (emojis)
+
 ### Fixed
 - More space between buttons in `Quote Maker`
 

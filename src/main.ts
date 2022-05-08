@@ -38,7 +38,7 @@ export default class LocalQuotes extends Plugin {
 					new QuoteMakerModal(this).open();
 				} else {
 					new ErrorModal(
-						'Local Quote Error',
+						'❌ Local Quote Error',
 						'After scan there is no any quote listings in your vault.'
 					).open();
 				}
