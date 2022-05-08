@@ -48,8 +48,8 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 				}));
 
 		new Setting(containerEl)
-			.setName('Reload interval')
-			.setDesc('You can set default reload interval and miss corresponding field in codeblock (in seconds)')
+			.setName('Refresh interval')
+			.setDesc('You can set default refresh interval and miss corresponding field in codeblock (in seconds)')
 			.addText(text => text
 				.setPlaceholder(DEFAULT_SETTINGS.defaultReloadInterval.toString())
 				.setValue(this.plugin.settings.defaultReloadInterval.toString())

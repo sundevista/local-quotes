@@ -1,9 +1,12 @@
-export const author_regexp: RegExp = /:::.+:::/gm;
+export const author_regexp: RegExp = /:::\w(\w| |,|\.)+(\w|\.|,):::/gm;
 export const quote_regexp: RegExp = /(- .+)|(\d. .+)/gm;
 
+export const search_or_regexp: RegExp = /^([(\w|,| )+]|[ \|\| ])+/gm;
+export const author_string_regexp: RegExp = /^\w(\w| |,|\.)+(\w|\.|,)/gm
+
 export const codeblock_id_regexp: RegExp = /id \w+/gm;
-export const codeblock_author_regexp: RegExp = /author .+/gm;
-export const codeblock_reloadInterval_regexp: RegExp = /reload \d+\w/gm;
+export const codeblock_author_regexp: RegExp = /search .+/gm;
+export const codeblock_reloadInterval_regexp: RegExp = /refresh \d+\w/gm;
 export const codeblock_customClass_regexp: RegExp = /customClass \w+/gm;
 
 export const sec_in_minute: number = 60;

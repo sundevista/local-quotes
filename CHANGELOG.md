@@ -5,9 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### BREAKING CHANGE
+- New BlockMetadata design(read
+[this wiki](https://github.com/ka1tzyu/local-quotes/wiki/How-to-switch-from-%600.x.x%60-to-%601.x.x%60)
+to switch from `0.x.x` to `1.x.x`)
+
 ### Added
 - Error model that occurs when you summon `Quote Maker` with no quote listings
 - [Wiki page](https://github.com/ka1tzyu/local-quotes/wiki/How-quote-listings-work) about quote listing (and refer to it in error modal)
+- Search possibilities ([wiki](https://github.com/ka1tzyu/local-quotes/wiki/How-to-use-search))
 
 ### Changed
 - Modal styling (emojis)

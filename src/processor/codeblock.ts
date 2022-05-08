@@ -23,8 +23,8 @@ export async function processCodeblock(
 		bq.appendChild(el.createEl(
 			'p',
 			{
-				text: p.replace('{{content}}', mb.text)
-					.replace('{{author}}', mb.author)
+				text: p.replace('{{content}}', mb.content.text)
+					.replace('{{author}}', mb.content.author)
 			}
 		));
 	}

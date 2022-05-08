@@ -51,13 +51,13 @@ export class QuoteMakerModal extends Modal {
 	async onOpen() {
 		const authorList: string[] = fetchAuthorsInQuoteVault(this.plugin);
 		const randomId: string = getRandomQuoteId();
-		let tmpReloadChar: string = 'd';
-		let tmpReloadNum: Number = 1;
+		let tmpRefreshChar: string = 'd';
+		let tmpRefreshNum: Number = 1;
+		let tmpSearch = '';
+		let tmpAuthor = authorList[0];
 		this.result = {
-			id: randomId,
-			author: authorList[0],
-			reloadInterval: 86400,
-			customClass: null, lastUpdate: 0, text: null
+			content: {author: null, text: null},
+			id: randomId, search: null, refresh: 86400, customClass: null, lastUpdate: 0
 		};
 
 		let {contentEl} = this;
@@ -75,17 +75,6 @@ export class QuoteMakerModal extends Modal {
 				}));
 
 		new Setting(contentEl)
-			.setName('Author')
-			.setDesc('Choose author for your quote block')
-			.addDropdown(dropdown => {
-				authorList.map((author) => dropdown.addOption(author, author));
-				dropdown.setValue(this.result.author);
-				dropdown.onChange((value) => {
-					this.result.author = value;
-				})
-			});
-
-		new Setting(contentEl)
 			.setName('Custom class')
 			.setDesc('Set custom css class (from snippets, for example)')
 			.addText(text => text
@@ -95,20 +84,44 @@ export class QuoteMakerModal extends Modal {
 					else this.result.customClass = null;
 				}));
 
-		contentEl.createEl('h3', {text: 'Reload settings'});
+		contentEl.createEl('h3', {text: 'Search'});
 
 		new Setting(contentEl)
-			.setName('Reload interval value')
+			.setName('Author')
+			.setDesc('Choose author for your quote block (if you want choose only one)')
+			.addDropdown(dropdown => {
+				authorList.map((author) => dropdown.addOption(author, author));
+				dropdown.setValue(tmpAuthor);
+				dropdown.onChange((value) => {
+					tmpAuthor = value;
+				})
+			});
+
+		new Setting(contentEl)
+			.setName('Advanced search')
+			.setDesc('Write your search query (\'author1 || author2\', etc). If this field empty, output you\'ll see' +
+				'chose option from setting above')
+			.addText(text => text
+				.setValue(tmpSearch)
+				.onChange((value) => {
+					tmpSearch = value;
+				}));
+
+
+		contentEl.createEl('h3', {text: 'Refresh settings'});
+
+		new Setting(contentEl)
+			.setName('Refresh interval value')
 			.setDesc('Set the value of your interval (only number!)')
 			.addText(text => text
-				.setValue(tmpReloadNum.toString())
+				.setValue(tmpRefreshNum.toString())
 				.onChange((value) => {
-					tmpReloadNum = parseInt(value);
-					this.result.reloadInterval = parseTime(tmpReloadNum + tmpReloadChar);
+					tmpRefreshNum = parseInt(value);
+					this.result.refresh = parseTime(tmpRefreshNum + tmpRefreshChar);
 				}));
 
 		new Setting(contentEl)
-			.setName('Reload interval modifier')
+			.setName('Refresh interval modifier')
 			.setDesc('Choose the modifier for value clarification')
 			.addDropdown(dropdown => dropdown
 				.addOption('s', 'second')
@@ -118,10 +131,10 @@ export class QuoteMakerModal extends Modal {
 				.addOption('w', 'week')
 				.addOption('M', 'month')
 				.addOption('y', 'year')
-				.setValue(tmpReloadChar)
+				.setValue(tmpRefreshChar)
 				.onChange((value) => {
-					tmpReloadChar = value;
-					this.result.reloadInterval = parseTime(tmpReloadNum + tmpReloadChar);
+					tmpRefreshChar = value;
+					this.result.refresh = parseTime(tmpRefreshNum + tmpRefreshChar);
 				})
 			);
 
@@ -141,15 +154,17 @@ export class QuoteMakerModal extends Modal {
 				.setButtonText('Insert Quote')
 				.setCta()
 				.onClick(() => {
+					this.result.search = tmpSearch.length > 0 ? tmpSearch : tmpAuthor;
+
 					this.editor.replaceRange(
-						parseBlockMetadataToCodeBlock(this.result, tmpReloadNum + tmpReloadChar),
+						parseBlockMetadataToCodeBlock(this.result, tmpRefreshNum + tmpRefreshChar),
 						this.editor.getCursor()
 					);
 
 					this.onClose();
 					this.close();
 
-					new Notice(`Quote '${this.result.id}' from '${this.result.author}' inserted!`);
+					new Notice(`Quote '${this.result.id}' from '${this.result.content.author}' inserted!`);
 				}));
 	}
 

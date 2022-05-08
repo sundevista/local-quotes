@@ -6,7 +6,7 @@ export function getRandomQuoteId(length: number = 5): string {
 	let result: string = '';
 
 	for (let i = 0; i < length; i++) {
-		result += characters[getRandomInt(characters.length)];
+		result += getRandomArrayItem(characters);
 	}
 
 	return result;
@@ -14,6 +14,14 @@ export function getRandomQuoteId(length: number = 5): string {
 
 function getRandomInt(max: number): number {
 	return Math.floor(Math.random() * max);
+}
+
+export function getRandomArrayItem(arr: any[]|string): any {
+	return arr[getRandomInt(arr.length)];
+}
+
+export function getRandomAuthor(plugin: LocalQuotes): string {
+	return getRandomArrayItem(plugin.quoteVault).author;
 }
 
 export function getRandomQuoteOfAuthor(plugin: LocalQuotes, author: string): string {

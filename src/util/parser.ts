@@ -6,13 +6,13 @@ import {
 	codeblock_reloadInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
 } from "../consts";
 
-export function parseBlockMetadataToCodeBlock(blockMetadata: BlockMetadata, reloadStr: string): string {
+export function parseBlockMetadataToCodeBlock(blockMetadata: BlockMetadata, refreshStr: string): string {
 	let result: Array<string> = [];
 
 	result.push('```localquote');
 	result.push(`id ${blockMetadata.id}`);
-	result.push(`author ${blockMetadata.author}`);
-	result.push(`reload ${reloadStr}`);
+	result.push(`search ${blockMetadata.search}`);
+	result.push(`refresh ${refreshStr}`);
 	blockMetadata.customClass && result.push(`customClass ${blockMetadata.customClass}`);
 	result.push('```');
 
@@ -20,23 +20,17 @@ export function parseBlockMetadataToCodeBlock(blockMetadata: BlockMetadata, relo
 }
 
 export function parseCodeBlock(content: string): BlockMetadata {
-	let id = null, author = null, reloadInterval = null, customClass = null;
+	let result: BlockMetadata = {
+		content: null, customClass: null, id: null, lastUpdate: 0, refresh: null, search: null};
 
 	for (let line of content.split('\n')) {
-		if (line.match(codeblock_id_regexp)) id = line.split('id ')[1];
-		if (line.match(codeblock_author_regexp)) author = line.split('author ')[1];
-		if (line.match(codeblock_reloadInterval_regexp)) reloadInterval = parseTime(line.split('reload ')[1]);
-		if (line.match(codeblock_customClass_regexp)) customClass = line.split('customClass ')[1];
+		if (line.match(codeblock_id_regexp)) result.id = line.split('id ')[1];
+		if (line.match(codeblock_author_regexp)) result.search = line.split('search ')[1];
+		if (line.match(codeblock_reloadInterval_regexp)) result.refresh = parseTime(line.split('refresh ')[1]);
+		if (line.match(codeblock_customClass_regexp)) result.customClass = line.split('customClass ')[1];
 	}
 
-	return {
-		id: id,
-		author: author,
-		text: null,
-		customClass: customClass,
-		lastUpdate: 0,
-		reloadInterval: reloadInterval,
-	};
+	return result;
 }
 
 export function parseTime(str: string): number {
