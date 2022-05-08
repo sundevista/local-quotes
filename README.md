@@ -29,6 +29,8 @@ changed in settings).
 Remember that these listings updating only when you open quote codeblock,
 but you can also use command `Rescan vault for local quotes`.
 
+Visit wiki page [How quote listings work](https://github.com/ka1tzyu/local-quotes/wiki/How-quote-listings-work) for more details.
+
 ## ⚒️ Quote Maker
 The simplest way to create a quote block is 'Quote Maker' modal. You can summon it with
 `Open Quote Maker` command. Then just follow instruction and press `Insert Quote`
