@@ -33,7 +33,7 @@ export class QuoteMakerModal extends Modal {
 
 		let {contentEl} = this;
 
-		contentEl.createEl('h1', {text: 'Make Quote Block'});
+		contentEl.createEl('h1', {text: 'Quote Maker'});
 
 		new Setting(contentEl)
 			.setName('Id')
