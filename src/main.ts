@@ -24,7 +24,7 @@ export default class LocalQuotes extends Plugin {
 			id: 'rescan-local-quotes',
 			name: 'Rescan vault for local quotes',
 			callback: async() => {
-				await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag));
+				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 				new Notice('Your quote listings successfully updated!');
 			}
 		});
@@ -33,7 +33,7 @@ export default class LocalQuotes extends Plugin {
 			id: 'open-local-quote-block-maker',
 			name: 'Open Quote Maker',
 			callback: async () => {
-				await updateQuotesVault(this, findTaggedFiles(this.app, this.settings.quoteTag));
+				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 				new QuoteMakerModal(this).open();
 			}
 		});

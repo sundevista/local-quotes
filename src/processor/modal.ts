@@ -16,7 +16,7 @@ export class QuoteMakerModal extends Modal {
 	constructor(plugin: LocalQuotes) {
 		super(plugin.app);
 		this.plugin = plugin;
-		this.editor = plugin.app.workspace.getActiveViewOfType(MarkdownView).editor;
+		this.editor = app.workspace.getActiveViewOfType(MarkdownView).editor;
 	}
 
 	async onOpen() {

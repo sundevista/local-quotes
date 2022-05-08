@@ -1,4 +1,4 @@
-import {App, TFile} from "obsidian";
+import {TFile} from "obsidian";
 import LocalQuotes from "../main";
 
 export function getAuthorIdx(plugin: LocalQuotes, author: string): number {
@@ -9,7 +9,7 @@ export function getBlockMetadataIdx(plugin: LocalQuotes, id: string): number {
 	return plugin.settings.blockMetadata.findIndex((e) => e.id === id);
 }
 
-function checkFileTag(app: App, f: TFile, tag: string): boolean {
+function checkFileTag(f: TFile, tag: string): boolean {
 	const tagInContent = app.metadataCache.getFileCache(f).tags &&
 		(app.metadataCache.getFileCache(f).tags.findIndex((t) => t.tag === `#${tag}`) >= 0);
 	const tagInFrontmatter = app.metadataCache.getFileCache(f).frontmatter &&
@@ -19,13 +19,12 @@ function checkFileTag(app: App, f: TFile, tag: string): boolean {
 	return tagInContent || tagInFrontmatter;
 }
 
-export function findTaggedFiles(app: App, tag: string): TFile[] {
+export function findTaggedFiles(tag: string): TFile[] {
 	let result: TFile[] = [];
 
 	for (let p of app.vault.getMarkdownFiles()) {
-		if (checkFileTag(app, p, tag)) {
+		if (checkFileTag(p, tag)) {
 			result.push(p);
-			console.log(app.metadataCache.getFileCache(p));
 		}
 	}
 
