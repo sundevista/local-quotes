@@ -2,8 +2,8 @@ import LocalQuotes from "../main";
 import {getAuthorIdx} from "./scan";
 
 export function getRandomQuoteId(length: number = 5): string {
-	const characters = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890-';
-	let result = '';
+	const characters: string = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890-';
+	let result: string = '';
 
 	for (let i = 0; i < length; i++) {
 		result += characters[getRandomInt(characters.length)];
@@ -17,7 +17,7 @@ function getRandomInt(max: number): number {
 }
 
 export function getRandomQuoteOfAuthor(plugin: LocalQuotes, author: string): string {
-	const authorIdx = getAuthorIdx(plugin, author);
+	const authorIdx: number = getAuthorIdx(plugin, author);
 	if (authorIdx < 0) {
 		return 'You\'ve tried to find an author that doesn\'t exist';
 	} else {

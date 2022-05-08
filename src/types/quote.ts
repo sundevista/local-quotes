@@ -9,7 +9,7 @@ export interface Quote {
 }
 
 export async function uploadQuote(plugin: LocalQuotes, author: string, quote: string): Promise<void> {
-	const idx = getAuthorIdx(plugin, author);
+	const idx: number = getAuthorIdx(plugin, author);
 
 	if (idx >= 0) {
 		if (!plugin.quoteVault[idx].quotes.contains(quote)) {
@@ -25,7 +25,7 @@ export async function uploadQuote(plugin: LocalQuotes, author: string, quote: st
 export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Promise<void> {
 	plugin.quoteVault = [];
 
-	let current_author;
+	let current_author: string;
 
 	for (let file of files) {
 		current_author = '';

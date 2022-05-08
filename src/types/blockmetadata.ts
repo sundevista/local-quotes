@@ -23,8 +23,8 @@ function makeBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata)
 }
 
 function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata): BlockMetadata {
-	const bmIdx = getBlockMetadataIdx(plugin, rawBlockMetadata.id);
-	const prevBm = plugin.settings.blockMetadata[bmIdx];
+	const bmIdx: number = getBlockMetadataIdx(plugin, rawBlockMetadata.id);
+	const prevBm: BlockMetadata = plugin.settings.blockMetadata[bmIdx];
 
 	// Fields updating
 	if (prevBm.author !== rawBlockMetadata.author) {
@@ -53,8 +53,8 @@ function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadat
 }
 
 export function selectBlockMetadata(plugin: LocalQuotes, source: string): BlockMetadata {
-	let tmpBm = parseCodeBlock(source);
-	const idx = plugin.settings.blockMetadata.findIndex((e) => e.id === tmpBm.id);
+	let tmpBm: BlockMetadata = parseCodeBlock(source);
+	const idx: number = plugin.settings.blockMetadata.findIndex((e) => e.id === tmpBm.id);
 
 	// If author and/or id aren't set
 	if (!(tmpBm.id && tmpBm.author) || !plugin.quoteVault.length) {

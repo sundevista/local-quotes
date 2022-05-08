@@ -41,10 +41,10 @@ export function parseCodeBlock(content: string): BlockMetadata {
 
 export function parseTime(str: string): number {
 	// Last letter
-	const letter = str.slice(-1);
+	const letter: string = str.slice(-1);
 
 	// Number value
-	const value = parseInt(str);
+	const value: number = parseInt(str);
 
 	if (Number.isNaN(value)) return null;
 

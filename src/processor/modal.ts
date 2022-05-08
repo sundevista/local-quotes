@@ -20,13 +20,13 @@ export class QuoteVaultErrorModal extends Modal {
 		contentEl.createEl('h3', {text: '❌ Local Quote Error'});
 		contentEl.createEl('p', {text: 'After scan there is no any quote listings in your vault.'});
 
-		const a = createDomLink(
+		const a: HTMLElement = createDomLink(
 			contentEl,
 			'wiki page',
 			'https://github.com/ka1tzyu/local-quotes/wiki/How-quote-listings-work'
 		);
 
-		let p = contentEl.createEl('p');
+		let p: HTMLElement = contentEl.createEl('p');
 		p.appendText('If you want to learn more about quote listings and understand how it works you can visit ');
 		p.appendChild(a);
 		p.appendText('.');
@@ -49,10 +49,10 @@ export class QuoteMakerModal extends Modal {
 	}
 
 	async onOpen() {
-		const authorList = fetchAuthorsInQuoteVault(this.plugin);
-		const randomId = getRandomQuoteId();
-		let tmpReloadChar = 'd';
-		let tmpReloadNum = 1;
+		const authorList: string[] = fetchAuthorsInQuoteVault(this.plugin);
+		const randomId: string = getRandomQuoteId();
+		let tmpReloadChar: string = 'd';
+		let tmpReloadNum: Number = 1;
 		this.result = {
 			id: randomId,
 			author: authorList[0],
@@ -125,7 +125,7 @@ export class QuoteMakerModal extends Modal {
 				})
 			);
 
-		let buttonContainer = contentEl.createEl('div');
+		let buttonContainer: HTMLElement = contentEl.createEl('div');
 		buttonContainer.addClass('local-quote-modal-button-container');
 
 		new Setting(buttonContainer)
