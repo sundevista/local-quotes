@@ -8,7 +8,7 @@ export async function processCodeblock(
 	source: string,
 	el: HTMLElement): Promise<void>
 {
-	await updateQuotesVault(plugin, findTaggedFiles(plugin.app, plugin.settings.quoteTag))
+	await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag))
 
 	let mb = selectBlockMetadata(plugin, source);
 
