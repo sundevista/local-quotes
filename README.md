@@ -1,5 +1,3 @@
-**all images and gifs refer to 0.2.1**
-
 # 📜 Local Quotes
 
 Collect your quotes from all over the vault and embed them in different locations.
@@ -47,7 +45,7 @@ represent your quote block. There are some settings those allow you to
 configure quote block:
 - `id` (required) - any string or number for quote identification (`1`,
 `d2f`, `my-quote1`).
-- `search` (required) - search query may be only author's name, but you can use 
+- `search` (required) - search query, may be only author's name, but you can use 
 [some operators](https://github.com/ka1tzyu/local-quotes/wiki/How-to-use-search) too.
 - `refresh` (optional) - refresh interval, when this time passes plugin
 will update quote text with another random one (`1m`, `2d`, `30s`, [more 
