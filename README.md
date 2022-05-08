@@ -1,3 +1,5 @@
+**all images and gifs refer to 0.2.1**
+
 # 📜 Local Quotes
 
 Collect your quotes from all over the vault and embed them in different locations.
@@ -45,23 +47,24 @@ represent your quote block. There are some settings those allow you to
 configure quote block:
 - `id` (required) - any string or number for quote identification (`1`,
 `d2f`, `my-quote1`).
-- `author` (required) - author of quote that you want to see.
-- `reload` (optional) - renew interval, when this time passes plugin
+- `search` (required) - search query may be only author's name, but you can use 
+[some operators](https://github.com/ka1tzyu/local-quotes/wiki/How-to-use-search) too.
+- `refresh` (optional) - refresh interval, when this time passes plugin
 will update quote text with another random one (`1m`, `2d`, `30s`, [more 
-examples](#-reload-intervals))
+examples](#-refresh-intervals))
 - `customClass` (optional) - class that can be added to parent div
 
 ````
 ```localquote
 id 1
-author Kamina, TTGL
-reload 1d
+search Kamina, TTGL
+refresh 1d
 customClass my-quote-class
 ```
 ````
 
-### 🔃 Reload intervals
-`reload` property uses custom moment.js like syntax. There are all possible
+### 🔃 Refresh intervals
+`refresh` property uses custom moment.js like syntax. There are all possible
 variants (case-sensitive):
 - `10s` - equals 10 seconds
 - `10m` - equals 10 minutes
