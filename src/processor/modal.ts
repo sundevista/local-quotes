@@ -8,6 +8,28 @@ function fetchAuthorsInQuoteVault(plugin: LocalQuotes): Array<string> {
 	return plugin.quoteVault.map((obj) => obj.author);
 }
 
+export class ErrorModal extends Modal {
+	header: string;
+	message: string;
+
+	constructor(header: string, message: string) {
+		super(app);
+		this.header = header;
+		this.message = message;
+	}
+
+	onOpen() {
+		let {contentEl} = this;
+
+		contentEl.createEl('h3', {text: this.header});
+		contentEl.createEl('p', {text: this.message});
+	}
+
+	onClose() {
+		this.contentEl.empty();
+	}
+}
+
 export class QuoteMakerModal extends Modal {
 	result: BlockMetadata;
 	plugin: LocalQuotes;
@@ -125,7 +147,6 @@ export class QuoteMakerModal extends Modal {
 	}
 
 	onClose() {
-		let {contentEl} = this;
-		contentEl.empty();
+		this.contentEl.empty();
 	}
 }

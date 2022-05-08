@@ -3,7 +3,7 @@ import {findTaggedFiles} from "./util/scan";
 import {Quote, updateQuotesVault} from "./types/quote";
 import {processCodeblock} from "./processor/codeblock";
 import {DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab} from "./settings";
-import {QuoteMakerModal} from "./processor/modal";
+import {ErrorModal, QuoteMakerModal} from "./processor/modal";
 
 export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;
@@ -34,7 +34,14 @@ export default class LocalQuotes extends Plugin {
 			name: 'Open Quote Maker',
 			callback: async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
-				new QuoteMakerModal(this).open();
+				if (this.quoteVault && this.quoteVault.length > 0) {
+					new QuoteMakerModal(this).open();
+				} else {
+					new ErrorModal(
+						'Local Quote Error',
+						'After scan there is no any quote listings in your vault.'
+					).open();
+				}
 			}
 		});
 	}
