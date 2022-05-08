@@ -99,8 +99,15 @@ export class QuoteMakerModal extends Modal {
 
 		new Setting(contentEl)
 			.setName('Advanced search')
-			.setDesc('Write your search query (\'author1 || author2\', etc). If this field empty, output you\'ll see' +
-				'chose option from setting above')
+			.setDesc(
+				createFragment((e) => {
+					let p = e.createEl('span');
+					p.appendText('You can freely use \'*\' and || after reading ');
+					p.appendChild(createDomLink(p, 'search guide',
+						'https://github.com/ka1tzyu/local-quotes/wiki/How-to-use-search'));
+					p.appendText('.');
+				})
+			)
 			.addText(text => text
 				.setValue(tmpSearch)
 				.onChange((value) => {
