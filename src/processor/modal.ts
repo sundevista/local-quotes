@@ -3,26 +3,33 @@ import {BlockMetadata} from "../types/blockmetadata";
 import {getRandomQuoteId} from "../util/random";
 import LocalQuotes from "../main";
 import {parseBlockMetadataToCodeBlock, parseTime} from "../util/parser";
+import {createDomLink} from "../util/dom";
 
 function fetchAuthorsInQuoteVault(plugin: LocalQuotes): Array<string> {
 	return plugin.quoteVault.map((obj) => obj.author);
 }
 
-export class ErrorModal extends Modal {
-	header: string;
-	message: string;
-
-	constructor(header: string, message: string) {
+export class QuoteVaultErrorModal extends Modal {
+	constructor() {
 		super(app);
-		this.header = header;
-		this.message = message;
 	}
 
 	onOpen() {
 		let {contentEl} = this;
 
-		contentEl.createEl('h3', {text: this.header});
-		contentEl.createEl('p', {text: this.message});
+		contentEl.createEl('h3', {text: '❌ Local Quote Error'});
+		contentEl.createEl('p', {text: 'After scan there is no any quote listings in your vault.'});
+
+		const a = createDomLink(
+			contentEl,
+			'wiki page',
+			'https://github.com/ka1tzyu/local-quotes/wiki/How-quote-listings-work'
+		);
+
+		let p = contentEl.createEl('p');
+		p.appendText('If you want to learn more about quote listings and understand how it works you can visit ');
+		p.appendChild(a);
+		p.appendText('.');
 	}
 
 	onClose() {

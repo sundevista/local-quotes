@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Error model that occurs when you summon `Quote Maker` with no quote listings
+- [Wiki page](https://github.com/ka1tzyu/local-quotes/wiki/How-quote-listings-work) about quote listing (and refer to it in error modal)
 
 ### Changed
 - Modal styling (emojis)
@@ -16,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.1] - 2022-06-08
 ### Fixed
-- Plugin now searches tag in any position and source (fronmatter) (#12)
+- Plugin now searches tag in any position and source (frontmatter) (#12)
 
 ### Changed
 - Modal name now is Quote Maker
