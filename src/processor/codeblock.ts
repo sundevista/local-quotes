@@ -20,12 +20,10 @@ export async function processCodeblock(
 	el.appendChild(bq);
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
-		bq.appendChild(el.createEl(
-			'p',
-			{
-				text: p.replace('{{content}}', mb.content.text)
-					.replace('{{author}}', mb.content.author)
-			}
-		));
+		let e = el.createEl('p');
+		e.innerHTML = p.replace('{{content}}', mb.content.text)
+			.replace('{{author}}', mb.content.author);
+
+		bq.appendChild(e);
 	}
 }
