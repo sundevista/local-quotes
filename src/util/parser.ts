@@ -1,10 +1,16 @@
 import {BlockMetadata} from "../types/blockmetadata";
+import * as Showdown from 'showdown';
 import {
 	codeblock_author_regexp,
 	codeblock_customClass_regexp,
 	codeblock_id_regexp,
 	codeblock_reloadInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
 } from "../consts";
+
+export function parseMdToHtml(src: string): string {
+	const conv = new Showdown.Converter();
+	return conv.makeHtml(src);
+}
 
 export function parseBlockMetadataToCodeBlock(blockMetadata: BlockMetadata, refreshStr: string): string {
 	let result: Array<string> = [];

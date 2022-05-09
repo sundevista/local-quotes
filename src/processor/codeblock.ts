@@ -2,6 +2,7 @@ import LocalQuotes from "../main";
 import {BlockMetadata, selectBlockMetadata} from "../types/blockmetadata";
 import {updateQuotesVault} from "../types/quote";
 import {findTaggedFiles} from "../util/scan";
+import {parseMdToHtml} from "../util/parser";
 
 export async function processCodeblock(
 	plugin: LocalQuotes,
@@ -20,10 +21,7 @@ export async function processCodeblock(
 	el.appendChild(bq);
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
-		let e = el.createEl('p');
-		e.innerHTML = p.replace('{{content}}', mb.content.text)
-			.replace('{{author}}', mb.content.author);
-
-		bq.appendChild(e);
+		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', mb.content.text)
+			.replace('{{author}}', mb.content.author));
 	}
 }

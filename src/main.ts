@@ -13,7 +13,6 @@ export default class LocalQuotes extends Plugin {
 		console.log('loading Local Quotes...')
 		await this.loadSettings();
 
-
 		this.registerMarkdownCodeBlockProcessor(
 			'localquote',
 			(src, el, _) => processCodeblock(this, src, el));
