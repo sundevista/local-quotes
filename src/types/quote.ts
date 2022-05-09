@@ -10,6 +10,13 @@ export interface Quote {
 	quotes: string[];
 }
 
+export function getValidAuthorsFromAdvancedSearch(plugin: LocalQuotes, search: string): string[] {
+	return search.split('||')
+		.map((a) => {
+			if((a.trim().length > 0) && (getAuthorIdx(plugin, a.trim()) >= 0)) return a.trim();
+		});
+}
+
 export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataContent {
 	let result: BlockMetadataContent = {author: null, text: null};
 
@@ -17,9 +24,7 @@ export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataC
 	if (search === '*') {
 		result.author = getRandomAuthor(plugin);
 	} else if (search.match(search_or_regexp)) {
-		const authorList = search.split('||').map((a) => {
-			if ((a.trim().length > 0) && (getAuthorIdx(plugin, a.trim()) >= 0)) return a.trim();
-		});
+		const authorList = getValidAuthorsFromAdvancedSearch(plugin, search);
 		result.author = getRandomArrayItem(authorList);
 	} else if (search.match(author_string_regexp)) {
 		result.author = search;

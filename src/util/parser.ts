@@ -13,8 +13,7 @@ export function parseMdToHtml(src: string): string {
 		type: 'lang',
 			regex: /==.+==/gm,
 		replace: (s: string) => {
-			return s.replace('==', '<mark>')
-				.replace('==', '</mark>');
+			return s.replace('==', '<mark>').replace('==', '</mark>');
 		}
 	}
 
