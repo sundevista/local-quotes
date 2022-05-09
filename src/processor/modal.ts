@@ -171,7 +171,7 @@ export class QuoteMakerModal extends Modal {
 					this.onClose();
 					this.close();
 
-					new Notice(`Quote '${this.result.id}' from '${this.result.content.author}' inserted!`);
+					new Notice(`Quote '${this.result.id}' via '${this.result.search}' inserted!`);
 				}));
 	}
 
