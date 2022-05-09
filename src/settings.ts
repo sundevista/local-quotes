@@ -58,17 +58,6 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 					await this.plugin.saveSettings();
 				}));
 
-		new Setting(containerEl)
-			.setName('Show reload button (unavailable)')
-			.setDesc('Turn off if you want to hide reload button')
-			.addToggle(state => state
-				.setDisabled(true)
-				.setValue(this.plugin.settings.showReloadButton)
-				.onChange(async (value) => {
-					this.plugin.settings.showReloadButton = value;
-					await this.plugin.saveSettings();
-				}));
-
 		containerEl.createEl('h2', {text: 'Advanced'});
 
 		new Setting(containerEl)
