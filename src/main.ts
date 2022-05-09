@@ -3,7 +3,7 @@ import {findTaggedFiles} from "./util/scan";
 import {Quote, updateQuotesVault} from "./types/quote";
 import {processCodeblock, processOneTimeCodeBlock} from "./processor/codeblock";
 import {DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab} from "./settings";
-import {QuoteMakerModal, QuoteVaultErrorModal} from "./processor/modal";
+import {OneTimeQuoteMakerModal, QuoteMakerModal, QuoteVaultErrorModal} from "./processor/modal";
 
 export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;
@@ -41,6 +41,19 @@ export default class LocalQuotes extends Plugin {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 				if (this.quoteVault && this.quoteVault.length > 0) {
 					new QuoteMakerModal(this).open();
+				} else {
+					new QuoteVaultErrorModal().open();
+				}
+			}
+		});
+
+		this.addCommand({
+			id: 'open-local-quote-one-time-block-maker',
+			name: 'Open One-Time Quote Maker',
+			callback: async () => {
+				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
+				if (this.quoteVault && this.quoteVault.length > 0) {
+					new OneTimeQuoteMakerModal(this).open();
 				} else {
 					new QuoteVaultErrorModal().open();
 				}

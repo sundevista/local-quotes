@@ -24,6 +24,17 @@ export function parseMdToHtml(src: string): string {
 	return conv.makeHtml(src);
 }
 
+export function parseOneTimeBlockToCodeBlock(blockMetadata: OneTimeBlock): string {
+	let result: Array<string> = [];
+
+	result.push('```localquote-once');
+	result.push(`search ${blockMetadata.search}`);
+	blockMetadata.customClass && result.push(`customClass ${blockMetadata.customClass}`);
+	result.push('```');
+
+	return result.join('\n');
+}
+
 export function parseBlockMetadataToCodeBlock(blockMetadata: BlockMetadata, refreshStr: string): string {
 	let result: Array<string> = [];
 
