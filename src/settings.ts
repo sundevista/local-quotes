@@ -2,6 +2,7 @@ import {App, Notice, PluginSettingTab, Setting} from "obsidian";
 import LocalQuotes from "./main";
 import {BlockMetadata} from "./types/blockmetadata";
 import {sec_in_day} from "./consts";
+import {OneTimeBlock} from "./types/onetime";
 
 export interface LocalQuotesSettings {
 	quoteTag: string;
@@ -10,6 +11,8 @@ export interface LocalQuotesSettings {
 	showReloadButton: boolean;
 	quoteBlockFormat: string;
 	blockMetadata: BlockMetadata[];
+	oneTimeBlocks: OneTimeBlock[];
+	templateFolder: string;
 }
 
 export const DEFAULT_SETTINGS: LocalQuotesSettings = {
@@ -19,6 +22,8 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	showReloadButton: false,
 	quoteBlockFormat: '{{content}}\n— {{author}}',
 	blockMetadata: [],
+	oneTimeBlocks: [],
+	templateFolder: '',
 }
 
 export class LocalQuotesSettingTab extends PluginSettingTab {
@@ -55,6 +60,17 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 				.setValue(this.plugin.settings.defaultReloadInterval.toString())
 				.onChange(async (value) => {
 					this.plugin.settings.defaultReloadInterval = parseInt(value);
+					await this.plugin.saveSettings();
+				}));
+
+		new Setting(containerEl)
+			.setName('Template folder')
+			.setDesc('Folder that will be ignored by one-time quotes.')
+			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.templateFolder)
+				.setValue(this.plugin.settings.templateFolder)
+				.onChange(async (value) => {
+					this.plugin.settings.templateFolder = value;
 					await this.plugin.saveSettings();
 				}));
 

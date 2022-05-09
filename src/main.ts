@@ -1,7 +1,7 @@
 import {Notice, Plugin} from 'obsidian';
 import {findTaggedFiles} from "./util/scan";
 import {Quote, updateQuotesVault} from "./types/quote";
-import {processCodeblock} from "./processor/codeblock";
+import {processCodeblock, processOneTimeCodeBlock} from "./processor/codeblock";
 import {DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab} from "./settings";
 import {QuoteMakerModal, QuoteVaultErrorModal} from "./processor/modal";
 
@@ -15,7 +15,13 @@ export default class LocalQuotes extends Plugin {
 
 		this.registerMarkdownCodeBlockProcessor(
 			'localquote',
-			(src, el, _) => processCodeblock(this, src, el));
+			(src, el, _) => processCodeblock(this, src, el)
+		);
+
+		this.registerMarkdownCodeBlockProcessor(
+			'localquote-once',
+			(src, el, ctx) => processOneTimeCodeBlock(this, src, el, ctx)
+		);
 
 		this.addSettingTab(new LocalQuotesSettingTab(this.app, this));
 

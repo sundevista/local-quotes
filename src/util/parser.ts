@@ -7,6 +7,7 @@ import {
 	codeblock_reloadInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
 } from "../consts";
 import {ShowdownExtension} from "showdown";
+import {OneTimeBlock} from "../types/onetime";
 
 export function parseMdToHtml(src: string): string {
 	const highlightExt: ShowdownExtension = {
@@ -44,6 +45,17 @@ export function parseCodeBlock(content: string): BlockMetadata {
 		if (line.match(codeblock_id_regexp)) result.id = line.split('id ')[1];
 		if (line.match(codeblock_author_regexp)) result.search = line.split('search ')[1];
 		if (line.match(codeblock_reloadInterval_regexp)) result.refresh = parseTime(line.split('refresh ')[1]);
+		if (line.match(codeblock_customClass_regexp)) result.customClass = line.split('customClass ')[1];
+	}
+
+	return result;
+}
+
+export function parseOneTimeCodeBlock(content: string): OneTimeBlock {
+	let result: OneTimeBlock = {filename: null, content: null, customClass: null, search: null};
+
+	for (let line of content.split('\n')) {
+		if (line.match(codeblock_author_regexp)) result.search = line.split('search ')[1];
 		if (line.match(codeblock_customClass_regexp)) result.customClass = line.split('customClass ')[1];
 	}
 
