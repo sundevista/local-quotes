@@ -10,6 +10,21 @@ function fetchAuthorsInQuoteVault(plugin: LocalQuotes): Array<string> {
 	return plugin.quoteVault.map((obj) => obj.author);
 }
 
+function okCloserButton(modal: Modal): void {
+	let buttonContainer: HTMLElement = modal.contentEl.createEl('div');
+	buttonContainer.addClass('local-quote-modal-button-container');
+
+	new Setting(buttonContainer)
+		.addButton(btn => btn
+			.setButtonText('OK')
+			.setCta()
+			.onClick(() => {
+				modal.onClose();
+				modal.close();
+			}));
+}
+
+
 export class QuoteVaultErrorModal extends Modal {
 	constructor() {
 		super(app);
@@ -31,6 +46,8 @@ export class QuoteVaultErrorModal extends Modal {
 		p.appendText('If you want to learn more about quote listings and understand how it works you can visit ');
 		p.appendChild(a);
 		p.appendText('.');
+
+		okCloserButton(this);
 	}
 
 	onClose() {
@@ -120,7 +137,7 @@ export class QuoteMakerModal extends Modal {
 				}));
 
 		new Setting(contentEl)
-			.setName('Advanced search validator')
+			.setName('Search validator')
 			.setDesc('Summons notice with validated (existent) authors')
 			.addButton(btn => btn
 				.setButtonText('Check')
