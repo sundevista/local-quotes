@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Ability to use markdown (highlight too) inside quote's format setting and quotes' listings
 - New setting that allows to validate advanced search
+- [One-time quote](https://github.com/ka1tzyu/local-quotes/wiki/What-is-one-time-quote%3F) — brand-new quote type
+- New setting — `Clear one-time blocks`
+- New modal — `One-Time Quote Maker`
+- New command — `Open One-Time Quote Maker`
 
 ### Removed
 - Unnecessary `reload button` setting

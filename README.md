@@ -72,6 +72,23 @@ variants (case-sensitive):
 - `2M` - equals 2 months
 - `1y` - equals 1 year
 
+## 🗓 One-time quotes
+Do you want to see quote that creating once, for example, in daily note? There is a simple
+solution — **One-time Quote**! Just set `Template folder` in the plugin's settings and
+use special code block language. When note placed inside template folder, quote won't
+render. But at the time when it's outside of template folder, it immediately renders
+when you open note, and will not be changed later. Totally one-time. 
+
+This feature comes with special modal `One-Time Quote Maker`.
+
+Learn [this wiki page](https://github.com/ka1tzyu/local-quotes/wiki/What-is-one-time-quote%3F) to get more detailed information.
+
+````
+```localquote-once
+search Kamina, TTGL
+```
+````
+
 ## ⏫ Future updates
 You can see what I am doing at the moment [here](https://github.com/users/ka1tzyu/projects/1). If you want some feature to be made first, like the first message in
 this feature's issue, I'll pay attention. Also, you can see unreleased but already done features and changes in [CHANGELOG](CHANGELOG.md), they'll be available in the next release.
