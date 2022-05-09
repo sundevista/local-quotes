@@ -108,5 +108,17 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 					await this.plugin.saveSettings();
 					new Notice('Your block metadata successfully cleared!')
 				}));
+
+		new Setting(containerEl)
+			.setName('Clear one-time blocks')
+			.setDesc('Set oneTimeBlocks property to empty array (use if you have problems with ' +
+				'mismatched template folder)')
+			.addButton(btn => btn
+				.setButtonText('Clear')
+				.onClick(async () => {
+					this.plugin.settings.oneTimeBlocks = [];
+					await this.plugin.saveSettings();
+					new Notice('Your one-time blocks successfully cleared!')
+				}));
 	}
 }
