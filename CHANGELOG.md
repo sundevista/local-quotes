@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Ability to use markdown inside quote's format setting and quotes' listings
+- Ability to use markdown (highlight too) inside quote's format setting and quotes' listings
 
 ### Fixed
 - Notice from Quote Maker now return `search` rather than `null` from uncreated content

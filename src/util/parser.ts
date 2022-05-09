@@ -6,9 +6,21 @@ import {
 	codeblock_id_regexp,
 	codeblock_reloadInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
 } from "../consts";
+import {ShowdownExtension} from "showdown";
 
 export function parseMdToHtml(src: string): string {
-	const conv = new Showdown.Converter();
+	const highlightExt: ShowdownExtension = {
+		type: 'lang',
+			regex: /==.+==/gm,
+		replace: (s: string) => {
+			return s.replace('==', '<mark>')
+				.replace('==', '</mark>');
+		}
+	}
+
+	const conv = new Showdown.Converter({
+		extensions: [highlightExt],
+	});
 	return conv.makeHtml(src);
 }
 
