@@ -73,7 +73,7 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 			line = line.trim();
 			if (current_author && quote_regexp.test(line) && line.length >= plugin.settings.minimalQuoteLength) {
 				// Quote case
-				await uploadQuote(plugin, current_author, line.slice(2))
+				await uploadQuote(plugin, current_author, line.slice(line.indexOf(' ')));
 			} else if (author_regexp.test(line)) {
 				// Author case
 				current_author = line.split(':::')[1]
