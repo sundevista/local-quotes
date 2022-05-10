@@ -1,12 +1,14 @@
 import LocalQuotes from "../main";
-import {TFile} from "obsidian";
+import {Notice, TFile} from "obsidian";
 import {author_regexp, quote_regexp, search_regexp} from "../consts";
 import {getAuthorIdx} from "../utils/scan";
 import {BlockMetadataContent} from "./block-metadata";
 import {getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor} from "../utils/random";
+import {clearFromMarkdownStyling} from "../utils/parser";
 
 export interface Quote {
 	author: string;
+	authorCode: string;
 	quotes: string[];
 }
 
@@ -32,12 +34,16 @@ export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataC
 		result.author = getRandomArrayItem(authorList);
 	}
 
+	new Notice(search);
+
 	result.text = getRandomQuoteOfAuthor(plugin, result.author);
 	return result;
 }
 
 
-export async function uploadQuote(plugin: LocalQuotes, author: string, quote: string): Promise<void> {
+export async function uploadQuote(plugin: LocalQuotes, authorCode: string, quote: string): Promise<void> {
+	const author = clearFromMarkdownStyling(authorCode);
+
 	const idx: number = getAuthorIdx(plugin, author);
 
 	if (idx >= 0) {
@@ -45,7 +51,7 @@ export async function uploadQuote(plugin: LocalQuotes, author: string, quote: st
 			plugin.quoteVault[idx].quotes.push(quote.trim());
 		}
 	} else {
-		plugin.quoteVault.push({author: author, quotes: [quote.trim()]});
+		plugin.quoteVault.push({author: author, authorCode: authorCode, quotes: [quote.trim()]});
 	}
 
 	await plugin.saveSettings();

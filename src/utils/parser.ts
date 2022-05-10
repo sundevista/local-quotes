@@ -9,6 +9,26 @@ import {
 import {ShowdownExtension} from "showdown";
 import {OneTimeBlock} from "../types/one-time-block";
 
+export function clearFromMarkdownStyling(src: string): string {
+	const showdown = new Showdown.Converter();
+	src = showdown.makeHtml(src);
+
+	const blacklist = ['<strong>', '</strong>', '<em>', '</em>', '<p>', '</p>'];
+
+	for (let el of blacklist) {
+		src = src.split(el).join('');
+	}
+
+	return src;
+}
+
+export function clearCodeFromClosableTag(src: string, tag: string): string {
+	for (let el of [`<${tag}>`, `</${tag}>`]) {
+		src = src.split(el).join('');
+	}
+	return src;
+}
+
 export function parseMdToHtml(src: string): string {
 	const highlightExt: ShowdownExtension = {
 		type: 'lang',

@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Danger setting got their own settings category - `Danger Zone`
 
+### Fixed
+- You can use markdown (bold/italic style) to your quote's listings headers (`:::**Author**:::`)
+
 ## [1.1.1] - 2022/05/10
 ### Changed
 - Auto generated id's length moved to settings
