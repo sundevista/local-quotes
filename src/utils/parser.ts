@@ -1,13 +1,13 @@
-import {BlockMetadata} from "../types/blockmetadata";
+import {BlockMetadata} from "../types/block-metadata";
 import * as Showdown from 'showdown';
 import {
-	codeblock_author_regexp,
-	codeblock_customClass_regexp,
-	codeblock_id_regexp,
-	codeblock_reloadInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
+	code_block_search_regexp,
+	code_block_customClass_regexp,
+	code_block_id_regexp,
+	code_block_refreshInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
 } from "../consts";
 import {ShowdownExtension} from "showdown";
-import {OneTimeBlock} from "../types/onetime";
+import {OneTimeBlock} from "../types/one-time-block";
 
 export function parseMdToHtml(src: string): string {
 	const highlightExt: ShowdownExtension = {
@@ -54,10 +54,10 @@ export function parseCodeBlock(content: string): BlockMetadata {
 	};
 
 	for (let line of content.split('\n')) {
-		if (line.match(codeblock_id_regexp)) result.id = line.split('id ')[1];
-		if (line.match(codeblock_author_regexp)) result.search = line.split('search ')[1];
-		if (line.match(codeblock_reloadInterval_regexp)) result.refresh = parseTime(line.split('refresh ')[1]);
-		if (line.match(codeblock_customClass_regexp)) result.customClass = line.split('customClass ')[1];
+		if (line.match(code_block_id_regexp)) result.id = line.split('id ')[1];
+		if (line.match(code_block_search_regexp)) result.search = line.split('search ')[1];
+		if (line.match(code_block_refreshInterval_regexp)) result.refresh = parseTime(line.split('refresh ')[1]);
+		if (line.match(code_block_customClass_regexp)) result.customClass = line.split('customClass ')[1];
 	}
 
 	return result;
@@ -67,8 +67,8 @@ export function parseOneTimeCodeBlock(content: string): OneTimeBlock {
 	let result: OneTimeBlock = {filename: null, content: null, customClass: null, search: null};
 
 	for (let line of content.split('\n')) {
-		if (line.match(codeblock_author_regexp)) result.search = line.split('search ')[1];
-		if (line.match(codeblock_customClass_regexp)) result.customClass = line.split('customClass ')[1];
+		if (line.match(code_block_search_regexp)) result.search = line.split('search ')[1];
+		if (line.match(code_block_customClass_regexp)) result.customClass = line.split('customClass ')[1];
 	}
 
 	return result;

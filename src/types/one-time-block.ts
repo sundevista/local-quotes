@@ -1,7 +1,7 @@
-import {BlockMetadataContent} from "./blockmetadata";
+import {BlockMetadataContent} from "./block-metadata";
 import LocalQuotes from "../main";
 import {MarkdownPostProcessorContext} from "obsidian";
-import {parseOneTimeCodeBlock} from "../util/parser";
+import {parseOneTimeCodeBlock} from "../utils/parser";
 import {searchQuote} from "./quote";
 
 export interface OneTimeBlock {

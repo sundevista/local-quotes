@@ -1,4 +1,4 @@
-import {parseTime} from "../util/parser";
+import {parseTime} from "../utils/parser";
 
 
 /*

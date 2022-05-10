@@ -1,12 +1,12 @@
 import LocalQuotes from "../main";
-import {BlockMetadata, selectBlockMetadata} from "../types/blockmetadata";
+import {BlockMetadata, selectBlockMetadata} from "../types/block-metadata";
 import {updateQuotesVault} from "../types/quote";
-import {findTaggedFiles} from "../util/scan";
-import {parseMdToHtml} from "../util/parser";
-import {OneTimeBlock, selectOneTimeBlock} from "../types/onetime";
+import {findTaggedFiles} from "../utils/scan";
+import {parseMdToHtml} from "../utils/parser";
+import {OneTimeBlock, selectOneTimeBlock} from "../types/one-time-block";
 import {MarkdownPostProcessorContext} from "obsidian";
 
-export async function processCodeblock(
+export async function processCodeBlock(
 	plugin: LocalQuotes,
 	source: string,
 	el: HTMLElement): Promise<void> {

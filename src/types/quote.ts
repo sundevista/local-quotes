@@ -1,13 +1,17 @@
 import LocalQuotes from "../main";
 import {TFile} from "obsidian";
-import {author_regexp, author_string_regexp, quote_regexp, search_or_regexp} from "../consts";
-import {getAuthorIdx} from "../util/scan";
-import {BlockMetadataContent} from "./blockmetadata";
-import {getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor} from "../util/random";
+import {author_regexp, single_author_regexp, quote_regexp, search_or_regexp} from "../consts";
+import {getAuthorIdx} from "../utils/scan";
+import {BlockMetadataContent} from "./block-metadata";
+import {getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor} from "../utils/random";
 
 export interface Quote {
 	author: string;
 	quotes: string[];
+}
+
+export function fetchAuthorsInQuoteVault(plugin: LocalQuotes): Array<string> {
+	return plugin.quoteVault.map((obj) => obj.author);
 }
 
 export function getValidAuthorsFromAdvancedSearch(plugin: LocalQuotes, search: string): string[] {
@@ -26,7 +30,7 @@ export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataC
 	} else if (search.match(search_or_regexp)) {
 		const authorList = getValidAuthorsFromAdvancedSearch(plugin, search);
 		result.author = getRandomArrayItem(authorList);
-	} else if (search.match(author_string_regexp)) {
+	} else if (search.match(single_author_regexp)) {
 		result.author = search;
 	}
 

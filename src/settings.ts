@@ -1,8 +1,8 @@
 import {App, Notice, PluginSettingTab, Setting} from "obsidian";
 import LocalQuotes from "./main";
-import {BlockMetadata} from "./types/blockmetadata";
+import {BlockMetadata} from "./types/block-metadata";
 import {sec_in_day} from "./consts";
-import {OneTimeBlock} from "./types/onetime";
+import {OneTimeBlock} from "./types/one-time-block";
 
 export interface LocalQuotesSettings {
 	quoteTag: string;
