@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Now auto generated id's length moved to settings
+- Auto generated id's length moved to settings
+- Search validator now returns special message if there is no valid authors in search
 
 ### Fixed
 - Constant regular expressions improvements

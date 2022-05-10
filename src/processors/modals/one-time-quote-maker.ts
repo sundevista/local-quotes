@@ -83,8 +83,11 @@ export class OneTimeQuoteMakerModal extends Modal {
 				.setButtonText('Check')
 				.setCta()
 				.onClick(() => {
-					new Notice('Validated authors:\n' +
-						getValidAuthorsFromAdvancedSearch(this.plugin, tmpSearch).join('\n'));
+					const validatedAuthors = getValidAuthorsFromAdvancedSearch(this.plugin, tmpSearch).join('\n');
+					new Notice((validatedAuthors.length > 0)
+						? ('Validated authors:\n' + validatedAuthors)
+						: 'Plugin can\'t find authors those you mentioned!\nTry to change search.'
+					);
 				}));
 
 		let buttonContainer: HTMLElement = contentEl.createEl('div');
