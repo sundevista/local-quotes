@@ -112,6 +112,8 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 					await this.plugin.saveSettings();
 				}));
 
+		containerEl.createEl('h2', {text: 'Danger Zone'});
+
 		new Setting(containerEl)
 			.setName('Clear block metadata')
 			.setDesc('Set blockMetadata property to empty array (use if you have problems with old quote occurrence)')
