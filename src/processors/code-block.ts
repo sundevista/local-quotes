@@ -1,6 +1,6 @@
 import LocalQuotes from "../main";
 import {BlockMetadata, selectBlockMetadata} from "../types/block-metadata";
-import {updateQuotesVault} from "../types/quote";
+import {getAuthorsCode, updateQuotesVault} from "../types/quote";
 import {findTaggedFiles} from "../utils/scan";
 import {parseMdToHtml} from "../utils/parser";
 import {OneTimeBlock, selectOneTimeBlock} from "../types/one-time-block";
@@ -23,7 +23,13 @@ export async function processCodeBlock(
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
 		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', mb.content.text)
-			.replace('{{author}}', mb.content.author));
+			.replace(
+				'{{author}}',
+				plugin.settings.inheritListingStyle
+					? getAuthorsCode(plugin, mb.content.author)
+					: mb.content.author
+			)
+		);
 	}
 }
 

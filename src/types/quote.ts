@@ -12,6 +12,10 @@ export interface Quote {
 	quotes: string[];
 }
 
+export function getAuthorsCode(plugin: LocalQuotes, author: string): string {
+	return plugin.quoteVault[getAuthorIdx(plugin, author)].authorCode;
+}
+
 export function fetchAuthorsInQuoteVault(plugin: LocalQuotes): Array<string> {
 	return plugin.quoteVault.map((obj) => obj.author);
 }
