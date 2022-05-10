@@ -27,10 +27,10 @@ export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataC
 	// '*' case (random quote of random author)
 	if (search === '*') {
 		result.author = getRandomAuthor(plugin);
-	} else if (search.match(search_or_regexp)) {
+	} else if (search_or_regexp.test(search)) {
 		const authorList = getValidAuthorsFromAdvancedSearch(plugin, search);
 		result.author = getRandomArrayItem(authorList);
-	} else if (search.match(single_author_regexp)) {
+	} else if (single_author_regexp.test(search)) {
 		result.author = search;
 	}
 
@@ -62,10 +62,10 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 		current_author = '';
 
 		for (let line of (await plugin.app.vault.cachedRead(file)).split('\n')) {
-			if (current_author && line.match(quote_regexp) && line.length >= plugin.settings.minimalQuoteLength) {
+			if (current_author && quote_regexp.test(line) && line.length >= plugin.settings.minimalQuoteLength) {
 				// Quote case
 				await uploadQuote(plugin, current_author, line.slice(2))
-			} else if (line.match(author_regexp)) {
+			} else if (author_regexp.test(line)) {
 				// Author case
 				current_author = line.split(':::')[1]
 			} else {

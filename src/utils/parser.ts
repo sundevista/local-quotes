@@ -54,10 +54,10 @@ export function parseCodeBlock(content: string): BlockMetadata {
 	};
 
 	for (let line of content.split('\n')) {
-		if (line.match(code_block_id_regexp)) result.id = line.split('id ')[1];
-		if (line.match(code_block_search_regexp)) result.search = line.split('search ')[1];
-		if (line.match(code_block_refreshInterval_regexp)) result.refresh = parseTime(line.split('refresh ')[1]);
-		if (line.match(code_block_customClass_regexp)) result.customClass = line.split('customClass ')[1];
+		if (code_block_id_regexp.test(line)) result.id = line.split('id ')[1];
+		if (code_block_search_regexp.test(line)) result.search = line.split('search ')[1];
+		if (code_block_refreshInterval_regexp.test(line)) result.refresh = parseTime(line.split('refresh ')[1]);
+		if (code_block_customClass_regexp.test(line)) result.customClass = line.split('customClass ')[1];
 	}
 
 	return result;
@@ -67,8 +67,8 @@ export function parseOneTimeCodeBlock(content: string): OneTimeBlock {
 	let result: OneTimeBlock = {filename: null, content: null, customClass: null, search: null};
 
 	for (let line of content.split('\n')) {
-		if (line.match(code_block_search_regexp)) result.search = line.split('search ')[1];
-		if (line.match(code_block_customClass_regexp)) result.customClass = line.split('customClass ')[1];
+		if (code_block_search_regexp.test(line)) result.search = line.split('search ')[1];
+		if (code_block_customClass_regexp.test(line)) result.customClass = line.split('customClass ')[1];
 	}
 
 	return result;
