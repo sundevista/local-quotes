@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.3] - 2022/05/11
+### Fixed
+- Remove unnecessary notice (dev)
+
 ## [1.2.2] - 2022/05/10
 ### Fixed
 - Now quote slicing based on first space position rathar than persistent position

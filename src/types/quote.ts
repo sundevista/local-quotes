@@ -1,5 +1,5 @@
 import LocalQuotes from "../main";
-import {Notice, TFile} from "obsidian";
+import {TFile} from "obsidian";
 import {author_regexp, quote_regexp, search_regexp} from "../consts";
 import {getAuthorIdx} from "../utils/scan";
 import {BlockMetadataContent} from "./block-metadata";
@@ -37,8 +37,6 @@ export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataC
 		const authorList = getValidAuthorsFromAdvancedSearch(plugin, search);
 		result.author = getRandomArrayItem(authorList);
 	}
-
-	new Notice(search);
 
 	result.text = getRandomQuoteOfAuthor(plugin, result.author);
 	return result;
