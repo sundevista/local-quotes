@@ -1,4 +1,4 @@
-export const author_regexp: RegExp = /^:::\w[\w ,.]+:::$/m;
+export const author_regexp: RegExp = /^:::[\w ,.*_]+:::$/m;
 export const quote_regexp: RegExp = /^\d+\..+$|^- .+$/m;
 
 export const search_regexp: RegExp = /^(?:[\w,. ]| \|\| )+$/m;

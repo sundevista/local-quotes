@@ -22,6 +22,7 @@ test('checking author_regexp', () => {
 		[':::Author 12 :::', true],
 		[':::Author, From:::', true],
 		[':::Author, From. Full Source:::', true],
+		[':::**Author** with some _style_:::', true],
 		['::::Author:::', false],
 		['::Author:::', false],
 		[' :::Author:::', false],
