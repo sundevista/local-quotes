@@ -12,7 +12,7 @@ import {OneTimeBlock} from "../types/one-time-block";
 export function parseMdToHtml(src: string): string {
 	const highlightExt: ShowdownExtension = {
 		type: 'lang',
-		regex: /==.+==/gm,
+		regex: /==.+==/,
 		replace: (s: string) => {
 			return s.replace('==', '<mark>').replace('==', '</mark>');
 		}

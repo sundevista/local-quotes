@@ -1,6 +1,6 @@
 import LocalQuotes from "../main";
 import {TFile} from "obsidian";
-import {author_regexp, single_author_regexp, quote_regexp, search_or_regexp} from "../consts";
+import {author_regexp, quote_regexp, search_regexp} from "../consts";
 import {getAuthorIdx} from "../utils/scan";
 import {BlockMetadataContent} from "./block-metadata";
 import {getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor} from "../utils/random";
@@ -27,11 +27,9 @@ export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataC
 	// '*' case (random quote of random author)
 	if (search === '*') {
 		result.author = getRandomAuthor(plugin);
-	} else if (search_or_regexp.test(search)) {
+	} else if (search_regexp.test(search)) {
 		const authorList = getValidAuthorsFromAdvancedSearch(plugin, search);
 		result.author = getRandomArrayItem(authorList);
-	} else if (single_author_regexp.test(search)) {
-		result.author = search;
 	}
 
 	result.text = getRandomQuoteOfAuthor(plugin, result.author);
@@ -62,6 +60,7 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 		current_author = '';
 
 		for (let line of (await plugin.app.vault.cachedRead(file)).split('\n')) {
+			line = line.trim();
 			if (current_author && quote_regexp.test(line) && line.length >= plugin.settings.minimalQuoteLength) {
 				// Quote case
 				await uploadQuote(plugin, current_author, line.slice(2))
