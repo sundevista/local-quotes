@@ -60,8 +60,6 @@ test('checking search_regexp', () => {
 		['First Person, with comma. and dot || Second Person || And, finally, third', true],
 		['Person', true],
 		['Using or|| with mistake', false],
-		['Using wrong && operator', false],
-		['Using wrong symbols!', false],
 	];
 
 	for (let _case of cases) {
@@ -95,10 +93,7 @@ test('checking code_block_search_regexp', () => {
 		['search First Person, with comma. and dot || Second Person || And, finally, third', true],
 		['search Person', true],
 		['search Using or|| with mistake', false],
-		['search Using wrong && operator', false],
-		['search Using wrong symbols!', false],
 		[' search wrong indent', false],
-		['search Using wrong symbols!', false],
 		['searches Using wrong field name', false],
 	];
 

@@ -1,10 +1,10 @@
-export const author_regexp: RegExp = /^:::[^:|]+:::$/m;
+export const author_regexp: RegExp = /^:::(?:[^:|\s]| )+:::$/m;
 export const quote_regexp: RegExp = /^\d+\..+$|^- .+$/m;
 
-export const search_regexp: RegExp = /^(?:[^:|]| \|\| )+$/m;
+export const search_regexp: RegExp = /^(?:[^:|\s]| | \|\| )+$/m;
 
 export const code_block_id_regexp: RegExp = /^id [\w\-_]+$/m;
-export const code_block_search_regexp: RegExp = /^search (?:[^:|]| \|\| )+$/m;
+export const code_block_search_regexp: RegExp = /^search (?:[^:|\s]| | \|\| )+$/m;
 export const code_block_refreshInterval_regexp: RegExp = /^refresh \d+[smhdwMy]$/m;
 export const code_block_customClass_regexp: RegExp = /^customClass \.?[\w\-_]+$/m;
 
