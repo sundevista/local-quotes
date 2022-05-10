@@ -28,7 +28,7 @@ export default class LocalQuotes extends Plugin {
 		this.addCommand({
 			id: 'rescan-local-quotes',
 			name: 'Rescan vault for local quotes',
-			callback: async() => {
+			callback: async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 				new Notice('Your quote listings successfully updated!');
 			}

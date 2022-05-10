@@ -46,8 +46,8 @@ function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadat
 
 	// Update quote
 	let refreshInterval = plugin.settings.blockMetadata[bmIdx].refresh === null
-			? plugin.settings.defaultReloadInterval
-			: plugin.settings.blockMetadata[bmIdx].refresh;
+		? plugin.settings.defaultReloadInterval
+		: plugin.settings.blockMetadata[bmIdx].refresh;
 
 	if ((plugin.settings.blockMetadata[bmIdx].lastUpdate + refreshInterval) < getCurrentSeconds()) {
 		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin, rawBlockMetadata.search);

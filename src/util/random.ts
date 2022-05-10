@@ -16,7 +16,7 @@ function getRandomInt(max: number): number {
 	return Math.floor(Math.random() * max);
 }
 
-export function getRandomArrayItem(arr: any[]|string): any {
+export function getRandomArrayItem(arr: any[] | string): any {
 	return arr[getRandomInt(arr.length)];
 }
 

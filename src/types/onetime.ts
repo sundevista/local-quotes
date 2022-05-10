@@ -54,7 +54,7 @@ export function selectOneTimeBlock(
 			filename: null,
 			search: null
 		}
-	// Inside template folder
+		// Inside template folder
 	} else if (ctx.sourcePath.startsWith(plugin.settings.templateFolder)) {
 		return {
 			content: {
@@ -65,7 +65,7 @@ export function selectOneTimeBlock(
 			filename: null,
 			search: null
 		}
-	// Time to use!
+		// Time to use!
 	} else {
 		const splitSource = ctx.sourcePath.split('/');
 		tmpOtb.filename = splitSource[splitSource.length - 1];

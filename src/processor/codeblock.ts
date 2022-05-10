@@ -9,8 +9,7 @@ import {MarkdownPostProcessorContext} from "obsidian";
 export async function processCodeblock(
 	plugin: LocalQuotes,
 	source: string,
-	el: HTMLElement): Promise<void>
-{
+	el: HTMLElement): Promise<void> {
 	await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
 
 	const mb: BlockMetadata = selectBlockMetadata(plugin, source);
@@ -32,8 +31,7 @@ export async function processOneTimeCodeBlock(
 	plugin: LocalQuotes,
 	source: string,
 	el: HTMLElement,
-	ctx: MarkdownPostProcessorContext): Promise<void>
-{
+	ctx: MarkdownPostProcessorContext): Promise<void> {
 	await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
 
 	const otb: OneTimeBlock = selectOneTimeBlock(plugin, source, ctx);

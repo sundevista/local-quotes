@@ -12,7 +12,7 @@ import {OneTimeBlock} from "../types/onetime";
 export function parseMdToHtml(src: string): string {
 	const highlightExt: ShowdownExtension = {
 		type: 'lang',
-			regex: /==.+==/gm,
+		regex: /==.+==/gm,
 		replace: (s: string) => {
 			return s.replace('==', '<mark>').replace('==', '</mark>');
 		}
@@ -50,7 +50,8 @@ export function parseBlockMetadataToCodeBlock(blockMetadata: BlockMetadata, refr
 
 export function parseCodeBlock(content: string): BlockMetadata {
 	let result: BlockMetadata = {
-		content: null, customClass: null, id: null, lastUpdate: 0, refresh: null, search: null};
+		content: null, customClass: null, id: null, lastUpdate: 0, refresh: null, search: null
+	};
 
 	for (let line of content.split('\n')) {
 		if (line.match(codeblock_id_regexp)) result.id = line.split('id ')[1];

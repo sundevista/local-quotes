@@ -13,7 +13,7 @@ export interface Quote {
 export function getValidAuthorsFromAdvancedSearch(plugin: LocalQuotes, search: string): string[] {
 	return search.split('||')
 		.map((a) => {
-			if((a.trim().length > 0) && (getAuthorIdx(plugin, a.trim()) >= 0)) return a.trim();
+			if ((a.trim().length > 0) && (getAuthorIdx(plugin, a.trim()) >= 0)) return a.trim();
 		});
 }
 
