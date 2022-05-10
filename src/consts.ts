@@ -1,9 +1,9 @@
 export const author_regexp: RegExp = /^:::\w[\w ,.]+:::$/m;
 export const quote_regexp: RegExp = /^\d+\..+$|^- .+$/m;
 
-export const search_regexp: RegExp = /^(?:[\w,. ]| \|\| )+$/gm;
+export const search_regexp: RegExp = /^(?:[\w,. ]| \|\| )+$/m;
 
-export const code_block_id_regexp: RegExp = /id \w+/gm;
+export const code_block_id_regexp: RegExp = /^id [\w\-_]+$/m;
 export const code_block_search_regexp: RegExp = /search .+/gm;
 export const code_block_refreshInterval_regexp: RegExp = /refresh \d+\w/gm;
 export const code_block_customClass_regexp: RegExp = /customClass \w+/gm;

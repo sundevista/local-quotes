@@ -2,7 +2,7 @@ import LocalQuotes from "../main";
 import {getAuthorIdx} from "./scan";
 
 export function getRandomQuoteId(length: number = 5): string {
-	const characters: string = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890-';
+	const characters: string = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890-_';
 	let result: string = '';
 
 	for (let i = 0; i < length; i++) {
