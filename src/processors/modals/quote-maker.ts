@@ -94,6 +94,10 @@ export class QuoteMakerModal extends Modal {
 				.setButtonText('Check')
 				.setCta()
 				.onClick(() => {
+					if (tmpSearch === '*') {
+						new Notice('You chose all authors.');
+						return;
+					}
 					const validatedAuthors = getValidAuthorsFromAdvancedSearch(this.plugin, tmpSearch).join('\n');
 					new Notice((validatedAuthors.length > 0)
 						? ('Validated authors:\n' + validatedAuthors)
