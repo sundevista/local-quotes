@@ -89,6 +89,9 @@ search Kamina, TTGL
 ```
 ````
 
+## 📉 Statistics
+You can get some info from Local Quote. Use `Open Statistics` command and research.
+
 ## ⏫ Future updates
 You can see what I am doing at the moment [here](https://github.com/users/ka1tzyu/projects/1). If you want some feature to be made first, like the first message in
 this feature's issue, I'll pay attention. Also, you can see unreleased but already done features and changes in [CHANGELOG](CHANGELOG.md), they'll be available in the next release.

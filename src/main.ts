@@ -6,6 +6,7 @@ import {DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab} from "./se
 import {QuoteMakerModal} from "./processors/modals/quote-maker";
 import {QuoteVaultErrorModal} from "./processors/modals/quote-vault-error";
 import {OneTimeQuoteMakerModal} from "./processors/modals/one-time-quote-maker";
+import {StatisticsModal} from "./processors/modals/statistics";
 
 export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;
@@ -56,6 +57,19 @@ export default class LocalQuotes extends Plugin {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 				if (this.quoteVault && this.quoteVault.length > 0) {
 					new OneTimeQuoteMakerModal(this).open();
+				} else {
+					new QuoteVaultErrorModal().open();
+				}
+			}
+		});
+
+		this.addCommand({
+			id: 'open-local-quote-statistics',
+			name: 'Open Statistics',
+			callback: async () => {
+				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
+				if (this.quoteVault && this.quoteVault.length > 0) {
+					new StatisticsModal(this).open();
 				} else {
 					new QuoteVaultErrorModal().open();
 				}
