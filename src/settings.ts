@@ -78,6 +78,8 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 					await this.plugin.saveSettings();
 				}));
 
+		containerEl.createEl('h3', {text: 'Style'});
+
 		new Setting(containerEl)
 			.setName('Inherit listing style')
 			.setDesc('You can use style in your listings like `:::**Author**:::`, if this setting turns on, your ' +
