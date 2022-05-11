@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.5] - 2022/05/11
+### Fixed
+- On slow devices `onLayoutReady` does it work slowly than page render
+
 ## [1.2.4] - 2022/05/11
 ### Added
 - Ability to configure quoteVault updating while code block renders

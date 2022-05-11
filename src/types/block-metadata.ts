@@ -61,13 +61,12 @@ export function selectBlockMetadata(plugin: LocalQuotes, source: string): BlockM
 	let tmpBm: BlockMetadata = parseCodeBlock(source);
 	const idx: number = plugin.settings.blockMetadata.findIndex((e) => e.id === tmpBm.id);
 
-	// If author and/or id aren't set, or quoteVault is empty
-	if (!(tmpBm.id && tmpBm.search) || !plugin.quoteVault.length) {
+	// If author and/or id aren't set
+	if (!(tmpBm.id && tmpBm.search)) {
 		return {
 			content: {
 				author: 'Local Quotes',
-				text: 'You caught an error! Maybe you don\'t set author or/and id, maybe you\'ve no quotes in the ' +
-					'vault. You always can write an issue on GitHub'
+				text: 'You caught an error! If you can\'t understand what is wrong you can write an issue on GitHub'
 			},
 			customClass: null, id: null, lastUpdate: 0, refresh: null, search: null
 		};
