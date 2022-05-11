@@ -45,15 +45,16 @@ export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataC
 
 export async function uploadQuote(plugin: LocalQuotes, authorCode: string, quote: string): Promise<void> {
 	const author = clearFromMarkdownStyling(authorCode);
+	quote = quote.trim();
 
 	const idx: number = getAuthorIdx(plugin, author);
 
 	if (idx >= 0) {
-		if (!plugin.quoteVault[idx].quotes.contains(quote)) {
-			plugin.quoteVault[idx].quotes.push(quote.trim());
+		if (!plugin.quoteVault[idx].quotes.includes(quote)) {
+			plugin.quoteVault[idx].quotes.push(quote);
 		}
 	} else {
-		plugin.quoteVault.push({author: author, authorCode: authorCode, quotes: [quote.trim()]});
+		plugin.quoteVault.push({author: author, authorCode: authorCode, quotes: [quote]});
 	}
 
 	await plugin.saveSettings();

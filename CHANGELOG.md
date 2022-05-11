@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Fixed
 - Special notice on `*` validating instead of no authors notice warning
+- Quote duplicating
 
 ## [1.2.3] - 2022/05/11
 ### Fixed
