@@ -16,6 +16,10 @@ export default class LocalQuotes extends Plugin {
 		console.log('loading Local Quotes...')
 		await this.loadSettings();
 
+		app.workspace.onLayoutReady(
+			async () => await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag))
+		);
+
 		this.registerMarkdownCodeBlockProcessor(
 			'localquote',
 			(src, el, _) => processCodeBlock(this, src, el)
@@ -75,6 +79,8 @@ export default class LocalQuotes extends Plugin {
 				}
 			}
 		});
+
+		await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 	}
 
 	async onunload() {
