@@ -10,7 +10,10 @@ export async function processCodeBlock(
 	plugin: LocalQuotes,
 	source: string,
 	el: HTMLElement): Promise<void> {
-	await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
+
+	if (plugin.settings.quoteScanOnBlockRender) {
+		await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
+	}
 
 	const mb: BlockMetadata = selectBlockMetadata(plugin, source);
 
