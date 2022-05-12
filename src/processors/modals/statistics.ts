@@ -36,7 +36,7 @@ export class StatisticsModal extends Modal {
 			text: 'Quote listings'
 		});
 
-		this.plugin.quoteVault.sort(sortQuoteVaultEntries).reverse().forEach((q, i) => {
+		this.plugin.settings.quoteVault.sort(sortQuoteVaultEntries).reverse().forEach((q, i) => {
 			contentEl.createEl('p', {
 				text: `${i+1}. ${q.author}: ${q.quotes.length}`,
 				cls: 'local-quote-statistics-p'

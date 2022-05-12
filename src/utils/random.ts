@@ -21,15 +21,15 @@ export function getRandomArrayItem(arr: any[] | string): any {
 }
 
 export function getRandomAuthor(plugin: LocalQuotes): string {
-	return getRandomArrayItem(plugin.quoteVault).author;
+	return getRandomArrayItem(plugin.settings.quoteVault).author;
 }
 
 export function getRandomQuoteOfAuthor(plugin: LocalQuotes, author: string): string {
-	const authorIdx: number = getAuthorIdx(plugin, author);
+	const authorIdx: number = getAuthorIdx(plugin.settings.quoteVault, author);
 	if (authorIdx < 0) {
 		return 'You\'ve tried to find an author that doesn\'t exist';
 	} else {
-		const quoteIdx = getRandomInt(plugin.quoteVault[authorIdx].quotes.length);
-		return plugin.quoteVault[authorIdx].quotes[quoteIdx];
+		const quoteIdx = getRandomInt(plugin.settings.quoteVault[authorIdx].quotes.length);
+		return plugin.settings.quoteVault[authorIdx].quotes[quoteIdx];
 	}
 }

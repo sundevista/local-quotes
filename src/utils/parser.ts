@@ -15,6 +15,7 @@ export function clearFromMarkdownStyling(src: string): string {
 
 	const blacklist = ['<strong>', '</strong>', '<em>', '</em>', '<p>', '</p>'];
 
+	// TODO: implement clearCodeFromClosableTag
 	for (let el of blacklist) {
 		src = src.split(el).join('');
 	}

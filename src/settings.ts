@@ -3,6 +3,7 @@ import LocalQuotes from "./main";
 import {BlockMetadata} from "./types/block-metadata";
 import {sec_in_day} from "./consts";
 import {OneTimeBlock} from "./types/one-time-block";
+import {Quote} from "./types/quote";
 
 export interface LocalQuotesSettings {
 	quoteTag: string;
@@ -14,6 +15,7 @@ export interface LocalQuotesSettings {
 	quoteBlockFormat: string;
 	blockMetadata: BlockMetadata[];
 	oneTimeBlocks: OneTimeBlock[];
+	quoteVault: Quote[];
 	templateFolder: string;
 }
 
@@ -27,6 +29,7 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteBlockFormat: '{{content}}\n— {{author}}',
 	blockMetadata: [],
 	oneTimeBlocks: [],
+	quoteVault: [],
 	templateFolder: '',
 }
 

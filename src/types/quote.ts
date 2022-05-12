@@ -13,17 +13,17 @@ export interface Quote {
 }
 
 export function getAuthorsCode(plugin: LocalQuotes, author: string): string {
-	return plugin.quoteVault[getAuthorIdx(plugin, author)].authorCode;
+	return plugin.settings.quoteVault[getAuthorIdx(plugin.settings.quoteVault, author)].authorCode;
 }
 
 export function fetchAuthorsInQuoteVault(plugin: LocalQuotes): Array<string> {
-	return plugin.quoteVault.map((obj) => obj.author);
+	return plugin.settings.quoteVault.map((obj) => obj.author);
 }
 
 export function getValidAuthorsFromAdvancedSearch(plugin: LocalQuotes, search: string): string[] {
 	return search.split('||')
 		.map((a) => {
-			if ((a.trim().length > 0) && (getAuthorIdx(plugin, a.trim()) >= 0)) return a.trim();
+			if ((a.trim().length > 0) && (getAuthorIdx(plugin.settings.quoteVault, a.trim()) >= 0)) return a.trim();
 		});
 }
 
@@ -43,25 +43,23 @@ export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataC
 }
 
 
-export async function uploadQuote(plugin: LocalQuotes, authorCode: string, quote: string): Promise<void> {
+export function uploadQuote(quoteVault: Quote[], authorCode: string, quote: string): void {
 	const author = clearFromMarkdownStyling(authorCode);
 	quote = quote.trim();
 
-	const idx: number = getAuthorIdx(plugin, author);
+	const idx: number = getAuthorIdx(quoteVault, author);
 
 	if (idx >= 0) {
-		if (!plugin.quoteVault[idx].quotes.includes(quote)) {
-			plugin.quoteVault[idx].quotes.push(quote);
+		if (!quoteVault[idx].quotes.includes(quote)) {
+			quoteVault[idx].quotes.push(quote);
 		}
 	} else {
-		plugin.quoteVault.push({author: author, authorCode: authorCode, quotes: [quote]});
+		quoteVault.push({author: author, authorCode: authorCode, quotes: [quote]});
 	}
-
-	await plugin.saveSettings();
 }
 
 export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Promise<void> {
-	plugin.quoteVault = [];
+	let tmpQuoteVault: Quote[] = [];
 
 	let current_author: string;
 
@@ -72,7 +70,7 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 			line = line.trim();
 			if (current_author && quote_regexp.test(line) && line.length >= plugin.settings.minimalQuoteLength) {
 				// Quote case
-				await uploadQuote(plugin, current_author, line.slice(line.indexOf(' ')));
+				uploadQuote(tmpQuoteVault, current_author, line.slice(line.indexOf(' ')));
 			} else if (author_regexp.test(line)) {
 				// Author case
 				current_author = line.split(':::')[1]
@@ -82,4 +80,7 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 			}
 		}
 	}
+
+	plugin.settings.quoteVault = tmpQuoteVault;
+	await plugin.saveSettings();
 }

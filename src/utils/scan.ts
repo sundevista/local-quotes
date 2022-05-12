@@ -1,8 +1,9 @@
 import {TFile} from "obsidian";
 import LocalQuotes from "../main";
+import {Quote} from "../types/quote";
 
-export function getAuthorIdx(plugin: LocalQuotes, author: string): number {
-	return plugin.quoteVault.findIndex((e) => e.author === author);
+export function getAuthorIdx(quoteVault: Quote[], author: string): number {
+	return quoteVault.findIndex((e) => e.author === author);
 }
 
 export function getBlockMetadataIdx(plugin: LocalQuotes, id: string): number {

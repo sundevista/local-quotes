@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.6] - 2022/05/12
+### Fixed
+- Quotes now in settings, so you can view your first loaded note's quote block without page reload
+
 ## [1.2.5] - 2022/05/11
 ### Fixed
 - On slow devices `onLayoutReady` does it work slowly than page render

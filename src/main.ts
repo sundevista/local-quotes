@@ -1,6 +1,6 @@
 import {Notice, Plugin} from 'obsidian';
 import {findTaggedFiles} from "./utils/scan";
-import {Quote, updateQuotesVault} from "./types/quote";
+import {updateQuotesVault} from "./types/quote";
 import {processCodeBlock, processOneTimeCodeBlock} from "./processors/code-block";
 import {DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab} from "./settings";
 import {QuoteMakerModal} from "./processors/modals/quote-maker";
@@ -10,14 +10,15 @@ import {StatisticsModal} from "./processors/modals/statistics";
 
 export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;
-	quoteVault: Quote[];
 
 	async onload() {
 		console.log('loading Local Quotes...')
 		await this.loadSettings();
 
 		app.workspace.onLayoutReady(
-			async () => await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag))
+			async () => {
+				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
+			}
 		);
 
 		this.registerMarkdownCodeBlockProcessor(
@@ -46,7 +47,7 @@ export default class LocalQuotes extends Plugin {
 			name: 'Open Quote Maker',
 			callback: async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
-				if (this.quoteVault && this.quoteVault.length > 0) {
+				if (this.settings.quoteVault && this.settings.quoteVault.length > 0) {
 					new QuoteMakerModal(this).open();
 				} else {
 					new QuoteVaultErrorModal().open();
@@ -59,7 +60,7 @@ export default class LocalQuotes extends Plugin {
 			name: 'Open One-Time Quote Maker',
 			callback: async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
-				if (this.quoteVault && this.quoteVault.length > 0) {
+				if (this.settings.quoteVault && this.settings.quoteVault.length > 0) {
 					new OneTimeQuoteMakerModal(this).open();
 				} else {
 					new QuoteVaultErrorModal().open();
@@ -72,15 +73,13 @@ export default class LocalQuotes extends Plugin {
 			name: 'Open Statistics',
 			callback: async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
-				if (this.quoteVault && this.quoteVault.length > 0) {
+				if (this.settings.quoteVault && this.settings.quoteVault.length > 0) {
 					new StatisticsModal(this).open();
 				} else {
 					new QuoteVaultErrorModal().open();
 				}
 			}
 		});
-
-		await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 	}
 
 	async onunload() {

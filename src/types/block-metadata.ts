@@ -62,7 +62,7 @@ export function selectBlockMetadata(plugin: LocalQuotes, source: string): BlockM
 	const idx: number = plugin.settings.blockMetadata.findIndex((e) => e.id === tmpBm.id);
 
 	// If author and/or id aren't set
-	if (!(tmpBm.id && tmpBm.search)) {
+	if (!(tmpBm.id && tmpBm.search) || plugin.settings.quoteVault.length === 0) {
 		return {
 			content: {
 				author: 'Local Quotes',
