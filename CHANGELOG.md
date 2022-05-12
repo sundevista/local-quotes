@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.7] - 2022/05/12
+### Fixed
+- Grammar issues and setting name
+
 ## [1.2.6] - 2022/05/12
 ### Fixed
 - Quotes now in settings, so you can view your first loaded note's quote block without page reload

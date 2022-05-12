@@ -61,7 +61,7 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Refresh interval')
-			.setDesc('You can set default refresh interval and miss corresponding field in codeblock (in seconds)')
+			.setDesc('You can set default refresh interval (in seconds) and miss corresponding field in codeblock')
 			.addText(text => text
 				.setPlaceholder(DEFAULT_SETTINGS.defaultReloadInterval.toString())
 				.setValue(this.plugin.settings.defaultReloadInterval.toString())
@@ -84,7 +84,7 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 		containerEl.createEl('h3', {text: 'Style'});
 
 		new Setting(containerEl)
-			.setName('Inherit listing style')
+			.setName('Inherit listing author style')
 			.setDesc('You can use style in your listings like `:::**Author**:::`, if this setting turns on, your ' +
 				'quote blocks will inherit this styling')
 			.addToggle(t => t
@@ -110,7 +110,7 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 		containerEl.createEl('h2', {text: 'Advanced'});
 
 		new Setting(containerEl)
-			.setName('Rescan quote\'s lisings on block render')
+			.setName('Rescan quote\'s listings on block render')
 			.setDesc('If you turn on it plugin will scan your vault for new quote when you open note with quote block' +
 				'. If you have more than 100 notes it better to be disabled')
 			.addToggle(t => t
