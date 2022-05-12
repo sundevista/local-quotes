@@ -13,17 +13,16 @@ export function clearFromMarkdownStyling(src: string): string {
 	const showdown = new Showdown.Converter();
 	src = showdown.makeHtml(src);
 
-	const blacklist = ['<strong>', '</strong>', '<em>', '</em>', '<p>', '</p>'];
+	const blacklist = ['strong', 'em', 'p'];
 
-	// TODO: implement clearCodeFromClosableTag
 	for (let el of blacklist) {
-		src = src.split(el).join('');
+		src = clearCodeFromClosableTag(src, el);
 	}
 
 	return src;
 }
 
-export function clearCodeFromClosableTag(src: string, tag: string): string {
+function clearCodeFromClosableTag(src: string, tag: string): string {
 	for (let el of [`<${tag}>`, `</${tag}>`]) {
 		src = src.split(el).join('');
 	}
