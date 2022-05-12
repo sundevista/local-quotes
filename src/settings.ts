@@ -1,4 +1,4 @@
-import {App, Notice, PluginSettingTab, Setting} from "obsidian";
+import {Notice, PluginSettingTab, Setting} from "obsidian";
 import LocalQuotes from "./main";
 import {BlockMetadata} from "./types/block-metadata";
 import {sec_in_day} from "./consts";
@@ -36,8 +36,8 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
 export class LocalQuotesSettingTab extends PluginSettingTab {
 	plugin: LocalQuotes;
 
-	constructor(app: App, plugin: LocalQuotes) {
-		super(app, plugin);
+	constructor(plugin: LocalQuotes) {
+		super(plugin.app, plugin);
 		this.plugin = plugin;
 	}
 

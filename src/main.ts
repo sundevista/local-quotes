@@ -15,24 +15,31 @@ export default class LocalQuotes extends Plugin {
 		console.log('loading Local Quotes...')
 		await this.loadSettings();
 
+		// Scan vault for the new quotes on startup when files are loaded
 		app.workspace.onLayoutReady(
 			async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 			}
 		);
 
+		// Register a code block processor for the quote blocks
 		this.registerMarkdownCodeBlockProcessor(
 			'localquote',
 			(src, el, _) => processCodeBlock(this, src, el)
 		);
 
+		// Register a code block processor for the one-time blocks
 		this.registerMarkdownCodeBlockProcessor(
 			'localquote-once',
 			(src, el, ctx) => processOneTimeCodeBlock(this, src, el, ctx)
 		);
 
-		this.addSettingTab(new LocalQuotesSettingTab(this.app, this));
+		// Add plugin's setting tab
+		this.addSettingTab(new LocalQuotesSettingTab(this));
 
+		/*
+		 * Adding necessary commands
+		 */
 		this.addCommand({
 			id: 'rescan-local-quotes',
 			name: 'Rescan vault for local quotes',

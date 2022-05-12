@@ -9,10 +9,19 @@ import {
 import {ShowdownExtension} from "showdown";
 import {OneTimeBlock} from "../types/one-time-block";
 
+/*
+ * Clears string from markdown styling (bold, italic)
+ *
+ * @param src - string to be cleared
+ *
+ * @returns cleared string
+ */
 export function clearFromMarkdownStyling(src: string): string {
+	// Creating instance of markdown to html converter. Converting given string to html
 	const showdown = new Showdown.Converter();
 	src = showdown.makeHtml(src);
 
+	// Array of the tags (styles) to be cleared
 	const blacklist = ['strong', 'em', 'p'];
 
 	for (let el of blacklist) {
@@ -22,6 +31,14 @@ export function clearFromMarkdownStyling(src: string): string {
 	return src;
 }
 
+/*
+ * Clears string from one closable html tag
+ *
+ * @param src - string to be cleared
+ * @param tag - tag to be removed
+ *
+ * @returns cleared string
+ */
 function clearCodeFromClosableTag(src: string, tag: string): string {
 	for (let el of [`<${tag}>`, `</${tag}>`]) {
 		src = src.split(el).join('');
@@ -29,7 +46,15 @@ function clearCodeFromClosableTag(src: string, tag: string): string {
 	return src;
 }
 
+/*
+ * Parses markdown string to html. It's parsing special styles (obsidian's highlight) too
+ *
+ * @param src - string to be parsed
+ *
+ * @returns parsed string
+ */
 export function parseMdToHtml(src: string): string {
+	// Creating extension to add support of obsidian highlight syntax
 	const highlightExt: ShowdownExtension = {
 		type: 'lang',
 		regex: /==.+==/,
@@ -38,23 +63,39 @@ export function parseMdToHtml(src: string): string {
 		}
 	}
 
+	// Creating markdown to html converter instance
 	const conv = new Showdown.Converter({
 		extensions: [highlightExt],
 	});
+
 	return conv.makeHtml(src);
 }
 
-export function parseOneTimeBlockToCodeBlock(blockMetadata: OneTimeBlock): string {
+/*
+ * Parses from {@link OneTimeBlock} to it code block representation
+ *
+ * @param oneTimeBlock - object to be parsed
+ *
+ * @returns code block representation of given `oneTimeBlock`
+ */
+export function parseOneTimeBlockToCodeBlock(oneTimeBlock: OneTimeBlock): string {
 	let result: Array<string> = [];
 
 	result.push('```localquote-once');
-	result.push(`search ${blockMetadata.search}`);
-	blockMetadata.customClass && result.push(`customClass ${blockMetadata.customClass}`);
+	result.push(`search ${oneTimeBlock.search}`);
+	oneTimeBlock.customClass && result.push(`customClass ${oneTimeBlock.customClass}`);
 	result.push('```');
 
 	return result.join('\n');
 }
 
+/*
+ * Parses from {@link BlockMetadata} to it code block representation
+ *
+ * @param blockMetadata - object to be parsed
+ *
+ * @returns code block representation of given `blockMetadata`
+ */
 export function parseBlockMetadataToCodeBlock(blockMetadata: BlockMetadata, refreshStr: string): string {
 	let result: Array<string> = [];
 
@@ -68,6 +109,13 @@ export function parseBlockMetadataToCodeBlock(blockMetadata: BlockMetadata, refr
 	return result.join('\n');
 }
 
+/*
+ * Parses code block to {@link BlockMetadata} object representation
+ *
+ * @param content - string to be parsed
+ *
+ * @returns code block representation of `content`
+ */
 export function parseCodeBlock(content: string): BlockMetadata {
 	let result: BlockMetadata = {
 		content: null, customClass: null, id: null, lastUpdate: 0, refresh: null, search: null
@@ -83,6 +131,13 @@ export function parseCodeBlock(content: string): BlockMetadata {
 	return result;
 }
 
+/*
+ * Parses code block to {@link OneTimeBlock} object representation
+ *
+ * @param content - string to be parsed
+ *
+ * @returns code block representation of `content`
+ */
 export function parseOneTimeCodeBlock(content: string): OneTimeBlock {
 	let result: OneTimeBlock = {filename: null, content: null, customClass: null, search: null};
 
@@ -94,6 +149,13 @@ export function parseOneTimeCodeBlock(content: string): OneTimeBlock {
 	return result;
 }
 
+/*
+ * Parses refresh interval string to the seconds
+ *
+ * @param str - refresh interval
+ *
+ * @returns refresh time in seconds
+ */
 export function parseTime(str: string): number {
 	// Last letter
 	const letter: string = str.slice(-1);
