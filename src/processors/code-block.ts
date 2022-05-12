@@ -5,6 +5,7 @@ import {findTaggedFiles} from "../utils/scan";
 import {parseMdToHtml} from "../utils/parser";
 import {OneTimeBlock, selectOneTimeBlock} from "../types/one-time-block";
 import {MarkdownPostProcessorContext} from "obsidian";
+import {isStringWeakForInnerHtmlVulnerability} from "../utils/dom";
 
 export async function processCodeBlock(
 	plugin: LocalQuotes,
@@ -23,6 +24,11 @@ export async function processCodeBlock(
 	if (blockMetadata.customClass !== null) el.addClass(blockMetadata.customClass);
 	const bq: HTMLElement = el.createEl('blockquote');
 	el.appendChild(bq);
+
+	if (isStringWeakForInnerHtmlVulnerability(blockMetadata.content.text + blockMetadata.content.author)) {
+		bq.innerText = 'Remove script tag from your quote, tricky fox!';
+		return;
+	}
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
 		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', blockMetadata.content.text)
@@ -52,6 +58,11 @@ export async function processOneTimeCodeBlock(
 	if (oneTimeBlock.customClass !== null) el.addClass(oneTimeBlock.customClass);
 	const bq: HTMLElement = el.createEl('blockquote');
 	el.appendChild(bq);
+
+	if (isStringWeakForInnerHtmlVulnerability(oneTimeBlock.content.text + oneTimeBlock.content.author)) {
+		bq.innerText = 'Remove script tag from your quote, tricky fox!';
+		return;
+	}
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
 		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', oneTimeBlock.content.text)

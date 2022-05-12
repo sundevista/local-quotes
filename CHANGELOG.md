@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.8] - 2022/05/12
+### Fixed
+- `innerHtml` <script> execution vulnerability
+
 ## [1.2.7] - 2022/05/12
 ### Fixed
 - Grammar issues and setting name
