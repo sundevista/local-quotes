@@ -16,13 +16,7 @@ export function okCloserButton(modal: Modal): void {
 }
 
 export function sortQuoteVaultEntries(a: Quote, b: Quote): number {
-	if (a.quotes.length < b.quotes.length) {
-		return -1;
-	}
-
-	if(a.quotes.length > b.quotes.length) {
-		return 1;
-	}
-
+	if (a.quotes.length < b.quotes.length) return -1;
+	if (a.quotes.length > b.quotes.length) return 1;
 	return 0;
 }
