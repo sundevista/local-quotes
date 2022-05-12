@@ -15,22 +15,22 @@ export async function processCodeBlock(
 		await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
 	}
 
-	const mb: BlockMetadata = selectBlockMetadata(plugin, source);
+	const blockMetadata: BlockMetadata = selectBlockMetadata(plugin, source);
 
 	await plugin.saveSettings();
 
 	el.addClass('el-blockquote');
-	if (mb.customClass !== null) el.addClass(mb.customClass);
+	if (blockMetadata.customClass !== null) el.addClass(blockMetadata.customClass);
 	const bq: HTMLElement = el.createEl('blockquote');
 	el.appendChild(bq);
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
-		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', mb.content.text)
+		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', blockMetadata.content.text)
 			.replace(
 				'{{author}}',
 				plugin.settings.inheritListingStyle
-					? getAuthorsCode(plugin.settings.quoteVault, mb.content.author)
-					: mb.content.author
+					? getAuthorsCode(plugin.settings.quoteVault, blockMetadata.content.author)
+					: blockMetadata.content.author
 			)
 		);
 	}
@@ -41,19 +41,26 @@ export async function processOneTimeCodeBlock(
 	source: string,
 	el: HTMLElement,
 	ctx: MarkdownPostProcessorContext): Promise<void> {
+
 	await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
 
-	const otb: OneTimeBlock = selectOneTimeBlock(plugin, source, ctx);
+	const oneTimeBlock: OneTimeBlock = selectOneTimeBlock(plugin, source, ctx);
 
 	await plugin.saveSettings();
 
 	el.addClass('el-blockquote');
-	if (otb.customClass !== null) el.addClass(otb.customClass);
+	if (oneTimeBlock.customClass !== null) el.addClass(oneTimeBlock.customClass);
 	const bq: HTMLElement = el.createEl('blockquote');
 	el.appendChild(bq);
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
-		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', otb.content.text)
-			.replace('{{author}}', otb.content.author));
+		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', oneTimeBlock.content.text)
+			.replace(
+				'{{author}}',
+				plugin.settings.inheritListingStyle
+					? getAuthorsCode(plugin.settings.quoteVault, oneTimeBlock.content.author)
+					: oneTimeBlock.content.author
+			)
+		);
 	}
 }
