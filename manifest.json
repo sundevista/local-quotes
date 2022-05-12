@@ -3,7 +3,7 @@
 	"name": "Local Quotes",
 	"version": "1.2.7",
 	"minAppVersion": "0.13.33",
-	"description": "Allows you to collect your quotes from all over the repository and embed them in different locations with renew delays.",
+	"description": "Collect your quotes from all over the repository and embed them in different locations with refresh delays.",
 	"author": "ka1tzyu",
 	"authorUrl": "https://github.com/ka1tzyu",
 	"isDesktopOnly": false
