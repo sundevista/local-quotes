@@ -19,7 +19,7 @@ export interface BlockMetadata {
 }
 
 function makeBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata): BlockMetadata {
-	rawBlockMetadata.content = searchQuote(plugin, rawBlockMetadata.search);
+	rawBlockMetadata.content = searchQuote(plugin.settings.quoteVault, rawBlockMetadata.search);
 	rawBlockMetadata.lastUpdate = getCurrentSeconds();
 
 	plugin.settings.blockMetadata.push(rawBlockMetadata);
@@ -34,14 +34,14 @@ function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadat
 	// Fields updating
 	if (prevBm.search !== rawBlockMetadata.search) {
 		plugin.settings.blockMetadata[bmIdx].search = rawBlockMetadata.search;
-		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin, rawBlockMetadata.search);
+		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin.settings.quoteVault, rawBlockMetadata.search);
 	}
 	if (prevBm.customClass !== rawBlockMetadata.customClass) {
 		plugin.settings.blockMetadata[bmIdx].customClass = rawBlockMetadata.customClass;
 	}
 	if (prevBm.refresh !== rawBlockMetadata.refresh) {
 		plugin.settings.blockMetadata[bmIdx].refresh = rawBlockMetadata.refresh;
-		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin, rawBlockMetadata.search);
+		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin.settings.quoteVault, rawBlockMetadata.search);
 	}
 
 	// Update quote
@@ -50,7 +50,7 @@ function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadat
 		: plugin.settings.blockMetadata[bmIdx].refresh;
 
 	if ((plugin.settings.blockMetadata[bmIdx].lastUpdate + refreshInterval) < getCurrentSeconds()) {
-		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin, rawBlockMetadata.search);
+		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin.settings.quoteVault, rawBlockMetadata.search);
 		plugin.settings.blockMetadata[bmIdx].lastUpdate = getCurrentSeconds();
 	}
 

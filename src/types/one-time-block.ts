@@ -12,7 +12,7 @@ export interface OneTimeBlock {
 }
 
 function makeOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlock): OneTimeBlock {
-	rawOneTimeBlock.content = searchQuote(plugin, rawOneTimeBlock.search);
+	rawOneTimeBlock.content = searchQuote(plugin.settings.quoteVault, rawOneTimeBlock.search);
 	plugin.settings.oneTimeBlocks.push(rawOneTimeBlock);
 	return rawOneTimeBlock;
 }
@@ -30,7 +30,7 @@ function updateOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlock):
 		plugin.settings.oneTimeBlocks[otbIdx].search = rawOneTimeBlock.search;
 
 		// Refresh quote if search changed
-		plugin.settings.oneTimeBlocks[otbIdx].content = searchQuote(plugin, rawOneTimeBlock.search);
+		plugin.settings.oneTimeBlocks[otbIdx].content = searchQuote(plugin.settings.quoteVault, rawOneTimeBlock.search);
 	}
 
 	return plugin.settings.oneTimeBlocks[otbIdx];

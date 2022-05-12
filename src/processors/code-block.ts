@@ -29,7 +29,7 @@ export async function processCodeBlock(
 			.replace(
 				'{{author}}',
 				plugin.settings.inheritListingStyle
-					? getAuthorsCode(plugin, mb.content.author)
+					? getAuthorsCode(plugin.settings.quoteVault, mb.content.author)
 					: mb.content.author
 			)
 		);

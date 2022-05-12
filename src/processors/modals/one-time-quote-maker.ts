@@ -17,7 +17,7 @@ export class OneTimeQuoteMakerModal extends Modal {
 	}
 
 	async onOpen() {
-		const authorList: string[] = fetchAuthorsInQuoteVault(this.plugin);
+		const authorList: string[] = fetchAuthorsInQuoteVault(this.plugin.settings.quoteVault);
 		let tmpSearch = authorList[0];
 		this.result = {
 			customClass: null, filename: null, search: null,
@@ -87,7 +87,12 @@ export class OneTimeQuoteMakerModal extends Modal {
 						new Notice('You chose all authors.');
 						return;
 					}
-					const validatedAuthors = getValidAuthorsFromAdvancedSearch(this.plugin, tmpSearch).join('\n');
+
+					const validatedAuthors = getValidAuthorsFromAdvancedSearch(
+						this.plugin.settings.quoteVault,
+						tmpSearch
+					).join('\n');
+
 					new Notice((validatedAuthors.length > 0)
 						? ('Validated authors:\n' + validatedAuthors)
 						: 'Plugin can\'t find authors those you mentioned!\nTry to change search.'

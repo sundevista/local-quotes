@@ -12,33 +12,34 @@ export interface Quote {
 	quotes: string[];
 }
 
-export function getAuthorsCode(plugin: LocalQuotes, author: string): string {
-	return plugin.settings.quoteVault[getAuthorIdx(plugin.settings.quoteVault, author)].authorCode;
+export function getAuthorsCode(quoteVault: Quote[], author: string): string {
+	return quoteVault[getAuthorIdx(quoteVault, author)].authorCode;
 }
 
-export function fetchAuthorsInQuoteVault(plugin: LocalQuotes): Array<string> {
-	return plugin.settings.quoteVault.map((obj) => obj.author);
+export function fetchAuthorsInQuoteVault(quoteVault: Quote[]): Array<string> {
+	return quoteVault.map((obj) => obj.author);
 }
 
-export function getValidAuthorsFromAdvancedSearch(plugin: LocalQuotes, search: string): string[] {
+export function getValidAuthorsFromAdvancedSearch(quoteVault: Quote[], search: string): string[] {
 	return search.split('||')
 		.map((a) => {
-			if ((a.trim().length > 0) && (getAuthorIdx(plugin.settings.quoteVault, a.trim()) >= 0)) return a.trim();
+			a = a.trim();
+			if ((a.length > 0) && (getAuthorIdx(quoteVault, a) >= 0)) return a;
 		});
 }
 
-export function searchQuote(plugin: LocalQuotes, search: string): BlockMetadataContent {
+export function searchQuote(quoteVault: Quote[], search: string): BlockMetadataContent {
 	let result: BlockMetadataContent = {author: null, text: null};
 
 	// '*' case (random quote of random author)
 	if (search === '*') {
-		result.author = getRandomAuthor(plugin);
+		result.author = getRandomAuthor(quoteVault);
 	} else if (search_regexp.test(search)) {
-		const authorList = getValidAuthorsFromAdvancedSearch(plugin, search);
+		const authorList = getValidAuthorsFromAdvancedSearch(quoteVault, search);
 		result.author = getRandomArrayItem(authorList);
 	}
 
-	result.text = getRandomQuoteOfAuthor(plugin, result.author);
+	result.text = getRandomQuoteOfAuthor(quoteVault, result.author);
 	return result;
 }
 
