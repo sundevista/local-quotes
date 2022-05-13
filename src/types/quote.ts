@@ -81,7 +81,7 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 				uploadQuote(tmpQuoteVault, current_author, tline.slice(line.indexOf(' ')));
 			} else if (current_author && quote_long_regexp.test(line)
 				&& tline.length >= plugin.settings.minimalQuoteLength) {
-
+				// Multi-line quote appendix
 				appendToLastQuote(tmpQuoteVault, clearFromMarkdownStyling(current_author), tline);
 			} else if (author_regexp.test(tline)) {
 				// Author case
