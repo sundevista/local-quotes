@@ -31,9 +31,9 @@ export async function processCodeBlock(
 	}
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
-		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', blockMetadata.content.text)
-			.replace(
-				'{{author}}',
+		bq.innerHTML += parseMdToHtml(
+			p.replace('{{content}}', blockMetadata.content.text.split('\n').join('<br/>'))
+			.replace('{{author}}',
 				plugin.settings.inheritListingStyle
 					? getAuthorsCode(plugin.settings.quoteVault, blockMetadata.content.author)
 					: blockMetadata.content.author
@@ -65,13 +65,13 @@ export async function processOneTimeCodeBlock(
 	}
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
-		bq.innerHTML += parseMdToHtml(p.replace('{{content}}', oneTimeBlock.content.text)
-			.replace(
-				'{{author}}',
-				plugin.settings.inheritListingStyle
-					? getAuthorsCode(plugin.settings.quoteVault, oneTimeBlock.content.author)
-					: oneTimeBlock.content.author
-			)
+		bq.innerHTML += parseMdToHtml(
+			p.replace('{{content}}', oneTimeBlock.content.text.split('\n').join('<br/>'))
+				.replace('{{author}}',
+					plugin.settings.inheritListingStyle
+						? getAuthorsCode(plugin.settings.quoteVault, oneTimeBlock.content.author)
+						: oneTimeBlock.content.author
+				)
 		);
 	}
 }

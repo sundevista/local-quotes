@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.9] - 2022/05/13
+### Fixed
+- Multi-line quotes now work properly 
+[wiki reference](https://github.com/ka1tzyu/local-quotes/wiki/How-quote-listings-work#-multi-line-quotes)
+
 ## [1.2.8] - 2022/05/12
 ### Fixed
 - `innerHtml` <script> execution vulnerability
