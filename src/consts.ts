@@ -1,6 +1,7 @@
 // Quote listing: author's and quote's lines
 export const author_regexp: RegExp = /^:::(?:[^:|\s]| )+:::$/m;
 export const quote_regexp: RegExp = /^\d+\..+$|^- .+$/m;
+export const quote_long_regexp: RegExp = /^\t.+$/m
 
 // Internal: search query
 export const search_regexp: RegExp = /^(?:[^:|\s]| | \|\| )+$/m;

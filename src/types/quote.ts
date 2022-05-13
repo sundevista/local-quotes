@@ -1,6 +1,6 @@
 import LocalQuotes from "../main";
 import {TFile} from "obsidian";
-import {author_regexp, quote_regexp, search_regexp} from "../consts";
+import {author_regexp, quote_long_regexp, quote_regexp, search_regexp} from "../consts";
 import {getAuthorIdx} from "../utils/scan";
 import {BlockMetadataContent} from "./block-metadata";
 import {getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor} from "../utils/random";
@@ -59,6 +59,13 @@ export function uploadQuote(quoteVault: Quote[], authorCode: string, quote: stri
 	}
 }
 
+export function appendToLastQuote(quoteVault: Quote[], author: string, text: string): void {
+	const authorIdx: number = getAuthorIdx(quoteVault, author);
+	const quoteIdx: number = quoteVault[authorIdx].quotes.length - 1;
+
+	quoteVault[authorIdx].quotes[quoteIdx] = quoteVault[authorIdx].quotes[quoteIdx] + '\n' + text;
+}
+
 export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Promise<void> {
 	let tmpQuoteVault: Quote[] = [];
 
@@ -68,13 +75,17 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 		current_author = '';
 
 		for (let line of (await plugin.app.vault.cachedRead(file)).split('\n')) {
-			line = line.trim();
-			if (current_author && quote_regexp.test(line) && line.length >= plugin.settings.minimalQuoteLength) {
+			let tline = line.trim();
+			if (current_author && quote_regexp.test(tline) && tline.length >= plugin.settings.minimalQuoteLength) {
 				// Quote case
-				uploadQuote(tmpQuoteVault, current_author, line.slice(line.indexOf(' ')));
-			} else if (author_regexp.test(line)) {
+				uploadQuote(tmpQuoteVault, current_author, tline.slice(line.indexOf(' ')));
+			} else if (current_author && quote_long_regexp.test(line)
+				&& tline.length >= plugin.settings.minimalQuoteLength) {
+
+				appendToLastQuote(tmpQuoteVault, clearFromMarkdownStyling(current_author), tline);
+			} else if (author_regexp.test(tline)) {
 				// Author case
-				current_author = line.split(':::')[1]
+				current_author = line.split(':::')[1].trim();
 			} else {
 				// Empty line or other string (author reset case)
 				current_author = '';
