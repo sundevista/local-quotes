@@ -17,8 +17,8 @@ export default class LocalQuotes extends Plugin {
 
 		// Scan vault for the new quotes on startup when files are loaded
 		app.workspace.onLayoutReady(
-			async () => {
-				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
+			() => {
+				updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 			}
 		);
 
@@ -87,10 +87,6 @@ export default class LocalQuotes extends Plugin {
 				}
 			}
 		});
-	}
-
-	async onunload() {
-		await this.saveSettings();
 	}
 
 	async loadSettings() {

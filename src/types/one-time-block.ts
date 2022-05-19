@@ -11,13 +11,16 @@ export interface OneTimeBlock {
 	customClass: string;
 }
 
-function makeOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlock): OneTimeBlock {
+async function makeOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlock): Promise<OneTimeBlock> {
 	rawOneTimeBlock.content = searchQuote(plugin.settings.quoteVault, rawOneTimeBlock.search);
 	plugin.settings.oneTimeBlocks.push(rawOneTimeBlock);
+
+	await plugin.saveSettings();
+
 	return rawOneTimeBlock;
 }
 
-function updateOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlock): OneTimeBlock {
+async function updateOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlock): Promise<OneTimeBlock> {
 	const otbIdx: number = plugin.settings.oneTimeBlocks
 		.findIndex((o) => o.filename === rawOneTimeBlock.filename);
 	const prevOtb: OneTimeBlock = plugin.settings.oneTimeBlocks[otbIdx];
@@ -33,14 +36,16 @@ function updateOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlock):
 		plugin.settings.oneTimeBlocks[otbIdx].content = searchQuote(plugin.settings.quoteVault, rawOneTimeBlock.search);
 	}
 
+	await plugin.saveSettings();
+
 	return plugin.settings.oneTimeBlocks[otbIdx];
 }
 
-export function selectOneTimeBlock(
+export async function selectOneTimeBlock(
 	plugin: LocalQuotes,
 	source: string,
 	ctx: MarkdownPostProcessorContext
-): OneTimeBlock {
+): Promise<OneTimeBlock> {
 	let tmpOtb: OneTimeBlock = parseOneTimeCodeBlock(source);
 
 	// Template folder isn't set

@@ -16,9 +16,7 @@ export async function processCodeBlock(
 		await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
 	}
 
-	const blockMetadata: BlockMetadata = selectBlockMetadata(plugin, source);
-
-	await plugin.saveSettings();
+	const blockMetadata: BlockMetadata = await selectBlockMetadata(plugin, source);
 
 	el.addClass('el-blockquote');
 	if (blockMetadata.customClass !== null) el.addClass(blockMetadata.customClass);
@@ -50,9 +48,7 @@ export async function processOneTimeCodeBlock(
 
 	await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
 
-	const oneTimeBlock: OneTimeBlock = selectOneTimeBlock(plugin, source, ctx);
-
-	await plugin.saveSettings();
+	const oneTimeBlock: OneTimeBlock = await selectOneTimeBlock(plugin, source, ctx);
 
 	el.addClass('el-blockquote');
 	if (oneTimeBlock.customClass !== null) el.addClass(oneTimeBlock.customClass);

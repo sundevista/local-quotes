@@ -18,16 +18,18 @@ export interface BlockMetadata {
 	lastUpdate: number;
 }
 
-function makeBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata): BlockMetadata {
+async function makeBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata): Promise<BlockMetadata> {
 	rawBlockMetadata.content = searchQuote(plugin.settings.quoteVault, rawBlockMetadata.search);
 	rawBlockMetadata.lastUpdate = getCurrentSeconds();
 
 	plugin.settings.blockMetadata.push(rawBlockMetadata);
 
+	await plugin.saveSettings();
+
 	return rawBlockMetadata;
 }
 
-function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata): BlockMetadata {
+async function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata): Promise<BlockMetadata> {
 	const bmIdx: number = getBlockMetadataIdx(plugin, rawBlockMetadata.id);
 	const prevBm: BlockMetadata = plugin.settings.blockMetadata[bmIdx];
 
@@ -54,10 +56,12 @@ function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadat
 		plugin.settings.blockMetadata[bmIdx].lastUpdate = getCurrentSeconds();
 	}
 
+	await plugin.saveSettings();
+
 	return plugin.settings.blockMetadata[bmIdx];
 }
 
-export function selectBlockMetadata(plugin: LocalQuotes, source: string): BlockMetadata {
+export async function selectBlockMetadata(plugin: LocalQuotes, source: string): Promise<BlockMetadata> {
 	let tmpBm: BlockMetadata = parseCodeBlock(source);
 	const idx: number = plugin.settings.blockMetadata.findIndex((e) => e.id === tmpBm.id);
 

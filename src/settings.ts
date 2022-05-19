@@ -110,7 +110,7 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 		containerEl.createEl('h2', {text: 'Advanced'});
 
 		new Setting(containerEl)
-			.setName('Rescan quote\'s listings on block render')
+			.setName('Rescan quotes\' listings on block render')
 			.setDesc('If you turn on it plugin will scan your vault for new quote when you open note with quote block' +
 				'. If you have more than 100 notes it better to be disabled')
 			.addToggle(t => t
@@ -123,7 +123,7 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Minimal quote length')
-			.setDesc('If quote shorten it\'ll be skipped during scan (in characters)')
+			.setDesc('Quotes shorter than this length will not be included')
 			.addText(text => text
 				.setPlaceholder(DEFAULT_SETTINGS.minimalQuoteLength.toString())
 				.setValue(this.plugin.settings.minimalQuoteLength.toString())
