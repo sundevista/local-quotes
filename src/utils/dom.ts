@@ -14,15 +14,3 @@ export function createDomLink(doc: HTMLElement, text: string, link: string): HTM
 
 	return a;
 }
-
-/*
- * Check string for `innerHtml` vulnerability
- *
- * @param str - string to be checked
- *
- * @returns `true` if string is weak, else `false`
- */
-export function isStringWeakForInnerHtmlVulnerability(str: string): boolean {
-	return str.contains('<script>') && str.contains('</script>');
-
-}

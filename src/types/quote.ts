@@ -4,7 +4,7 @@ import {author_regexp, quote_long_regexp, quote_regexp, search_regexp} from "../
 import {getAuthorIdx} from "../utils/scan";
 import {BlockMetadataContent} from "./block-metadata";
 import {getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor} from "../utils/random";
-import {clearFromMarkdownStyling} from "../utils/parser";
+import { removeMd } from '../libs/remove_markdown';
 
 export interface Quote {
 	author: string;
@@ -44,8 +44,8 @@ export function searchQuote(quoteVault: Quote[], search: string): BlockMetadataC
 }
 
 
-export function uploadQuote(quoteVault: Quote[], authorCode: string, quote: string): void {
-	const author = clearFromMarkdownStyling(authorCode);
+export async function uploadQuote(quoteVault: Quote[], authorCode: string, quote: string): Promise<void> {
+	const author = removeMd(authorCode);
 	quote = quote.trim();
 
 	const idx: number = getAuthorIdx(quoteVault, author);
@@ -78,11 +78,11 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 			let tline = line.trim();
 			if (current_author && quote_regexp.test(tline) && tline.length >= plugin.settings.minimalQuoteLength) {
 				// Quote case
-				uploadQuote(tmpQuoteVault, current_author, tline.slice(line.indexOf(' ')));
+				await uploadQuote(tmpQuoteVault, current_author, tline.slice(line.indexOf(' ')));
 			} else if (current_author && quote_long_regexp.test(line)
 				&& tline.length >= plugin.settings.minimalQuoteLength) {
 				// Multi-line quote appendix
-				appendToLastQuote(tmpQuoteVault, clearFromMarkdownStyling(current_author), tline);
+				appendToLastQuote(tmpQuoteVault, removeMd(current_author), tline);
 			} else if (author_regexp.test(tline)) {
 				// Author case
 				current_author = line.split(':::')[1].trim();

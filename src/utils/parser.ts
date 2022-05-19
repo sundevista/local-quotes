@@ -1,75 +1,11 @@
 import {BlockMetadata} from "../types/block-metadata";
-import * as Showdown from 'showdown';
 import {
 	code_block_search_regexp,
 	code_block_customClass_regexp,
 	code_block_id_regexp,
 	code_block_refreshInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
 } from "../consts";
-import {ShowdownExtension} from "showdown";
 import {OneTimeBlock} from "../types/one-time-block";
-
-/*
- * Clears string from markdown styling (bold, italic)
- *
- * @param src - string to be cleared
- *
- * @returns cleared string
- */
-export function clearFromMarkdownStyling(src: string): string {
-	// Creating instance of markdown to html converter. Converting given string to html
-	const showdown = new Showdown.Converter();
-	src = showdown.makeHtml(src);
-
-	// Array of the tags (styles) to be cleared
-	const blacklist = ['strong', 'em', 'p'];
-
-	for (let el of blacklist) {
-		src = clearCodeFromClosableTag(src, el);
-	}
-
-	return src;
-}
-
-/*
- * Clears string from one closable html tag
- *
- * @param src - string to be cleared
- * @param tag - tag to be removed
- *
- * @returns cleared string
- */
-function clearCodeFromClosableTag(src: string, tag: string): string {
-	for (let el of [`<${tag}>`, `</${tag}>`]) {
-		src = src.split(el).join('');
-	}
-	return src;
-}
-
-/*
- * Parses markdown string to html. It's parsing special styles (obsidian's highlight) too
- *
- * @param src - string to be parsed
- *
- * @returns parsed string
- */
-export function parseMdToHtml(src: string): string {
-	// Creating extension to add support of obsidian highlight syntax
-	const highlightExt: ShowdownExtension = {
-		type: 'lang',
-		regex: /==.+==/,
-		replace: (s: string) => {
-			return s.replace('==', '<mark>').replace('==', '</mark>');
-		}
-	}
-
-	// Creating markdown to html converter instance
-	const conv = new Showdown.Converter({
-		extensions: [highlightExt],
-	});
-
-	return conv.makeHtml(src);
-}
 
 /*
  * Parses from {@link OneTimeBlock} to it code block representation
