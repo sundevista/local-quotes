@@ -1,6 +1,6 @@
 import {Modal} from "obsidian";
 import LocalQuotes from "../../main";
-import {okCloserButton, sortQuoteVaultEntries} from "./functions";
+import { getQuotesCount, okCloserButton, sortQuoteVaultEntries } from './functions';
 
 export class StatisticsModal extends Modal {
 	private readonly plugin: LocalQuotes;
@@ -38,7 +38,7 @@ export class StatisticsModal extends Modal {
 
 		this.plugin.settings.quoteVault.sort(sortQuoteVaultEntries).reverse().forEach((q, i) => {
 			contentEl.createEl('p', {
-				text: `${i+1}. ${q.author}: ${q.quotes.length}`,
+				text: `${i+1}. ${q.author}: ${getQuotesCount(q)}`,
 				cls: 'local-quote-statistics-p'
 			});
 		});

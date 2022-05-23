@@ -1,14 +1,19 @@
-import LocalQuotes from "../main";
-import {TFile} from "obsidian";
-import {author_regexp, quote_long_regexp, quote_regexp, search_regexp} from "../consts";
-import {getAuthorIdx} from "../utils/scan";
-import {BlockMetadataContent} from "./block-metadata";
-import {getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor} from "../utils/random";
+import LocalQuotes from '../main';
+import { TFile } from 'obsidian';
+import { author_regexp, quote_long_regexp, quote_regexp, search_regexp } from '../consts';
+import { getAuthorIdx } from '../utils/scan';
+import { BlockMetadataContent } from './block-metadata';
+import { getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor } from '../utils/random';
 import { removeMd } from '../libs/remove_markdown';
 
 export interface Quote {
 	author: string;
 	authorCode: string;
+	files: FilesQuotes[];
+}
+
+export interface FilesQuotes {
+	filename: string;
 	quotes: string[];
 }
 
@@ -18,6 +23,17 @@ export function getAuthorsCode(quoteVault: Quote[], author: string): string {
 
 export function fetchAuthorsInQuoteVault(quoteVault: Quote[]): Array<string> {
 	return quoteVault.map((obj) => obj.author);
+}
+
+export function fetchAllAuthorsQuotes(quoteVault: Quote[], author: string): string[] {
+	let quotes: string[] = [];
+	const authorIdx = getAuthorIdx(quoteVault, author);
+
+	for (let entry of quoteVault[authorIdx].files) {
+		quotes.push(...entry.quotes);
+	}
+
+	return quotes;
 }
 
 export function getValidAuthorsFromAdvancedSearch(quoteVault: Quote[], search: string): string[] {
@@ -43,27 +59,55 @@ export function searchQuote(quoteVault: Quote[], search: string): BlockMetadataC
 	return result;
 }
 
+export function isFileHaveAuthorsQuote(quoteVault: Quote[], filename: string, author: string, quote: string): boolean {
+	for (let entry of quoteVault[getAuthorIdx(quoteVault, author)].files) {
+		if (entry.filename == filename && entry.quotes.includes(quote)) {
+			return true;
+		}
+	}
+	return false
+}
 
-export async function uploadQuote(quoteVault: Quote[], authorCode: string, quote: string): Promise<void> {
+export function getFilesQuotesIdx(quoteVault: Quote[], filename: string, author: string): number {
+	return quoteVault[getAuthorIdx(quoteVault, author)].files.findIndex((e) => e.filename == filename);
+}
+
+export async function uploadQuote(
+	quoteVault: Quote[],
+	filename: string,
+	authorCode: string,
+	quote: string
+): Promise<void> {
 	const author = removeMd(authorCode);
 	quote = quote.trim();
 
 	const idx: number = getAuthorIdx(quoteVault, author);
 
 	if (idx >= 0) {
-		if (!quoteVault[idx].quotes.includes(quote)) {
-			quoteVault[idx].quotes.push(quote);
+		if (!isFileHaveAuthorsQuote(quoteVault, filename, author, quote)) {
+			const filesQuotesIdx = getFilesQuotesIdx(quoteVault, filename, author);
+
+			quoteVault[idx].files[filesQuotesIdx] = {
+				filename: filename,
+				quotes: [...quoteVault[idx].files[filesQuotesIdx].quotes, quote]
+			};
 		}
 	} else {
-		quoteVault.push({author: author, authorCode: authorCode, quotes: [quote]});
+		const tmpFilesQuotes: FilesQuotes = {
+			filename: filename,
+			quotes: [quote]
+		}
+		quoteVault.push({author: author, authorCode: authorCode, files: [tmpFilesQuotes]});
 	}
 }
 
-export function appendToLastQuote(quoteVault: Quote[], author: string, text: string): void {
+export function appendToLastQuote(quoteVault: Quote[], filename: string, author: string, text: string): void {
 	const authorIdx: number = getAuthorIdx(quoteVault, author);
-	const quoteIdx: number = quoteVault[authorIdx].quotes.length - 1;
+	const filesQuotesIdx: number = getFilesQuotesIdx(quoteVault, filename, author);
+	const quoteIdx: number = quoteVault[authorIdx].files[filesQuotesIdx].quotes.length - 1;
 
-	quoteVault[authorIdx].quotes[quoteIdx] = quoteVault[authorIdx].quotes[quoteIdx] + '\n' + text;
+	quoteVault[authorIdx].files[filesQuotesIdx].quotes[quoteIdx] =
+		quoteVault[authorIdx].files[filesQuotesIdx].quotes[quoteIdx] + '\n' + text;
 }
 
 export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Promise<void> {
@@ -78,11 +122,11 @@ export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Pr
 			let tline = line.trim();
 			if (current_author && quote_regexp.test(tline) && tline.length >= plugin.settings.minimalQuoteLength) {
 				// Quote case
-				await uploadQuote(tmpQuoteVault, current_author, tline.slice(line.indexOf(' ')));
+				await uploadQuote(tmpQuoteVault, file.name, current_author, tline.slice(line.indexOf(' ')));
 			} else if (current_author && quote_long_regexp.test(line)
 				&& tline.length >= plugin.settings.minimalQuoteLength) {
 				// Multi-line quote appendix
-				appendToLastQuote(tmpQuoteVault, removeMd(current_author), tline);
+				appendToLastQuote(tmpQuoteVault, file.name, removeMd(current_author), tline);
 			} else if (author_regexp.test(tline)) {
 				// Author case
 				current_author = line.split(':::')[1].trim();

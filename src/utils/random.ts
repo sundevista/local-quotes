@@ -1,5 +1,5 @@
 import {getAuthorIdx} from "./scan";
-import {Quote} from "../types/quote";
+import { fetchAllAuthorsQuotes, Quote } from '../types/quote';
 
 export function getRandomQuoteId(length: number = 5): string {
 	const characters: string = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890-_';
@@ -30,7 +30,7 @@ export function getRandomQuoteOfAuthor(quoteVault: Quote[], author: string): str
 	if (authorIdx < 0) {
 		return 'You\'ve tried to find an author that doesn\'t exist';
 	} else {
-		const quoteIdx = getRandomInt(quoteVault[authorIdx].quotes.length);
-		return quoteVault[authorIdx].quotes[quoteIdx];
+		const quotes: string[] = fetchAllAuthorsQuotes(quoteVault, author);
+		return quotes[getRandomInt(quotes.length)];
 	}
 }

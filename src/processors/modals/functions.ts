@@ -15,8 +15,18 @@ export function okCloserButton(modal: Modal): void {
 			}));
 }
 
+export function getQuotesCount(quote: Quote): number {
+	let cnt = 0;
+
+	for (let file of quote.files) {
+		cnt += file.quotes.length
+	}
+
+	return cnt;
+}
+
 export function sortQuoteVaultEntries(a: Quote, b: Quote): number {
-	if (a.quotes.length < b.quotes.length) return -1;
-	if (a.quotes.length > b.quotes.length) return 1;
+	if (getQuotesCount(a) < getQuotesCount(b)) return -1;
+	if (getQuotesCount(a) > getQuotesCount(b)) return 1;
 	return 0;
 }
