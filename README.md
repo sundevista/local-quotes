@@ -26,9 +26,6 @@ It's important to write quotes line by line, because when empty line appears
 your quote series is breaking. Also, your note must have `quotes` tag (can be 
 changed in settings).
 
-Remember that these listings updating only when you start obsidian or open 'Quote Maker',
-but you can also use command `Rescan vault for local quotes`.
-
 Visit wiki page [How quote listings work](https://github.com/ka1tzyu/local-quotes/wiki/How-quote-listings-work) for more details.
 
 ## ⚒️ Quote Maker
