@@ -1,6 +1,6 @@
-import {Modal} from "obsidian";
-import {createDomLink} from "../../utils/dom";
-import {okCloserButton} from "./functions";
+import { Modal } from 'obsidian';
+import { createDomLink } from '../../utils/dom';
+import { okCloserButton } from './functions';
 
 export class QuoteVaultErrorModal extends Modal {
 	constructor() {
@@ -8,10 +8,10 @@ export class QuoteVaultErrorModal extends Modal {
 	}
 
 	onOpen() {
-		let {contentEl} = this;
+		let { contentEl } = this;
 
-		contentEl.createEl('h3', {text: '❌ Local Quote Error'});
-		contentEl.createEl('p', {text: 'After scan there is no any quote listings in your vault.'});
+		contentEl.createEl('h3', { text: '❌ Local Quote Error' });
+		contentEl.createEl('p', { text: 'After scan there is no any quote listings in your vault.' });
 
 		const a: HTMLElement = createDomLink(
 			contentEl,

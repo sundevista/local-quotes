@@ -18,7 +18,7 @@ export interface FilesQuotes {
 	quotes: string[];
 }
 
-export async function onFileModify(plugin: LocalQuotes, file: TFile|TAbstractFile): Promise<void> {
+export async function onFileModify(plugin: LocalQuotes, file: TFile | TAbstractFile): Promise<void> {
 	const f: TFile = convertTAbstractFileToTFile(file);
 
 	if (checkFileTag(f, plugin.settings.quoteTag)) {
@@ -54,14 +54,14 @@ function clearFileEntries(quoteVault: Quote[], filename: string): void {
 
 export function getValidAuthorsFromAdvancedSearch(quoteVault: Quote[], search: string): string[] {
 	return search.split('||')
-		.map((a) => {
-			a = a.trim();
-			if ((a.length > 0) && (getAuthorIdx(quoteVault, a) >= 0)) return a;
-		});
+	.map((a) => {
+		a = a.trim();
+		if ((a.length > 0) && (getAuthorIdx(quoteVault, a) >= 0)) return a;
+	});
 }
 
 export function searchQuote(quoteVault: Quote[], search: string): BlockMetadataContent {
-	let result: BlockMetadataContent = {author: null, text: null};
+	let result: BlockMetadataContent = { author: null, text: null };
 
 	// '*' case (random quote of random author)
 	if (search === '*') {
@@ -81,7 +81,7 @@ export function isFileHaveAuthorsQuote(quoteVault: Quote[], filename: string, au
 			return true;
 		}
 	}
-	return false
+	return false;
 }
 
 export function getFilesQuotesIdx(quoteVault: Quote[], filename: string, author: string): number {
@@ -112,8 +112,8 @@ export async function uploadQuote(
 		const tmpFilesQuotes: FilesQuotes = {
 			filename: filename,
 			quotes: [quote]
-		}
-		quoteVault.push({author: author, authorCode: authorCode, files: [tmpFilesQuotes]});
+		};
+		quoteVault.push({ author: author, authorCode: authorCode, files: [tmpFilesQuotes] });
 	}
 }
 

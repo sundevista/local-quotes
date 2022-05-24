@@ -1,11 +1,17 @@
-import {BlockMetadata} from "../types/block-metadata";
+import { BlockMetadata } from '../types/block-metadata';
 import {
-	code_block_search_regexp,
 	code_block_customClass_regexp,
 	code_block_id_regexp,
-	code_block_refreshInterval_regexp, sec_in_day, sec_in_hour, sec_in_minute, sec_in_month, sec_in_week, sec_in_year
-} from "../consts";
-import {OneTimeBlock} from "../types/one-time-block";
+	code_block_refreshInterval_regexp,
+	code_block_search_regexp,
+	sec_in_day,
+	sec_in_hour,
+	sec_in_minute,
+	sec_in_month,
+	sec_in_week,
+	sec_in_year
+} from '../consts';
+import { OneTimeBlock } from '../types/one-time-block';
 
 /*
  * Parses from {@link OneTimeBlock} to it code block representation
@@ -75,7 +81,7 @@ export function parseCodeBlock(content: string): BlockMetadata {
  * @returns code block representation of `content`
  */
 export function parseOneTimeCodeBlock(content: string): OneTimeBlock {
-	let result: OneTimeBlock = {filename: null, content: null, customClass: null, search: null};
+	let result: OneTimeBlock = { filename: null, content: null, customClass: null, search: null };
 
 	for (let line of content.split('\n')) {
 		if (code_block_search_regexp.test(line)) result.search = line.split('search ')[1];

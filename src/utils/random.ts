@@ -1,4 +1,4 @@
-import {getAuthorIdx} from "./scan";
+import { getAuthorIdx } from './scan';
 import { fetchAllAuthorsQuotes, Quote } from '../types/quote';
 
 export function getRandomQuoteId(length: number = 5): string {

@@ -1,6 +1,6 @@
 import { TFile } from 'obsidian';
-import LocalQuotes from "../main";
-import {Quote} from "../types/quote";
+import LocalQuotes from '../main';
+import { Quote } from '../types/quote';
 
 export function getAuthorIdx(quoteVault: Quote[], author: string): number {
 	return quoteVault.findIndex((e) => e.author === author);

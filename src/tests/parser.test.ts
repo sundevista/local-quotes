@@ -1,9 +1,9 @@
-import {parseTime} from "../utils/parser";
+import { parseTime } from '../utils/parser';
 
 
 /*
-** PARSER TESTING
-*/
+ ** PARSER TESTING
+ */
 test('checking parserTime()', () => {
 	expect(parseTime('8j')).toBe(8);
 	expect(parseTime('8')).toBe(8);

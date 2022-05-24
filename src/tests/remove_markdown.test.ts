@@ -111,7 +111,7 @@ test('should remove indented blockquotes', () => {
 	const tests = [
 		{ string: ' > I am a blockquote', expected: 'I am a blockquote' },
 		{ string: '  > I am a blockquote', expected: 'I am a blockquote' },
-		{ string: '   > I am a blockquote', expected: 'I am a blockquote' },
+		{ string: '   > I am a blockquote', expected: 'I am a blockquote' }
 	];
 	tests.forEach((test) => {
 		expect(removeMd(test.string)).toBe(test.expected);
@@ -131,7 +131,7 @@ test('should not remove greater than signs', () => {
 		{ string: '100>0', expected: '100>0' },
 		{ string: '> 100 > 0', expected: '100 > 0' },
 		{ string: '1 < 100', expected: '1 < 100' },
-		{ string: '1 <= 100', expected: '1 <= 100' },
+		{ string: '1 <= 100', expected: '1 <= 100' }
 	];
 	tests.forEach((test) => {
 		expect(removeMd(test.string)).toBe(test.expected);

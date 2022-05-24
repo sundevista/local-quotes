@@ -1,8 +1,8 @@
-import {BlockMetadataContent} from "./block-metadata";
-import LocalQuotes from "../main";
-import {MarkdownPostProcessorContext} from "obsidian";
-import {parseOneTimeCodeBlock} from "../utils/parser";
-import {searchQuote} from "./quote";
+import { BlockMetadataContent } from './block-metadata';
+import LocalQuotes from '../main';
+import { MarkdownPostProcessorContext } from 'obsidian';
+import { parseOneTimeCodeBlock } from '../utils/parser';
+import { searchQuote } from './quote';
 
 export interface OneTimeBlock {
 	filename: string;
@@ -22,7 +22,7 @@ async function makeOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlo
 
 async function updateOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlock): Promise<OneTimeBlock> {
 	const otbIdx: number = plugin.settings.oneTimeBlocks
-		.findIndex((o) => o.filename === rawOneTimeBlock.filename);
+	.findIndex((o) => o.filename === rawOneTimeBlock.filename);
 	const prevOtb: OneTimeBlock = plugin.settings.oneTimeBlocks[otbIdx];
 
 	// Fields update
@@ -58,7 +58,7 @@ export async function selectOneTimeBlock(
 			customClass: tmpOtb.customClass,
 			filename: null,
 			search: null
-		}
+		};
 		// Inside template folder
 	} else if (ctx.sourcePath.startsWith(plugin.settings.templateFolder)) {
 		return {
@@ -69,7 +69,7 @@ export async function selectOneTimeBlock(
 			customClass: tmpOtb.customClass,
 			filename: null,
 			search: null
-		}
+		};
 		// Time to use!
 	} else {
 		const splitSource = ctx.sourcePath.split('/');

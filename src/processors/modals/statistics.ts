@@ -1,5 +1,5 @@
-import {Modal} from "obsidian";
-import LocalQuotes from "../../main";
+import { Modal } from 'obsidian';
+import LocalQuotes from '../../main';
 import { getQuotesCount, okCloserButton, sortQuoteVaultEntries } from './functions';
 
 export class StatisticsModal extends Modal {
@@ -11,9 +11,9 @@ export class StatisticsModal extends Modal {
 	}
 
 	onOpen() {
-		const {contentEl} = this;
+		const { contentEl } = this;
 
-		contentEl.createEl('h1', {text: '📉 Local Quote Statictics'});
+		contentEl.createEl('h1', { text: '📉 Local Quote Statictics' });
 		contentEl.createEl('p', {
 			text: 'Just research and refrect. All data fresh and clear, baked just a moment ago.'
 		});
@@ -38,7 +38,7 @@ export class StatisticsModal extends Modal {
 
 		this.plugin.settings.quoteVault.sort(sortQuoteVaultEntries).reverse().forEach((q, i) => {
 			contentEl.createEl('p', {
-				text: `${i+1}. ${q.author}: ${getQuotesCount(q)}`,
+				text: `${i + 1}. ${q.author}: ${getQuotesCount(q)}`,
 				cls: 'local-quote-statistics-p'
 			});
 		});

@@ -1,8 +1,8 @@
-import LocalQuotes from "../main";
-import {parseCodeBlock} from "../utils/parser";
-import {getBlockMetadataIdx} from "../utils/scan";
-import {getCurrentSeconds} from "../utils/date";
-import {searchQuote} from "./quote";
+import LocalQuotes from '../main';
+import { parseCodeBlock } from '../utils/parser';
+import { getBlockMetadataIdx } from '../utils/scan';
+import { getCurrentSeconds } from '../utils/date';
+import { searchQuote } from './quote';
 
 export interface BlockMetadataContent {
 	author: string;

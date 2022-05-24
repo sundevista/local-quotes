@@ -23,11 +23,11 @@ const DEFAULT_OPTIONS: RemoveMarkdownOptions = {
 	useImgAltText: true,
 	abbr: false,
 	replaceLinksWithURL: false,
-	htmlTagsToSkip: new Array<string>(),
+	htmlTagsToSkip: new Array<string>()
 
 };
 
-export function removeMd(md: string, options: RemoveMarkdownOptions|null = null): string {
+export function removeMd(md: string, options: RemoveMarkdownOptions | null = null): string {
 	options = options || DEFAULT_OPTIONS;
 
 	let output: string = md || '';
@@ -59,12 +59,12 @@ export function removeMd(md: string, options: RemoveMarkdownOptions|null = null)
 		}
 		output = output
 		// Remove HTML tags
-		.replace(/<[^>]*>/g, '')
+		.replace(/<[^>]*>/g, '');
 
 		let htmlReplaceRegex = new RegExp('<[^>]*>', 'g');
 		if (options.htmlTagsToSkip.length > 0) {
 			// Using negative lookahead. Eg. (?!sup|sub) will not match 'sup' and 'sub' tags.
-			let joinedHtmlTagsToSkip = '(?!' + options.htmlTagsToSkip.join("|") + ')';
+			let joinedHtmlTagsToSkip = '(?!' + options.htmlTagsToSkip.join('|') + ')';
 
 			// Adding the lookahead literal with the default regex for html. Eg./<(?!sup|sub)[^>]*>/ig
 			htmlReplaceRegex = new RegExp(
@@ -121,7 +121,7 @@ export function removeMd(md: string, options: RemoveMarkdownOptions|null = null)
 		.replace(/`(.+?)`/g, '$1')
 		// Replace strike through
 		.replace(/~(.*?)~/g, '$1');
-	} catch(e) {
+	} catch (e) {
 		console.error(e);
 		return md;
 	}

@@ -1,18 +1,19 @@
 import {
-	author_regexp, code_block_customClass_regexp,
+	author_regexp,
+	code_block_customClass_regexp,
 	code_block_id_regexp,
 	code_block_refreshInterval_regexp,
 	code_block_search_regexp,
 	quote_regexp,
 	search_regexp
-} from "../consts";
+} from '../consts';
 
 // @ts-suppress
 const testRegExp = (str: string, regexp: RegExp): boolean => regexp.test(str);
 
 /*
-** TESTING CONSTANTS
-*/
+ ** TESTING CONSTANTS
+ */
 test('checking author_regexp', () => {
 	const cases = [
 		[':::Author:::', true],
@@ -26,7 +27,7 @@ test('checking author_regexp', () => {
 		['::::Author:::', false],
 		['::Author:::', false],
 		[' :::Author:::', false],
-		[':::Author::: ', false],
+		[':::Author::: ', false]
 	];
 
 	for (let _case of cases) {
@@ -44,7 +45,7 @@ test('checking quote_regexp', () => {
 		['-- Wrong styled quote', false],
 		['.1 Wrong styled quote', false],
 		['Wrong styled quote', false],
-		[' - Wrong styled quote', false],
+		[' - Wrong styled quote', false]
 	];
 
 	for (let _case of cases) {
@@ -59,7 +60,7 @@ test('checking search_regexp', () => {
 		['First Person || Second Person', true],
 		['First Person, with comma. and dot || Second Person || And, finally, third', true],
 		['Person', true],
-		['Using or|| with mistake', false],
+		['Using or|| with mistake', false]
 	];
 
 	for (let _case of cases) {
@@ -77,7 +78,7 @@ test('checking code_block_id_regexp', () => {
 		['id with space', false],
 		['id with!wrong-char', false],
 		[' id wrong_indent', false],
-		['idx wrong_field-name', false],
+		['idx wrong_field-name', false]
 	];
 
 	for (let _case of cases) {
@@ -94,7 +95,7 @@ test('checking code_block_search_regexp', () => {
 		['search Person', true],
 		['search Using or|| with mistake', false],
 		[' search wrong indent', false],
-		['searches Using wrong field name', false],
+		['searches Using wrong field name', false]
 	];
 
 	for (let _case of cases) {
@@ -113,7 +114,7 @@ test('checking code_block_refreshInterval_regexp', () => {
 		['refresh 1', false],
 		[' refresh 10s', false],
 		['refresh 25!', false],
-		['refreshes 10s', false],
+		['refreshes 10s', false]
 	];
 
 	for (let _case of cases) {
@@ -130,7 +131,7 @@ test('checking code_block_customClass_regexp', () => {
 		['customClass ..two_dots_now_allowed', false],
 		['customClass wrong-char!', false],
 		[' customClass class', false],
-		['customClasses class', false],
+		['customClasses class', false]
 	];
 
 	for (let _case of cases) {
