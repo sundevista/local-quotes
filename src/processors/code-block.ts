@@ -1,18 +1,13 @@
-import LocalQuotes from "../main";
-import {BlockMetadata, selectBlockMetadata} from "../types/block-metadata";
-import {getAuthorsCode, updateQuotesVault} from "../types/quote";
-import {findTaggedFiles} from "../utils/scan";
-import {OneTimeBlock, selectOneTimeBlock} from "../types/one-time-block";
+import LocalQuotes from '../main';
+import { BlockMetadata, selectBlockMetadata } from '../types/block-metadata';
+import { getAuthorsCode } from '../types/quote';
+import { OneTimeBlock, selectOneTimeBlock } from '../types/one-time-block';
 import { MarkdownPostProcessorContext, MarkdownRenderer } from 'obsidian';
 
 export async function processCodeBlock(
 	plugin: LocalQuotes,
 	source: string,
 	el: HTMLElement): Promise<void> {
-
-	if (plugin.settings.quoteScanOnBlockRender) {
-		await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
-	}
 
 	const blockMetadata: BlockMetadata = await selectBlockMetadata(plugin, source);
 
@@ -37,8 +32,6 @@ export async function processOneTimeCodeBlock(
 	source: string,
 	el: HTMLElement,
 	ctx: MarkdownPostProcessorContext): Promise<void> {
-
-	await updateQuotesVault(plugin, findTaggedFiles(plugin.settings.quoteTag));
 
 	const oneTimeBlock: OneTimeBlock = await selectOneTimeBlock(plugin, source, ctx);
 

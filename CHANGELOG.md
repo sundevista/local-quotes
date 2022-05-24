@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ## Added
 - Ability to automatically update quote listing when file modifies, so you don't need to manually rescan it
-- Setting for automatically quote listing update (enabled by default) 
+- Setting for automatically quote listing update (enabled by default)
+
+## Removed
+- Unnecessary `quoteScanOnBlockRender` setting
 
 ## [1.2.10] - 2022/05/19
 ### Changed
