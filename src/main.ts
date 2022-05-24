@@ -1,6 +1,6 @@
-import {Notice, Plugin} from 'obsidian';
-import {findTaggedFiles} from "./utils/scan";
-import {updateQuotesVault} from "./types/quote";
+import { Notice, Plugin } from 'obsidian';
+import { findTaggedFiles } from './utils/scan';
+import { onFileModify, updateQuotesVault } from './types/quote';
 import {processCodeBlock, processOneTimeCodeBlock} from "./processors/code-block";
 import {DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab} from "./settings";
 import {QuoteMakerModal} from "./processors/modals/quote-maker";
@@ -21,6 +21,11 @@ export default class LocalQuotes extends Plugin {
 				updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
 			}
 		);
+
+		// Watching modify events
+		if (this.settings.updateFilesQuotesOnModify) {
+			this.registerEvent(app.vault.on('modify', (f) => onFileModify(this, f)));
+		}
 
 		// Register a code block processor for the quote blocks
 		this.registerMarkdownCodeBlockProcessor(

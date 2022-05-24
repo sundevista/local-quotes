@@ -1,10 +1,11 @@
 import LocalQuotes from '../main';
-import { TFile } from 'obsidian';
+import { TAbstractFile, TFile } from 'obsidian';
 import { author_regexp, quote_long_regexp, quote_regexp, search_regexp } from '../consts';
-import { getAuthorIdx } from '../utils/scan';
+import { checkFileTag, getAuthorIdx } from '../utils/scan';
 import { BlockMetadataContent } from './block-metadata';
 import { getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor } from '../utils/random';
 import { removeMd } from '../libs/remove_markdown';
+import { convertTAbstractFileToTFile } from '../utils/file';
 
 export interface Quote {
 	author: string;
@@ -15,6 +16,15 @@ export interface Quote {
 export interface FilesQuotes {
 	filename: string;
 	quotes: string[];
+}
+
+export async function onFileModify(plugin: LocalQuotes, file: TFile|TAbstractFile): Promise<void> {
+	const f: TFile = convertTAbstractFileToTFile(file);
+
+	if (checkFileTag(f, plugin.settings.quoteTag)) {
+		clearFileEntries(plugin.settings.quoteVault, file.name);
+		await updateQuotesVault(plugin, [f]);
+	}
 }
 
 export function getAuthorsCode(quoteVault: Quote[], author: string): string {
@@ -34,6 +44,12 @@ export function fetchAllAuthorsQuotes(quoteVault: Quote[], author: string): stri
 	}
 
 	return quotes;
+}
+
+function clearFileEntries(quoteVault: Quote[], filename: string): void {
+	for (let [eIdx, _] of quoteVault.entries()) {
+		quoteVault[eIdx].files = quoteVault[eIdx].files.filter((f) => f.filename !== filename);
+	}
 }
 
 export function getValidAuthorsFromAdvancedSearch(quoteVault: Quote[], search: string): string[] {
