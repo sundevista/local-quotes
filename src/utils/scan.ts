@@ -11,11 +11,12 @@ export function getBlockMetadataIdx(plugin: LocalQuotes, id: string): number {
 }
 
 export function checkFileTag(f: TFile, tag: string): boolean {
-	const tagInContent = app.metadataCache.getFileCache(f).tags &&
-		(app.metadataCache.getFileCache(f).tags.findIndex((t) => t.tag === `#${tag}`) >= 0);
-	const tagInFrontmatter = app.metadataCache.getFileCache(f).frontmatter &&
-		app.metadataCache.getFileCache(f).frontmatter.tags &&
-		app.metadataCache.getFileCache(f).frontmatter.tags.includes(tag);
+	const fileCache = app.metadataCache.getFileCache(f);
+	const tagInContent = fileCache && fileCache.tags &&
+		(fileCache.tags.findIndex((t) => t.tag === `#${tag}`) >= 0);
+	const tagInFrontmatter = fileCache && fileCache.frontmatter &&
+		fileCache.frontmatter.tags &&
+		fileCache.frontmatter.tags.includes(tag);
 
 	return tagInContent || tagInFrontmatter;
 }
