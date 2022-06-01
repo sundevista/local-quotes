@@ -8,7 +8,7 @@ This plugin allows you to:
 - Apply custom classes to every quote
 - Choose your own quote's format
 
-![demo](assets/demo.gif)
+![demo](https://github.com/ka1tzyu/local-quotes/blob/master/assets/demo.gif)
 
 ## 🎯 Purpose
 I started to create this plugin with only one idea — I wanted to see in my Index note
@@ -34,7 +34,7 @@ The simplest way to create a quote block is 'Quote Maker' modal. You can summon 
 button. Then your quote block'll be inserted in your cursor position (remember that
 you need to be in **Editing** mode).
 
-![modal](assets/modal.gif)
+![modal](https://github.com/ka1tzyu/local-quotes/blob/master/assets/modal.gif)
 
 ## ✍️ Making quote block by yourself
 Plugin using codeblock and special codeblock language (`localquote`) to
