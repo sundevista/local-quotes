@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.2] - 2022/06/01
+## Changed
+- `onFileModify` event from file's `modify` to metadata's `changed`
+
+## Removed
+- Some reduntant code
+
 ## [1.3.1] - 2022/05/28
 ## Fixed
 - Error on startup with failed load
