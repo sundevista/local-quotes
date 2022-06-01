@@ -1,4 +1,4 @@
-import { Notice, Plugin, TFile } from 'obsidian';
+import { Notice, Plugin } from 'obsidian';
 import { findTaggedFiles } from './utils/scan';
 import { onFileModify, updateQuotesVault } from './types/quote';
 import { processCodeBlock, processOneTimeCodeBlock } from './processors/code-block';
@@ -24,9 +24,7 @@ export default class LocalQuotes extends Plugin {
 
 		// Watching modify events
 		if (this.settings.updateFilesQuotesOnModify) {
-			this.registerEvent(app.metadataCache.on('changed', (f) => {
-				if (f instanceof TFile) onFileModify(this, f);
-			}));
+			this.registerEvent(app.metadataCache.on('changed', (f) => onFileModify(this, f)));
 		}
 
 		// Register a code block processor for the quote blocks
