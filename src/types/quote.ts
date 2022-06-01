@@ -1,11 +1,10 @@
 import LocalQuotes from '../main';
-import { TAbstractFile, TFile } from 'obsidian';
+import { TFile } from 'obsidian';
 import { author_regexp, quote_long_regexp, quote_regexp, search_regexp } from '../consts';
 import { checkFileTag, getAuthorIdx } from '../utils/scan';
 import { BlockMetadataContent } from './block-metadata';
 import { getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor } from '../utils/random';
 import { removeMd } from '../libs/remove_markdown';
-import { convertTAbstractFileToTFile } from '../utils/file';
 
 export interface Quote {
 	author: string;
@@ -18,12 +17,10 @@ export interface FilesQuotes {
 	quotes: string[];
 }
 
-export async function onFileModify(plugin: LocalQuotes, file: TFile | TAbstractFile): Promise<void> {
-	const f: TFile = convertTAbstractFileToTFile(file);
-
-	if (checkFileTag(f, plugin.settings.quoteTag)) {
+export async function onFileModify(plugin: LocalQuotes, file: TFile): Promise<void> {
+	if (checkFileTag(file, plugin.settings.quoteTag)) {
 		clearFileEntries(plugin.settings.quoteVault, file.name);
-		await updateQuotesVault(plugin, [f]);
+		await updateQuotesVault(plugin, [file]);
 	}
 }
 
