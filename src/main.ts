@@ -24,7 +24,7 @@ export default class LocalQuotes extends Plugin {
 
 		// Watching modify events
 		if (this.settings.updateFilesQuotesOnModify) {
-			this.registerEvent(app.vault.on('modify', (f) => {
+			this.registerEvent(app.metadataCache.on('changed', (f) => {
 				if (f instanceof TFile) onFileModify(this, f);
 			}));
 		}
