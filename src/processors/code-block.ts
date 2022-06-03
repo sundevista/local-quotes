@@ -22,7 +22,7 @@ export async function processCodeBlock(
 			.replace('{{author}}', plugin.settings.inheritListingStyle
 				? getAuthorsCode(plugin.settings.quoteVault, blockMetadata.content.author)
 				: blockMetadata.content.author),
-			bq, null, null
+			bq, '?no-dataview', null
 		);
 	}
 }
@@ -46,7 +46,7 @@ export async function processOneTimeCodeBlock(
 			.replace('{{author}}', plugin.settings.inheritListingStyle
 				? getAuthorsCode(plugin.settings.quoteVault, oneTimeBlock.content.author)
 				: oneTimeBlock.content.author),
-			bq, null, null
+			bq, '?no-dataview', null
 		);
 	}
 }

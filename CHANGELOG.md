@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.3] - 2022/06/03
+## Fixed
+- Dataview update blocked rendering some lines of quote
+
 ## [1.3.2] - 2022/06/01
 ## Changed
 - `onFileModify` event from file's `modify` to metadata's `changed`
