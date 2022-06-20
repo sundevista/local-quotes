@@ -126,10 +126,8 @@ export function appendToLastQuote(quoteVault: Quote[], filename: string, author:
 export async function updateQuotesVault(plugin: LocalQuotes, files: TFile[]): Promise<void> {
 	let tmpQuoteVault: Quote[] = [];
 
-	let current_author: string;
-
 	for (let file of files) {
-		current_author = '';
+		let current_author = '';
 
 		for (let line of (await plugin.app.vault.cachedRead(file)).split('\n')) {
 			let tline = line.trim();
