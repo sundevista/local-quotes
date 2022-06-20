@@ -17,45 +17,15 @@ test('should leave non-matching markdown markdown', () => {
 	expect(removeMd(string)).toBe(expected);
 });
 
-test('should leave non-matching markdown, but strip empty anchors', () => {
-	const string = '*Javascript* [developers]()* are the _best_.';
-	const expected = 'Javascript developers* are the best.';
-	expect(removeMd(string)).toBe(expected);
-});
-
 test('should strip HTML', () => {
 	const string = '<p>Hello World</p>';
 	const expected = 'Hello World';
 	expect(removeMd(string)).toBe(expected);
 });
 
-test('should strip anchors', () => {
-	const string = '*Javascript* [developers](https://engineering.condenast.io/)* are the _best_.';
-	const expected = 'Javascript developers* are the best.';
-	expect(removeMd(string)).toBe(expected);
-});
-
-test('should strip img tags', () => {
-	const string = '![](https://placebear.com/640/480)*Javascript* developers are the _best_.';
-	const expected = 'Javascript developers are the best.';
-	expect(removeMd(string)).toBe(expected);
-});
-
-test('should use the alt-text of an image, if it is provided', () => {
-	const string = '![This is the alt-text](https://www.example.com/images/logo.png)';
-	const expected = 'This is the alt-text';
-	expect(removeMd(string)).toBe(expected);
-});
-
 test('should strip code tags', () => {
 	const string = 'In `Getting Started` we set up `something` foo.';
 	const expected = 'In Getting Started we set up something foo.';
-	expect(removeMd(string)).toBe(expected);
-});
-
-test('should leave hashtags in headings', () => {
-	const string = '## This #heading contains #hashtags';
-	const expected = 'This #heading contains #hashtags';
 	expect(removeMd(string)).toBe(expected);
 });
 
@@ -83,47 +53,6 @@ test('should remove double emphasis', () => {
 	expect(removeMd(string)).toBe(expected);
 });
 
-test('should remove horizontal rules', () => {
-	const string = 'Some text on a line\n\n---\n\nA line below';
-	const expected = 'Some text on a line\n\nA line below';
-	expect(removeMd(string)).toBe(expected);
-});
-
-test('should remove horizontal rules with space-separated asterisks', () => {
-	const string = 'Some text on a line\n\n* * *\n\nA line below';
-	const expected = 'Some text on a line\n\nA line below';
-	expect(removeMd(string)).toBe(expected);
-});
-
-test('should remove blockquotes', () => {
-	const string = '>I am a blockquote';
-	const expected = 'I am a blockquote';
-	expect(removeMd(string)).toBe(expected);
-});
-
-test('should remove blockquotes with spaces', () => {
-	const string = '> I am a blockquote';
-	const expected = 'I am a blockquote';
-	expect(removeMd(string)).toBe(expected);
-});
-
-test('should remove indented blockquotes', () => {
-	const tests = [
-		{ string: ' > I am a blockquote', expected: 'I am a blockquote' },
-		{ string: '  > I am a blockquote', expected: 'I am a blockquote' },
-		{ string: '   > I am a blockquote', expected: 'I am a blockquote' }
-	];
-	tests.forEach((test) => {
-		expect(removeMd(test.string)).toBe(test.expected);
-	});
-});
-
-test('should remove blockquotes over multiple lines', () => {
-	const string = '> I am a blockquote firstline  \n>I am a blockquote secondline';
-	const expected = 'I am a blockquote firstline\nI am a blockquote secondline';
-	expect(removeMd(string)).toBe(expected);
-});
-
 test('should not remove greater than signs', () => {
 	const tests = [
 		{ string: '100 > 0', expected: '100 > 0' },
@@ -136,27 +65,4 @@ test('should not remove greater than signs', () => {
 	tests.forEach((test) => {
 		expect(removeMd(test.string)).toBe(test.expected);
 	});
-});
-
-test('should strip unordered list leaders', () => {
-	const string = 'Some text on a line\n\n* A list Item\n* Another list item';
-	const expected = 'Some text on a line\n\nA list Item\nAnother list item';
-	expect(removeMd(string)).toBe(expected);
-});
-
-test('should strip ordered list leaders', () => {
-	const string = 'Some text on a line\n\n9. A list Item\n10. Another list item';
-	const expected = 'Some text on a line\n\nA list Item\nAnother list item';
-	expect(removeMd(string)).toBe(expected);
-});
-
-test('should handle paragraphs with markdown', () => {
-	const paragraph = '\n## This is a heading ##\n\nThis is a paragraph with [a link](https://www.disney.com/).\n\n### This is another heading\n\nIn `Getting Started` we set up `something` foo.\n\n  * Some list\n  * With items\n    * Even indented';
-	const expected = '\nThis is a heading\n\nThis is a paragraph with a link.\n\nThis is another heading\n\nIn Getting Started we set up something foo.\n\n  Some list\n  With items\n    Even indented';
-	expect(removeMd(paragraph)).toBe(expected);
-});
-
-test('should not strip paragraphs without content', () => {
-	const paragraph = '\n#This paragraph\n##This paragraph#';
-	expect(removeMd(paragraph)).toBe(paragraph);
 });
