@@ -1,9 +1,9 @@
-import { Notice, PluginSettingTab, Setting } from 'obsidian';
+import {Notice, PluginSettingTab, Setting} from 'obsidian';
 import LocalQuotes from './main';
-import { BlockMetadata } from './types/block-metadata';
-import { sec_in_day } from './consts';
-import { OneTimeBlock } from './types/one-time-block';
-import { Quote } from './types/quote';
+import {BlockMetadata} from './types/block-metadata';
+import {sec_in_day} from './consts';
+import {OneTimeBlock} from './types/one-time-block';
+import {Quote} from './types/quote';
 
 export interface LocalQuotesSettings {
 	quoteTag: string;
@@ -13,6 +13,7 @@ export interface LocalQuotesSettings {
 	inheritListingStyle: boolean;
 	updateFilesQuotesOnModify: boolean;
 	quoteBlockFormat: string;
+	usePlainFormat: boolean;
 	blockMetadata: BlockMetadata[];
 	oneTimeBlocks: OneTimeBlock[];
 	quoteVault: Quote[];
@@ -27,6 +28,7 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	inheritListingStyle: false,
 	updateFilesQuotesOnModify: true,
 	quoteBlockFormat: '{{content}}\n— {{author}}',
+	usePlainFormat: false,
 	blockMetadata: [],
 	oneTimeBlocks: [],
 	quoteVault: [],
@@ -42,130 +44,140 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 	}
 
 	display(): void {
-		const { containerEl } = this;
+		const {containerEl} = this;
 
 		containerEl.empty();
 
-		containerEl.createEl('h2', { text: 'General' });
+		containerEl.createEl('h2', {text: 'General'});
 
 		new Setting(containerEl)
-		.setName('Quote tag')
-		.setDesc('Tag name that will be used for searching notes with quotes')
-		.addText(text => text
-		.setPlaceholder(DEFAULT_SETTINGS.quoteTag)
-		.setValue(this.plugin.settings.quoteTag)
-		.onChange(async (value) => {
-			this.plugin.settings.quoteTag = value;
-			await this.plugin.saveSettings();
-		}));
+			.setName('Quote tag')
+			.setDesc('Tag name that will be used for searching notes with quotes')
+			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.quoteTag)
+				.setValue(this.plugin.settings.quoteTag)
+				.onChange(async (value) => {
+					this.plugin.settings.quoteTag = value;
+					await this.plugin.saveSettings();
+				}));
 
 		new Setting(containerEl)
-		.setName('Refresh interval')
-		.setDesc('You can set default refresh interval (in seconds) and miss corresponding field in codeblock')
-		.addText(text => text
-		.setPlaceholder(DEFAULT_SETTINGS.defaultReloadInterval.toString())
-		.setValue(this.plugin.settings.defaultReloadInterval.toString())
-		.onChange(async (value) => {
-			this.plugin.settings.defaultReloadInterval = parseInt(value);
-			await this.plugin.saveSettings();
-		}));
+			.setName('Refresh interval')
+			.setDesc('You can set default refresh interval (in seconds) and miss corresponding field in codeblock')
+			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.defaultReloadInterval.toString())
+				.setValue(this.plugin.settings.defaultReloadInterval.toString())
+				.onChange(async (value) => {
+					this.plugin.settings.defaultReloadInterval = parseInt(value);
+					await this.plugin.saveSettings();
+				}));
 
 		new Setting(containerEl)
-		.setName('Template folder')
-		.setDesc('Folder that will be ignored by one-time quotes')
-		.addText(text => text
-		.setPlaceholder(DEFAULT_SETTINGS.templateFolder)
-		.setValue(this.plugin.settings.templateFolder)
-		.onChange(async (value) => {
-			this.plugin.settings.templateFolder = value;
-			await this.plugin.saveSettings();
-		}));
+			.setName('Template folder')
+			.setDesc('Folder that will be ignored by one-time quotes')
+			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.templateFolder)
+				.setValue(this.plugin.settings.templateFolder)
+				.onChange(async (value) => {
+					this.plugin.settings.templateFolder = value;
+					await this.plugin.saveSettings();
+				}));
 
-		containerEl.createEl('h3', { text: 'Style' });
-
-		new Setting(containerEl)
-		.setName('Inherit listing author style')
-		.setDesc('You can use style in your listings like `:::**Author**:::`, if this setting turns on, your ' +
-			'quote blocks will inherit this styling')
-		.addToggle(t => t
-			.setValue(this.plugin.settings.inheritListingStyle)
-			.onChange(async (value) => {
-				this.plugin.settings.inheritListingStyle = value;
-				await this.plugin.saveSettings();
-			})
-		);
+		containerEl.createEl('h3', {text: 'Style'});
 
 		new Setting(containerEl)
-		.setName('Quote block format')
-		.setDesc('Set your own format for quote blocks. Use {{content}} and {{author}} placeholders to place data')
-		.addTextArea(text => text
-		.setPlaceholder(DEFAULT_SETTINGS.quoteBlockFormat)
-		.setValue(this.plugin.settings.quoteBlockFormat)
-		.onChange(async (value) => {
-			this.plugin.settings.quoteBlockFormat = value;
-			await this.plugin.saveSettings();
-		}));
-
-
-		containerEl.createEl('h2', { text: 'Advanced' });
+			.setName('Inherit listing author style')
+			.setDesc('You can use style in your listings like `:::**Author**:::`, if this setting turns on, your ' +
+				'quote blocks will inherit this styling')
+			.addToggle(t => t
+				.setValue(this.plugin.settings.inheritListingStyle)
+				.onChange(async (value) => {
+					this.plugin.settings.inheritListingStyle = value;
+					await this.plugin.saveSettings();
+				})
+			);
 
 		new Setting(containerEl)
-		.setName('Automatically update quote listing')
-		.setDesc('If you turn on it plugin will scan your file for new quotes when you modify it. Requires app ' +
-			'relauch to apply setting change')
-		.addToggle(t => t
-			.setValue(this.plugin.settings.updateFilesQuotesOnModify)
-			.onChange(async (value) => {
-				this.plugin.settings.updateFilesQuotesOnModify = value;
-				await this.plugin.saveSettings();
-			})
-		);
+			.setName('Quote block format')
+			.setDesc('Set your own format for quote blocks. Use {{content}} and {{author}} placeholders to place data')
+			.addTextArea(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.quoteBlockFormat)
+				.setValue(this.plugin.settings.quoteBlockFormat)
+				.onChange(async (value) => {
+					this.plugin.settings.quoteBlockFormat = value;
+					await this.plugin.saveSettings();
+				}));
 
 		new Setting(containerEl)
-		.setName('Minimal quote length')
-		.setDesc('Quotes shorter than this length will not be included')
-		.addText(text => text
-		.setPlaceholder(DEFAULT_SETTINGS.minimalQuoteLength.toString())
-		.setValue(this.plugin.settings.minimalQuoteLength.toString())
-		.onChange(async (value) => {
-			this.plugin.settings.minimalQuoteLength = parseInt(value);
-			await this.plugin.saveSettings();
-		}));
+			.setName('Use plain format')
+			.setDesc('If you turn it on, your quotes will be placed in a simple div block without "quote" appearance' +
+				', it\'ll be placed as plain text')
+			.addToggle(st => st
+				.setValue(this.plugin.settings.usePlainFormat)
+				.onChange(async (value) => {
+					this.plugin.settings.usePlainFormat = value;
+					await this.plugin.saveSettings();
+				}));
+
+
+		containerEl.createEl('h2', {text: 'Advanced'});
 
 		new Setting(containerEl)
-		.setName('Auto generated id length')
-		.setDesc('This setting affects on length of id that automatically generated in \'Quote Maker\'')
-		.addText(text => text
-		.setPlaceholder(DEFAULT_SETTINGS.autoGeneratedIdLength.toString())
-		.setValue(this.plugin.settings.autoGeneratedIdLength.toString())
-		.onChange(async (value) => {
-			this.plugin.settings.autoGeneratedIdLength = parseInt(value);
-			await this.plugin.saveSettings();
-		}));
-
-		containerEl.createEl('h2', { text: 'Danger Zone' });
+			.setName('Automatically update quote listing')
+			.setDesc('If you turn on it plugin will scan your file for new quotes when you modify it. Requires app ' +
+				'relauch to apply setting change')
+			.addToggle(t => t
+				.setValue(this.plugin.settings.updateFilesQuotesOnModify)
+				.onChange(async (value) => {
+					this.plugin.settings.updateFilesQuotesOnModify = value;
+					await this.plugin.saveSettings();
+				}));
 
 		new Setting(containerEl)
-		.setName('Clear block metadata')
-		.setDesc('Set blockMetadata property to empty array (use if you have problems with old quote occurrence)')
-		.addButton(btn => btn
-		.setButtonText('Clear')
-		.onClick(async () => {
-			this.plugin.settings.blockMetadata = [];
-			await this.plugin.saveSettings();
-			new Notice('Your block metadata successfully cleared!');
-		}));
+			.setName('Minimal quote length')
+			.setDesc('Quotes shorter than this length will not be included')
+			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.minimalQuoteLength.toString())
+				.setValue(this.plugin.settings.minimalQuoteLength.toString())
+				.onChange(async (value) => {
+					this.plugin.settings.minimalQuoteLength = parseInt(value);
+					await this.plugin.saveSettings();
+				}));
 
 		new Setting(containerEl)
-		.setName('Clear one-time blocks')
-		.setDesc('Set oneTimeBlocks property to empty array (use if you have problems with ' +
-			'mismatched template folder)')
-		.addButton(btn => btn
-		.setButtonText('Clear')
-		.onClick(async () => {
-			this.plugin.settings.oneTimeBlocks = [];
-			await this.plugin.saveSettings();
-			new Notice('Your one-time blocks successfully cleared!');
-		}));
+			.setName('Auto generated id length')
+			.setDesc('This setting affects on length of id that automatically generated in \'Quote Maker\'')
+			.addText(text => text
+				.setPlaceholder(DEFAULT_SETTINGS.autoGeneratedIdLength.toString())
+				.setValue(this.plugin.settings.autoGeneratedIdLength.toString())
+				.onChange(async (value) => {
+					this.plugin.settings.autoGeneratedIdLength = parseInt(value);
+					await this.plugin.saveSettings();
+				}));
+
+		containerEl.createEl('h2', {text: 'Danger Zone'});
+
+		new Setting(containerEl)
+			.setName('Clear block metadata')
+			.setDesc('Set blockMetadata property to empty array (use if you have problems with old quote occurrence)')
+			.addButton(btn => btn
+				.setButtonText('Clear')
+				.onClick(async () => {
+					this.plugin.settings.blockMetadata = [];
+					await this.plugin.saveSettings();
+					new Notice('Your block metadata successfully cleared!');
+				}));
+
+		new Setting(containerEl)
+			.setName('Clear one-time blocks')
+			.setDesc('Set oneTimeBlocks property to empty array (use if you have problems with ' +
+				'mismatched template folder)')
+			.addButton(btn => btn
+				.setButtonText('Clear')
+				.onClick(async () => {
+					this.plugin.settings.oneTimeBlocks = [];
+					await this.plugin.saveSettings();
+					new Notice('Your one-time blocks successfully cleared!');
+				}));
 	}
 }

@@ -11,9 +11,9 @@ export async function processCodeBlock(
 
 	const blockMetadata: BlockMetadata = await selectBlockMetadata(plugin, source);
 
-	el.addClass('el-blockquote');
+	if (!plugin.settings.usePlainFormat) el.addClass('el-blockquote');
 	if (blockMetadata.customClass !== null) el.addClass(blockMetadata.customClass);
-	const bq: HTMLElement = el.createEl('blockquote');
+	const bq: HTMLElement = el.createEl(plugin.settings.usePlainFormat ? 'div' : 'blockquote');
 	el.appendChild(bq);
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
@@ -35,9 +35,9 @@ export async function processOneTimeCodeBlock(
 
 	const oneTimeBlock: OneTimeBlock = await selectOneTimeBlock(plugin, source, ctx);
 
-	el.addClass('el-blockquote');
+	if (!plugin.settings.usePlainFormat) el.addClass('el-blockquote');
 	if (oneTimeBlock.customClass !== null) el.addClass(oneTimeBlock.customClass);
-	const bq: HTMLElement = el.createEl('blockquote');
+	const bq: HTMLElement = el.createEl(plugin.settings.usePlainFormat ? 'div' : 'blockquote');
 	el.appendChild(bq);
 
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {

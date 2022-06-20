@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.4] - 2022/06/20
+## Changed
+- Ability to disable quote's formatting (using plain text instead of quote's format)
+
 ## [1.3.3] - 2022/06/03
 ## Fixed
 - Dataview update blocked rendering some lines of quote
