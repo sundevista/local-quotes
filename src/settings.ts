@@ -111,7 +111,7 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 				}));
 
 		new Setting(containerEl)
-			.setName('Use plain format (not implemented)')
+			.setName('Use plain format')
 			.setDesc('If you turn it on, your quotes will be placed in a simple div block without "quote" appearance' +
 				', it\'ll be placed as plain text')
 			.addToggle(st => st

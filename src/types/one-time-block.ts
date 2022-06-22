@@ -12,7 +12,11 @@ export interface OneTimeBlock {
 }
 
 async function makeOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeBlock): Promise<OneTimeBlock> {
-	rawOneTimeBlock.content = searchQuote(plugin.settings.quoteVault, rawOneTimeBlock.search);
+	rawOneTimeBlock.content = searchQuote(
+		plugin.settings.quoteVault,
+		rawOneTimeBlock.search,
+		plugin.settings.useWeightedRandom
+	);
 	plugin.settings.oneTimeBlocks.push(rawOneTimeBlock);
 
 	await plugin.saveSettings();
@@ -33,7 +37,11 @@ async function updateOneTimeBlock(plugin: LocalQuotes, rawOneTimeBlock: OneTimeB
 		plugin.settings.oneTimeBlocks[otbIdx].search = rawOneTimeBlock.search;
 
 		// Refresh quote if search changed
-		plugin.settings.oneTimeBlocks[otbIdx].content = searchQuote(plugin.settings.quoteVault, rawOneTimeBlock.search);
+		plugin.settings.oneTimeBlocks[otbIdx].content = searchQuote(
+			plugin.settings.quoteVault,
+			rawOneTimeBlock.search,
+			plugin.settings.useWeightedRandom
+		);
 	}
 
 	await plugin.saveSettings();

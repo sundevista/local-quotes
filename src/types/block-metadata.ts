@@ -19,7 +19,11 @@ export interface BlockMetadata {
 }
 
 async function makeBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata): Promise<BlockMetadata> {
-	rawBlockMetadata.content = searchQuote(plugin.settings.quoteVault, rawBlockMetadata.search);
+	rawBlockMetadata.content = searchQuote(
+		plugin.settings.quoteVault,
+		rawBlockMetadata.search,
+		plugin.settings.useWeightedRandom
+	);
 	rawBlockMetadata.lastUpdate = getCurrentSeconds();
 
 	plugin.settings.blockMetadata.push(rawBlockMetadata);
@@ -36,14 +40,22 @@ async function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockM
 	// Fields updating
 	if (prevBm.search !== rawBlockMetadata.search) {
 		plugin.settings.blockMetadata[bmIdx].search = rawBlockMetadata.search;
-		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin.settings.quoteVault, rawBlockMetadata.search);
+		plugin.settings.blockMetadata[bmIdx].content = searchQuote(
+			plugin.settings.quoteVault,
+			rawBlockMetadata.search,
+			plugin.settings.useWeightedRandom
+		);
 	}
 	if (prevBm.customClass !== rawBlockMetadata.customClass) {
 		plugin.settings.blockMetadata[bmIdx].customClass = rawBlockMetadata.customClass;
 	}
 	if (prevBm.refresh !== rawBlockMetadata.refresh) {
 		plugin.settings.blockMetadata[bmIdx].refresh = rawBlockMetadata.refresh;
-		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin.settings.quoteVault, rawBlockMetadata.search);
+		plugin.settings.blockMetadata[bmIdx].content = searchQuote(
+			plugin.settings.quoteVault,
+			rawBlockMetadata.search,
+			plugin.settings.useWeightedRandom
+		);
 	}
 
 	// Update quote
@@ -52,7 +64,11 @@ async function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockM
 		: plugin.settings.blockMetadata[bmIdx].refresh;
 
 	if ((plugin.settings.blockMetadata[bmIdx].lastUpdate + refreshInterval) < getCurrentSeconds()) {
-		plugin.settings.blockMetadata[bmIdx].content = searchQuote(plugin.settings.quoteVault, rawBlockMetadata.search);
+		plugin.settings.blockMetadata[bmIdx].content = searchQuote(
+			plugin.settings.quoteVault,
+			rawBlockMetadata.search,
+			plugin.settings.useWeightedRandom
+		);
 		plugin.settings.blockMetadata[bmIdx].lastUpdate = getCurrentSeconds();
 	}
 

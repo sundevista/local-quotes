@@ -3,7 +3,7 @@ import { TFile } from 'obsidian';
 import { author_regexp, quote_long_regexp, quote_regexp, search_regexp } from '../consts';
 import { checkFileTag, getAuthorIdx } from '../utils/scan';
 import { BlockMetadataContent } from './block-metadata';
-import { getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor } from '../utils/random';
+import {getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor, getWeightedRandomAuthor} from '../utils/random';
 import { removeMd } from '../libs/remove_markdown';
 
 export interface Quote {
@@ -57,15 +57,19 @@ export function getValidAuthorsFromAdvancedSearch(quoteVault: Quote[], search: s
 	});
 }
 
-export function searchQuote(quoteVault: Quote[], search: string): BlockMetadataContent {
+export function searchQuote(quoteVault: Quote[], search: string, useWeightedRandom: boolean): BlockMetadataContent {
 	let result: BlockMetadataContent = { author: null, text: null };
 
 	// '*' case (random quote of random author)
 	if (search === '*') {
-		result.author = getRandomAuthor(quoteVault);
+		result.author = useWeightedRandom
+			? getWeightedRandomAuthor(quoteVault)
+			: getRandomAuthor(quoteVault);
 	} else if (search_regexp.test(search)) {
 		const authorList = getValidAuthorsFromAdvancedSearch(quoteVault, search);
-		result.author = getRandomArrayItem(authorList);
+		result.author = useWeightedRandom
+			? getWeightedRandomAuthor(quoteVault, authorList)
+			: getRandomArrayItem(authorList);
 	}
 
 	result.text = getRandomQuoteOfAuthor(quoteVault, result.author);
