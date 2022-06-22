@@ -14,6 +14,7 @@ export interface LocalQuotesSettings {
 	updateFilesQuotesOnModify: boolean;
 	quoteBlockFormat: string;
 	usePlainFormat: boolean;
+	useWeightedRandom: boolean;
 	blockMetadata: BlockMetadata[];
 	oneTimeBlocks: OneTimeBlock[];
 	quoteVault: Quote[];
@@ -29,6 +30,7 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	updateFilesQuotesOnModify: true,
 	quoteBlockFormat: '{{content}}\n— {{author}}',
 	usePlainFormat: false,
+	useWeightedRandom: false,
 	blockMetadata: [],
 	oneTimeBlocks: [],
 	quoteVault: [],
@@ -109,7 +111,7 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 				}));
 
 		new Setting(containerEl)
-			.setName('Use plain format')
+			.setName('Use plain format (not implemented)')
 			.setDesc('If you turn it on, your quotes will be placed in a simple div block without "quote" appearance' +
 				', it\'ll be placed as plain text')
 			.addToggle(st => st
@@ -121,6 +123,17 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 
 
 		containerEl.createEl('h2', {text: 'Advanced'});
+
+		new Setting(containerEl)
+			.setName('Use weighted random')
+			.setDesc('If you turn it on, plugin will use weighted random strategy so then more quotes author has then' +
+				' more probability of choosing exactly this author.')
+			.addToggle(t => t
+				.setValue(this.plugin.settings.useWeightedRandom)
+				.onChange(async (value) => {
+					this.plugin.settings.useWeightedRandom = value;
+					await this.plugin.saveSettings();
+				}));
 
 		new Setting(containerEl)
 			.setName('Automatically update quote listing')
