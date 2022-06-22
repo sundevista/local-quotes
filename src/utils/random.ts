@@ -24,6 +24,32 @@ export function getRandomAuthor(quoteVault: Quote[]): string {
 	return getRandomArrayItem(quoteVault).author;
 }
 
+export function getWeightedRandomAuthor(quoteVault: Quote[]): string {
+	let authorToQuoteList: [string, number][] = quoteVault.map(e => {
+		let quoteQuantity = 0;
+		e.files.forEach(e => {
+			quoteQuantity += e.quotes.length;
+		});
+
+		return [e.author, quoteQuantity];
+	});
+
+	let quotesSum = 0;
+	authorToQuoteList.forEach(e => quotesSum += e[1]);
+
+	let weightedAuthorList: [string, number][] = authorToQuoteList.map(e => [e[0], e[1]/quotesSum]);
+	console.log(getWeightedRandomElement(weightedAuthorList));
+	return "";
+}
+
+function getWeightedRandomElement(arr: [any, number][]): any {
+	let i, sum = 0, r = Math.random();
+	for (i in arr) {
+		sum += arr[i][1];
+		if (r <= sum) return arr[i][0];
+	}
+}
+
 export function getRandomQuoteOfAuthor(quoteVault: Quote[], author: string): string {
 	const authorIdx: number = getAuthorIdx(quoteVault, author);
 
