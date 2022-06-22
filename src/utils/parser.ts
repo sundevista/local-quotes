@@ -1,4 +1,4 @@
-import { BlockMetadata } from '../types/block-metadata';
+import {BlockMetadata} from '../types/block-metadata';
 import {
 	code_block_customClass_regexp,
 	code_block_id_regexp,
@@ -11,7 +11,8 @@ import {
 	sec_in_week,
 	sec_in_year
 } from '../consts';
-import { OneTimeBlock } from '../types/one-time-block';
+import {OneTimeBlock} from '../types/one-time-block';
+import {Quote} from "../types/quote";
 
 /*
  * Parses from {@link OneTimeBlock} to it code block representation
@@ -125,4 +126,8 @@ export function parseTime(str: string): number {
 		default:
 			return value;
 	}
+}
+
+export function getAllAuthors(quoteVault: Quote[]): string[] {
+	return quoteVault.map(e => e.author);
 }

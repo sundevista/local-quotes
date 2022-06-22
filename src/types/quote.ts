@@ -50,11 +50,11 @@ function clearFileEntries(quoteVault: Quote[], filename: string): void {
 }
 
 export function getValidAuthorsFromAdvancedSearch(quoteVault: Quote[], search: string): string[] {
-	return search.split('||')
-	.map((a) => {
+	const list = search.split('||').map((a) => {
 		a = a.trim();
 		if ((a.length > 0) && (getAuthorIdx(quoteVault, a) >= 0)) return a;
 	});
+	return list[0] !== undefined ? list : [];
 }
 
 export function searchQuote(quoteVault: Quote[], search: string, useWeightedRandom: boolean): BlockMetadataContent {

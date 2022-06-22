@@ -3,7 +3,7 @@ import { OneTimeBlock } from '../../types/one-time-block';
 import LocalQuotes from '../../main';
 import { createDomLink } from '../../utils/dom';
 import { fetchAuthorsInQuoteVault, getValidAuthorsFromAdvancedSearch } from '../../types/quote';
-import { parseOneTimeBlockToCodeBlock } from '../../utils/parser';
+import {getAllAuthors, parseOneTimeBlockToCodeBlock} from '../../utils/parser';
 
 export class OneTimeQuoteMakerModal extends Modal {
 	result: OneTimeBlock;
@@ -83,18 +83,16 @@ export class OneTimeQuoteMakerModal extends Modal {
 		.setButtonText('Check')
 		.setCta()
 		.onClick(() => {
+			let validatedAuthors: string[];
+
 			if (tmpSearch === '*') {
-				new Notice('You chose all authors.');
-				return;
+				validatedAuthors = getAllAuthors(this.plugin.settings.quoteVault);
+			} else {
+				validatedAuthors = getValidAuthorsFromAdvancedSearch(this.plugin.settings.quoteVault, tmpSearch);
 			}
 
-			const validatedAuthors = getValidAuthorsFromAdvancedSearch(
-				this.plugin.settings.quoteVault,
-				tmpSearch
-			).join('\n');
-
-			new Notice((validatedAuthors.length > 0)
-				? ('Validated authors:\n' + validatedAuthors)
+			new Notice(validatedAuthors.length > 0
+				? 'Validated authors:\n' + validatedAuthors.join('\n')
 				: 'Plugin can\'t find authors those you mentioned!\nTry to change search.'
 			);
 		}));

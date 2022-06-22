@@ -6,11 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ## Changed
-- Ability to use weighted random strategy in settings
+- Ability to use weighted random strategy in settings ([#15](https://github.com/ka1tzyu/local-quotes/issues/15))
 
 ## Fixed
 - Increased performance for function that removes markdown in author's name
-
+- Full search and wrong search display
 
 ## [1.3.4] - 2022/06/20
 ## Changed
