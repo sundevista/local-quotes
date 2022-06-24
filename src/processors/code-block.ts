@@ -1,8 +1,9 @@
 import LocalQuotes from '../main';
 import { BlockMetadata, selectBlockMetadata } from '../types/block-metadata';
-import { getAuthorsCode } from '../types/quote';
+import {getAuthorsCode, searchQuote} from '../types/quote';
 import { OneTimeBlock, selectOneTimeBlock } from '../types/one-time-block';
 import {MarkdownPostProcessorContext, MarkdownRenderer, MarkdownView} from 'obsidian';
+import {getBlockMetadataIdx} from "../utils/scan";
 
 export async function processCodeBlock(
 	plugin: LocalQuotes,
@@ -53,4 +54,42 @@ export async function processOneTimeCodeBlock(
 	}
 }
 
-export async function refreshAllQuotesForView(plugin: LocalQuotes, mdView: MarkdownView): Promise<void> {}
+export async function refreshAllQuotesForView(plugin: LocalQuotes, mdView: MarkdownView): Promise<void> {
+	const blockChild = plugin.settings.usePlainFormat ? 'div' : 'blockquote';
+
+	let quotesMap: Map<string,HTMLElement[]> = new Map<string,HTMLElement[]>();
+
+	mdView.containerEl.findAll('.block-language-localquote ' + blockChild).forEach(e => {
+		const id = e.getAttr('local-quote-id');
+		if (quotesMap.has(id)) quotesMap.set(id, quotesMap.get(id).concat(e));
+		else quotesMap.set(id, [e]);
+	});
+
+	for (const id of quotesMap.keys()) {
+		const bmIdx = getBlockMetadataIdx(plugin, id);
+
+		// Update blockMetadata
+		plugin.settings.blockMetadata[bmIdx].content = searchQuote(
+			plugin.settings.quoteVault,
+			plugin.settings.blockMetadata[bmIdx].search,
+			plugin.settings.useWeightedRandom
+		);
+
+		const blockMetadata = plugin.settings.blockMetadata[bmIdx];
+
+		for (const el of quotesMap.get(id)) {
+			el.innerHTML = '';
+
+			// Update current view
+			for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
+				await MarkdownRenderer.renderMarkdown(
+					p.replace('{{content}}', blockMetadata.content.text.split('\n').join('<br/>'))
+						.replace('{{author}}', plugin.settings.inheritListingStyle
+							? getAuthorsCode(plugin.settings.quoteVault, blockMetadata.content.author)
+							: blockMetadata.content.author),
+					el, '?no-dataview', null
+				);
+			}
+		}
+	}
+}
