@@ -45,7 +45,7 @@ export class OneTimeQuoteMakerModal extends Modal {
 		contentEl.createEl('p',
 			{
 				text: '(in the quote block will be used a last edited field (\'Author\' or \'Advanced search\'))',
-				cls: 'local-quote-heading-desc'
+				cls: 'local-quotes-heading-desc'
 			}
 		);
 
@@ -98,7 +98,7 @@ export class OneTimeQuoteMakerModal extends Modal {
 		}));
 
 		let buttonContainer: HTMLElement = contentEl.createEl('div');
-		buttonContainer.addClass('local-quote-modal-button-container');
+		buttonContainer.addClass('local-quotes-modal-button-container');
 
 		new Setting(buttonContainer)
 		.addButton(btn => btn

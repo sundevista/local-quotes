@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 - Some grammar issues and clarifying in the settings
+- Some wrong commands' and classes' names
 
 ## [1.4.0]
 ## Changed

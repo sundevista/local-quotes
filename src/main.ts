@@ -55,7 +55,7 @@ export default class LocalQuotes extends Plugin {
 		});
 
 		this.addCommand({
-			id: 'open-local-quote-block-maker',
+			id: 'open-local-quotes-block-maker',
 			name: 'Open Quote Maker',
 			callback: async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
@@ -68,7 +68,7 @@ export default class LocalQuotes extends Plugin {
 		});
 
 		this.addCommand({
-			id: 'open-local-quote-one-time-block-maker',
+			id: 'open-local-quotes-one-time-block-maker',
 			name: 'Open One-Time Quote Maker',
 			callback: async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
@@ -89,7 +89,7 @@ export default class LocalQuotes extends Plugin {
 		});
 
 		this.addCommand({
-			id: 'open-local-quote-statistics',
+			id: 'open-local-quotes-statistics',
 			name: 'Open Statistics',
 			callback: async () => {
 				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));

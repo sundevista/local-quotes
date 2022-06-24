@@ -24,12 +24,12 @@ export class StatisticsModal extends Modal {
 
 		contentEl.createEl('p', {
 			text: `Quantity of the block metadatas: ${this.plugin.settings.blockMetadata.length}`,
-			cls: 'local-quote-statistics-p'
+			cls: 'local-quotes-statistics-p'
 		});
 
 		contentEl.createEl('p', {
 			text: `Quantity of the one-time blocks: ${this.plugin.settings.oneTimeBlocks.length}`,
-			cls: 'local-quote-statistics-p'
+			cls: 'local-quotes-statistics-p'
 		});
 
 		contentEl.createEl('h3', {
@@ -39,7 +39,7 @@ export class StatisticsModal extends Modal {
 		this.plugin.settings.quoteVault.sort(sortQuoteVaultEntries).reverse().forEach((q, i) => {
 			contentEl.createEl('p', {
 				text: `${i + 1}. ${q.author}: ${getQuotesCount(q)}`,
-				cls: 'local-quote-statistics-p'
+				cls: 'local-quotes-statistics-p'
 			});
 		});
 

@@ -3,7 +3,7 @@ import { Quote } from '../../types/quote';
 
 export function okCloserButton(modal: Modal): void {
 	let buttonContainer: HTMLElement = modal.contentEl.createEl('div');
-	buttonContainer.addClass('local-quote-modal-button-container');
+	buttonContainer.addClass('local-quotes-modal-button-container');
 
 	new Setting(buttonContainer)
 	.addButton(btn => btn

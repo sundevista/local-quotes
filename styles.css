@@ -1,19 +1,19 @@
-.local-quote-modal-button-container {
+.local-quotes-modal-button-container {
 	text-align: center;
 	margin-top: 20px;
 }
 
-.local-quote-modal-button-container > .setting-item {
+.local-quotes-modal-button-container > .setting-item {
 	display: inline-block;
 	border: none;
 }
 
-.local-quote-modal-button-container > .setting-item:first-child {
+.local-quotes-modal-button-container > .setting-item:first-child {
 	margin-right: 10px;
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
-p.local-quote-heading-desc {
+p.local-quotes-heading-desc {
 	font-size: var(--font-settings-small, 10px);
 	color: var(--text-muted, gray);
 	font-style: italic;
@@ -21,6 +21,6 @@ p.local-quote-heading-desc {
 	margin-bottom: 15px;
 }
 
-p.local-quote-statistics-p {
+p.local-quotes-statistics-p {
 	margin: 0 0 2px 10px;
 }
