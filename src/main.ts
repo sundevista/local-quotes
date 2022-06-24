@@ -1,4 +1,4 @@
-import {MarkdownEditView, MarkdownView, Notice, Plugin} from 'obsidian';
+import { MarkdownView, Notice, Plugin } from 'obsidian';
 import { findTaggedFiles } from './utils/scan';
 import { onFileModify, updateQuotesVault } from './types/quote';
 import {processCodeBlock, processOneTimeCodeBlock, refreshAllQuotesForView} from './processors/code-block';
@@ -81,8 +81,8 @@ export default class LocalQuotes extends Plugin {
 		});
 
 		this.addCommand({
-			id: 'refresh-note-local-quotes',
-			name: 'Refresh local quotes for this note',
+			id: 'local-quotes-refresh-active-file',
+			name: 'Refresh local quotes for active file',
 			callback: () => {
 				refreshAllQuotesForView(this, this.app.workspace.getActiveViewOfType(MarkdownView));
 			}
