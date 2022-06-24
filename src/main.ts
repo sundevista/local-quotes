@@ -1,7 +1,7 @@
-import { Notice, Plugin } from 'obsidian';
+import {MarkdownEditView, MarkdownView, Notice, Plugin} from 'obsidian';
 import { findTaggedFiles } from './utils/scan';
 import { onFileModify, updateQuotesVault } from './types/quote';
-import { processCodeBlock, processOneTimeCodeBlock } from './processors/code-block';
+import {processCodeBlock, processOneTimeCodeBlock, refreshAllQuotesForView} from './processors/code-block';
 import { DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab } from './settings';
 import { QuoteMakerModal } from './processors/modals/quote-maker';
 import { QuoteVaultErrorModal } from './processors/modals/quote-vault-error';
@@ -77,6 +77,14 @@ export default class LocalQuotes extends Plugin {
 				} else {
 					new QuoteVaultErrorModal().open();
 				}
+			}
+		});
+
+		this.addCommand({
+			id: 'refresh-note-local-quotes',
+			name: 'Refresh local quotes for this note',
+			callback: () => {
+				refreshAllQuotesForView(this, this.app.workspace.getActiveViewOfType(MarkdownView));
 			}
 		});
 

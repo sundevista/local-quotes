@@ -2,7 +2,7 @@ import LocalQuotes from '../main';
 import { BlockMetadata, selectBlockMetadata } from '../types/block-metadata';
 import { getAuthorsCode } from '../types/quote';
 import { OneTimeBlock, selectOneTimeBlock } from '../types/one-time-block';
-import { MarkdownPostProcessorContext, MarkdownRenderer } from 'obsidian';
+import {MarkdownPostProcessorContext, MarkdownRenderer, MarkdownView} from 'obsidian';
 
 export async function processCodeBlock(
 	plugin: LocalQuotes,
@@ -52,3 +52,5 @@ export async function processOneTimeCodeBlock(
 		);
 	}
 }
+
+export async function refreshAllQuotesForView(plugin: LocalQuotes, mdView: MarkdownView): Promise<void> {}
