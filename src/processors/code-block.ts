@@ -16,6 +16,8 @@ export async function processCodeBlock(
 	const bq: HTMLElement = el.createEl(plugin.settings.usePlainFormat ? 'div' : 'blockquote');
 	el.appendChild(bq);
 
+	bq.setAttribute('local-quote-id', blockMetadata.id);
+
 	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
 		await MarkdownRenderer.renderMarkdown(
 			p.replace('{{content}}', blockMetadata.content.text.split('\n').join('<br/>'))
