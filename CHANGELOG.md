@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.5.0] - 2022/06/24
 ## Added
 - Command `Refresh local quotes for active file`
 
@@ -12,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Some grammar issues and clarifying in the settings
 - Some wrong commands' and classes' names
 
-## [1.4.0]
+## [1.4.0] - 2022/06/22
 ## Changed
 - Ability to use weighted random strategy in settings ([#15](https://github.com/ka1tzyu/local-quotes/issues/15))
 
