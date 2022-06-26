@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2022/06/26
+## Added
+- Refresh button that allow you to update content without waiting (and setting to hide it)
+
+## Changed
+- Some refactoring and code improvements
+
 ## [1.5.0] - 2022/06/24
 ## Added
 - Command `Refresh local quotes for active file`
