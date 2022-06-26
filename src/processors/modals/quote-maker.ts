@@ -3,8 +3,9 @@ import { BlockMetadata } from '../../types/block-metadata';
 import LocalQuotes from '../../main';
 import { getRandomQuoteId } from '../../utils/random';
 import { createDomLink } from '../../utils/dom';
-import { fetchAuthorsInQuoteVault, getValidAuthorsFromAdvancedSearch } from '../../types/quote';
+import { getValidAuthorsFromAdvancedSearch } from '../../types/quote';
 import {getAllAuthors, parseBlockMetadataToCodeBlock, parseTime} from '../../utils/parser';
+import {fetchAuthorsInQuoteVault} from "../../utils/quoteVault";
 
 export class QuoteMakerModal extends Modal {
 	result: BlockMetadata;

@@ -91,10 +91,7 @@ export async function selectBlockMetadata(plugin: LocalQuotes, source: string): 
 			customClass: null, id: null, lastUpdate: 0, refresh: null, search: null
 		};
 	} else {
-		if (idx >= 0) {
-			return updateBlockMetadata(plugin, tmpBm);
-		} else {
-			return makeBlockMetadata(plugin, tmpBm);
-		}
+		if (idx >= 0) return updateBlockMetadata(plugin, tmpBm);
+		else return makeBlockMetadata(plugin, tmpBm);
 	}
 }

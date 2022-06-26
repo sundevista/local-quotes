@@ -84,10 +84,7 @@ export async function selectOneTimeBlock(
 		tmpOtb.filename = splitSource[splitSource.length - 1];
 		const otbIdx = plugin.settings.oneTimeBlocks.findIndex((o) => o.filename === tmpOtb.filename);
 		// Record exists
-		if (otbIdx >= 0) {
-			return updateOneTimeBlock(plugin, tmpOtb);
-		} else {
-			return makeOneTimeBlock(plugin, tmpOtb);
-		}
+		if (otbIdx >= 0) return updateOneTimeBlock(plugin, tmpOtb);
+		else return makeOneTimeBlock(plugin, tmpOtb);
 	}
 }

@@ -2,8 +2,9 @@ import { Editor, MarkdownView, Modal, Notice, Setting } from 'obsidian';
 import { OneTimeBlock } from '../../types/one-time-block';
 import LocalQuotes from '../../main';
 import { createDomLink } from '../../utils/dom';
-import { fetchAuthorsInQuoteVault, getValidAuthorsFromAdvancedSearch } from '../../types/quote';
+import { getValidAuthorsFromAdvancedSearch } from '../../types/quote';
 import {getAllAuthors, parseOneTimeBlockToCodeBlock} from '../../utils/parser';
+import {fetchAuthorsInQuoteVault} from "../../utils/quoteVault";
 
 export class OneTimeQuoteMakerModal extends Modal {
 	result: OneTimeBlock;

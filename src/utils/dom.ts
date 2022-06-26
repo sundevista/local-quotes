@@ -8,13 +8,14 @@
  * @returns `<a>` elements with given params
  */
 import {MarkdownRenderer, MarkdownView} from "obsidian";
-import {getAuthorsCode, QuotesMap, searchQuote} from "../types/quote";
+import {QuotesMap, searchQuote} from "../types/quote";
 import {getBlockMetadataIdx} from "./scan";
 import LocalQuotes from "../main";
 import {LocalQuotesSettings} from "../settings";
 import {BlockMetadata} from "../types/block-metadata";
 import {OneTimeBlock} from "../types/one-time-block";
 import {formQuotesMap} from "../processors/code-block";
+import {getAuthorsCode} from "./quoteVault";
 
 export function createDomLink(doc: HTMLElement, text: string, link: string): HTMLElement {
 	let a: HTMLAnchorElement = doc.createEl('a');

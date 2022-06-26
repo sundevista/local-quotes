@@ -1,10 +1,11 @@
 import LocalQuotes from '../main';
-import { TFile } from 'obsidian';
-import { author_regexp, quote_long_regexp, quote_regexp, search_regexp } from '../consts';
-import { checkFileTag, getAuthorIdx } from '../utils/scan';
-import { BlockMetadataContent } from './block-metadata';
+import {TFile} from 'obsidian';
+import {author_regexp, quote_long_regexp, quote_regexp, search_regexp} from '../consts';
+import {getAuthorIdx} from '../utils/scan';
+import {BlockMetadataContent} from './block-metadata';
 import {getRandomArrayItem, getRandomAuthor, getRandomQuoteOfAuthor, getWeightedRandomAuthor} from '../utils/random';
-import { removeMd } from '../libs/remove_markdown';
+import {removeMd} from '../libs/remove_markdown';
+import {getFilesQuotesIdx, isFileHaveAuthorsQuote} from "../utils/file";
 
 export interface Quote {
 	author: string;
@@ -18,38 +19,6 @@ export interface FilesQuotes {
 }
 
 export type QuotesMap = Map<string,HTMLElement[]>;
-
-export async function onFileModify(plugin: LocalQuotes, file: TFile): Promise<void> {
-	if (checkFileTag(file, plugin.settings.quoteTag)) {
-		clearFileEntries(plugin.settings.quoteVault, file.name);
-		await updateQuotesVault(plugin, [file]);
-	}
-}
-
-export function getAuthorsCode(quoteVault: Quote[], author: string): string {
-	return quoteVault[getAuthorIdx(quoteVault, author)].authorCode;
-}
-
-export function fetchAuthorsInQuoteVault(quoteVault: Quote[]): Array<string> {
-	return quoteVault.map((obj) => obj.author);
-}
-
-export function fetchAllAuthorsQuotes(quoteVault: Quote[], author: string): string[] {
-	let quotes: string[] = [];
-	const authorIdx = getAuthorIdx(quoteVault, author);
-
-	for (let entry of quoteVault[authorIdx].files) {
-		quotes.push(...entry.quotes);
-	}
-
-	return quotes;
-}
-
-function clearFileEntries(quoteVault: Quote[], filename: string): void {
-	for (let [eIdx, _] of quoteVault.entries()) {
-		quoteVault[eIdx].files = quoteVault[eIdx].files.filter((f) => f.filename !== filename);
-	}
-}
 
 export function getValidAuthorsFromAdvancedSearch(quoteVault: Quote[], search: string): string[] {
 	const list = search.split('||').map((a) => {
@@ -76,19 +45,6 @@ export function searchQuote(quoteVault: Quote[], search: string, useWeightedRand
 
 	result.text = getRandomQuoteOfAuthor(quoteVault, result.author);
 	return result;
-}
-
-export function isFileHaveAuthorsQuote(quoteVault: Quote[], filename: string, author: string, quote: string): boolean {
-	for (let entry of quoteVault[getAuthorIdx(quoteVault, author)].files) {
-		if (entry.filename == filename && entry.quotes.includes(quote)) {
-			return true;
-		}
-	}
-	return false;
-}
-
-export function getFilesQuotesIdx(quoteVault: Quote[], filename: string, author: string): number {
-	return quoteVault[getAuthorIdx(quoteVault, author)].files.findIndex((e) => e.filename == filename);
 }
 
 export async function uploadQuote(

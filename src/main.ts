@@ -1,6 +1,6 @@
 import { MarkdownView, Notice, Plugin } from 'obsidian';
 import { findTaggedFiles } from './utils/scan';
-import { onFileModify, updateQuotesVault } from './types/quote';
+import { updateQuotesVault } from './types/quote';
 import {processCodeBlock, processOneTimeCodeBlock} from './processors/code-block';
 import { DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab } from './settings';
 import { QuoteMakerModal } from './processors/modals/quote-maker';
@@ -8,6 +8,7 @@ import { QuoteVaultErrorModal } from './processors/modals/quote-vault-error';
 import { OneTimeQuoteMakerModal } from './processors/modals/one-time-quote-maker';
 import { StatisticsModal } from './processors/modals/statistics';
 import {handlePossibleButtonClick, refreshAllQuotesForView} from "./utils/dom";
+import {onFileModify} from "./utils/file";
 
 export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;

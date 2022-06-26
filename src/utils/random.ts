@@ -1,5 +1,6 @@
 import { getAuthorIdx } from './scan';
-import { fetchAllAuthorsQuotes, Quote } from '../types/quote';
+import { Quote } from '../types/quote';
+import {fetchAllAuthorsQuotes} from "./quoteVault";
 
 export function getRandomQuoteId(length: number = 5): string {
 	const characters: string = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890-_';
