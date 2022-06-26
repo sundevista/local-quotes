@@ -17,6 +17,8 @@ export interface FilesQuotes {
 	quotes: string[];
 }
 
+export type QuotesMap = Map<string,HTMLElement[]>;
+
 export async function onFileModify(plugin: LocalQuotes, file: TFile): Promise<void> {
 	if (checkFileTag(file, plugin.settings.quoteTag)) {
 		clearFileEntries(plugin.settings.quoteVault, file.name);

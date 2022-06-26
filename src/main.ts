@@ -1,13 +1,13 @@
 import { MarkdownView, Notice, Plugin } from 'obsidian';
 import { findTaggedFiles } from './utils/scan';
 import { onFileModify, updateQuotesVault } from './types/quote';
-import {processCodeBlock, processOneTimeCodeBlock, refreshAllQuotesForView} from './processors/code-block';
+import {processCodeBlock, processOneTimeCodeBlock} from './processors/code-block';
 import { DEFAULT_SETTINGS, LocalQuotesSettings, LocalQuotesSettingTab } from './settings';
 import { QuoteMakerModal } from './processors/modals/quote-maker';
 import { QuoteVaultErrorModal } from './processors/modals/quote-vault-error';
 import { OneTimeQuoteMakerModal } from './processors/modals/one-time-quote-maker';
 import { StatisticsModal } from './processors/modals/statistics';
-import {handlePossibleButtonClick} from "./utils/dom";
+import {handlePossibleButtonClick, refreshAllQuotesForView} from "./utils/dom";
 
 export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;
@@ -43,6 +43,7 @@ export default class LocalQuotes extends Plugin {
 		// Add plugin's setting tab
 		this.addSettingTab(new LocalQuotesSettingTab(this));
 
+		// Handle click to trigger button actions
 		this.registerDomEvent(document, 'click',
 			(ev: MouseEvent) => handlePossibleButtonClick(this, ev)
 		);

@@ -1,9 +1,9 @@
 import LocalQuotes from '../main';
 import { BlockMetadata, selectBlockMetadata } from '../types/block-metadata';
-import {getAuthorsCode, searchQuote} from '../types/quote';
+import {QuotesMap} from '../types/quote';
 import { OneTimeBlock, selectOneTimeBlock } from '../types/one-time-block';
-import {MarkdownPostProcessorContext, MarkdownRenderer, MarkdownView} from 'obsidian';
-import {getBlockMetadataIdx} from "../utils/scan";
+import {MarkdownPostProcessorContext, MarkdownView} from 'obsidian';
+import {renderQuoteBlock} from "../utils/dom";
 import {LocalQuotesSettings} from "../settings";
 
 export async function processCodeBlock(
@@ -16,30 +16,13 @@ export async function processCodeBlock(
 	if (blockMetadata.customClass !== null) el.addClass(blockMetadata.customClass);
 
 	const bq: HTMLElement = el.createEl(plugin.settings.usePlainFormat ? 'div' : 'blockquote');
+
 	el.appendChild(bq);
-
 	bq.setAttribute('local-quote-id', blockMetadata.id);
-
 	// @ts-ignore
 	el.createEl('svg', {cls: 'reset'});
 
 	await renderQuoteBlock(plugin.settings, bq, blockMetadata);
-}
-
-export async function renderQuoteBlock(
-	pluginSettings: LocalQuotesSettings,
-	el: HTMLElement,
-	blockMetadata: BlockMetadata
-): Promise<void> {
-	for (let p of pluginSettings.quoteBlockFormat.split('\n')) {
-		await MarkdownRenderer.renderMarkdown(
-			p.replace('{{content}}', blockMetadata.content.text.split('\n').join('<br/>'))
-				.replace('{{author}}', pluginSettings.inheritListingStyle
-					? getAuthorsCode(pluginSettings.quoteVault, blockMetadata.content.author)
-					: blockMetadata.content.author),
-			el, '?no-dataview', null
-		);
-	}
 }
 
 export async function processOneTimeCodeBlock(
@@ -47,29 +30,22 @@ export async function processOneTimeCodeBlock(
 	source: string,
 	el: HTMLElement,
 	ctx: MarkdownPostProcessorContext): Promise<void> {
-
 	const oneTimeBlock: OneTimeBlock = await selectOneTimeBlock(plugin, source, ctx);
 
 	if (!plugin.settings.usePlainFormat) el.addClass('el-blockquote');
 	if (oneTimeBlock.customClass !== null) el.addClass(oneTimeBlock.customClass);
+
 	const bq: HTMLElement = el.createEl(plugin.settings.usePlainFormat ? 'div' : 'blockquote');
+
 	el.appendChild(bq);
 
-	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
-		await MarkdownRenderer.renderMarkdown(
-			p.replace('{{content}}', oneTimeBlock.content.text.split('\n').join('<br/>'))
-			.replace('{{author}}', plugin.settings.inheritListingStyle
-				? getAuthorsCode(plugin.settings.quoteVault, oneTimeBlock.content.author)
-				: oneTimeBlock.content.author),
-			bq, '?no-dataview', null
-		);
-	}
+	await renderQuoteBlock(plugin.settings, bq, oneTimeBlock);
 }
 
-export async function refreshAllQuotesForView(plugin: LocalQuotes, mdView: MarkdownView): Promise<void> {
-	const blockChild = plugin.settings.usePlainFormat ? 'div' : 'blockquote';
+export function formQuotesMap(pluginSettings: LocalQuotesSettings, mdView: MarkdownView): QuotesMap {
+	const blockChild = pluginSettings.usePlainFormat ? 'div' : 'blockquote';
 
-	let quotesMap: Map<string,HTMLElement[]> = new Map<string,HTMLElement[]>();
+	let quotesMap = new Map<string,HTMLElement[]>();
 
 	mdView.containerEl.findAll('.block-language-localquote ' + blockChild).forEach(e => {
 		const id = e.getAttr('local-quote-id');
@@ -77,31 +53,7 @@ export async function refreshAllQuotesForView(plugin: LocalQuotes, mdView: Markd
 		else quotesMap.set(id, [e]);
 	});
 
-	for (const id of quotesMap.keys()) {
-		const bmIdx = getBlockMetadataIdx(plugin, id);
-
-		// Update blockMetadata
-		plugin.settings.blockMetadata[bmIdx].content = searchQuote(
-			plugin.settings.quoteVault,
-			plugin.settings.blockMetadata[bmIdx].search,
-			plugin.settings.useWeightedRandom
-		);
-
-		const blockMetadata = plugin.settings.blockMetadata[bmIdx];
-
-		for (const el of quotesMap.get(id)) {
-			el.innerHTML = '';
-
-			// Update current view
-			for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
-				await MarkdownRenderer.renderMarkdown(
-					p.replace('{{content}}', blockMetadata.content.text.split('\n').join('<br/>'))
-						.replace('{{author}}', plugin.settings.inheritListingStyle
-							? getAuthorsCode(plugin.settings.quoteVault, blockMetadata.content.author)
-							: blockMetadata.content.author),
-					el, '?no-dataview', null
-				);
-			}
-		}
-	}
+	return quotesMap;
 }
+
+
