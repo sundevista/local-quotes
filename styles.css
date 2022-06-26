@@ -3,7 +3,7 @@
 	transition: all 0.6s ease !important;
 	display: inline;
 	position: absolute;
-	bottom: 10px;
+	top: 10px;
 	right: 10px;
 	opacity: 0;
 	min-width: 16px;
