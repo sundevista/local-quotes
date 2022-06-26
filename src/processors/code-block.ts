@@ -4,28 +4,40 @@ import {getAuthorsCode, searchQuote} from '../types/quote';
 import { OneTimeBlock, selectOneTimeBlock } from '../types/one-time-block';
 import {MarkdownPostProcessorContext, MarkdownRenderer, MarkdownView} from 'obsidian';
 import {getBlockMetadataIdx} from "../utils/scan";
+import {LocalQuotesSettings} from "../settings";
 
 export async function processCodeBlock(
 	plugin: LocalQuotes,
 	source: string,
 	el: HTMLElement): Promise<void> {
-
 	const blockMetadata: BlockMetadata = await selectBlockMetadata(plugin, source);
 
 	if (!plugin.settings.usePlainFormat) el.addClass('el-blockquote');
 	if (blockMetadata.customClass !== null) el.addClass(blockMetadata.customClass);
+
 	const bq: HTMLElement = el.createEl(plugin.settings.usePlainFormat ? 'div' : 'blockquote');
 	el.appendChild(bq);
 
 	bq.setAttribute('local-quote-id', blockMetadata.id);
 
-	for (let p of plugin.settings.quoteBlockFormat.split('\n')) {
+	// @ts-ignore
+	el.createEl('svg', {cls: 'reset'});
+
+	await renderQuoteBlock(plugin.settings, bq, blockMetadata);
+}
+
+export async function renderQuoteBlock(
+	pluginSettings: LocalQuotesSettings,
+	el: HTMLElement,
+	blockMetadata: BlockMetadata
+): Promise<void> {
+	for (let p of pluginSettings.quoteBlockFormat.split('\n')) {
 		await MarkdownRenderer.renderMarkdown(
 			p.replace('{{content}}', blockMetadata.content.text.split('\n').join('<br/>'))
-			.replace('{{author}}', plugin.settings.inheritListingStyle
-				? getAuthorsCode(plugin.settings.quoteVault, blockMetadata.content.author)
-				: blockMetadata.content.author),
-			bq, '?no-dataview', null
+				.replace('{{author}}', pluginSettings.inheritListingStyle
+					? getAuthorsCode(pluginSettings.quoteVault, blockMetadata.content.author)
+					: blockMetadata.content.author),
+			el, '?no-dataview', null
 		);
 	}
 }

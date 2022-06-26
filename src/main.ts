@@ -7,6 +7,7 @@ import { QuoteMakerModal } from './processors/modals/quote-maker';
 import { QuoteVaultErrorModal } from './processors/modals/quote-vault-error';
 import { OneTimeQuoteMakerModal } from './processors/modals/one-time-quote-maker';
 import { StatisticsModal } from './processors/modals/statistics';
+import {handlePossibleButtonClick} from "./utils/dom";
 
 export default class LocalQuotes extends Plugin {
 	settings: LocalQuotesSettings;
@@ -41,6 +42,10 @@ export default class LocalQuotes extends Plugin {
 
 		// Add plugin's setting tab
 		this.addSettingTab(new LocalQuotesSettingTab(this));
+
+		this.registerDomEvent(document, 'click',
+			(ev: MouseEvent) => handlePossibleButtonClick(this, ev)
+		);
 
 		/*
 		 * Adding necessary commands

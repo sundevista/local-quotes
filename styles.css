@@ -17,6 +17,13 @@
 	opacity: 1;
 	cursor: pointer;
 }
+
+/*noinspection CssUnresolvedCustomProperty*/
+.block-language-localquote svg:active {
+	transition: all 0.6s ease;
+	color: var(--md-color-text-muted);
+}
+
 .local-quotes-modal-button-container {
 	text-align: center;
 	margin-top: 20px;
@@ -42,4 +49,33 @@ p.local-quotes-heading-desc {
 
 p.local-quotes-statistics-p {
 	margin: 0 0 2px 10px;
+}
+
+@-ms-keyframes spin {
+	from {
+		-ms-transform: rotate(0deg);
+	} to {
+		  -ms-transform: rotate(360deg);
+	  }
+}
+@-moz-keyframes spin {
+	from {
+		-moz-transform: rotate(0deg);
+	} to {
+		  -moz-transform: rotate(360deg);
+	  }
+}
+@-webkit-keyframes spin {
+	from {
+		-webkit-transform: rotate(0deg);
+	} to {
+		  -webkit-transform: rotate(360deg);
+	  }
+}
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	} to {
+		  transform: rotate(360deg);
+	  }
 }
