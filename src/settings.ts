@@ -19,6 +19,7 @@ export interface LocalQuotesSettings {
 	oneTimeBlocks: OneTimeBlock[];
 	quoteVault: Quote[];
 	templateFolder: string;
+	hideRefreshButton: boolean;
 }
 
 export const DEFAULT_SETTINGS: LocalQuotesSettings = {
@@ -34,7 +35,8 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	blockMetadata: [],
 	oneTimeBlocks: [],
 	quoteVault: [],
-	templateFolder: ''
+	templateFolder: '',
+	hideRefreshButton: false,
 };
 
 export class LocalQuotesSettingTab extends PluginSettingTab {
@@ -124,6 +126,16 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 
 
 		containerEl.createEl('h2', {text: 'Advanced'});
+
+		new Setting(containerEl)
+			.setName('Hide refresh button')
+			.setDesc('If you turn it on, refresh button will disappear constantly.')
+			.addToggle(t => t
+				.setValue(this.plugin.settings.hideRefreshButton)
+				.onChange(async (value) => {
+					this.plugin.settings.hideRefreshButton = value;
+					await this.plugin.saveSettings();
+				}));
 
 		new Setting(containerEl)
 			.setName('Use weighted random')
