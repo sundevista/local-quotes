@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2022/06/28
+## Added
+- Style the refresh button as you like in `Style Settings` plugin
+
 ## [1.6.0] - 2022/06/26
 ## Added
 - Refresh button that allow you to update content without waiting (and setting to hide it)
