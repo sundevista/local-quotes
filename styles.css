@@ -24,10 +24,18 @@ settings:
 		allowEmpty: false
 		default: lq-btn-top-right
 		options:
-            - lq-btn-top-right
-            - lq-btn-top-left
-            - lq-btn-bottom-right
-            - lq-btn-bottom-left
+            -
+            	label: Top right
+            	value: lq-btn-top-right
+            -
+            	label: Top left
+            	value: lq-btn-top-left
+            -
+            	label: Bottom right
+            	value: lq-btn-bottom-right
+            -
+            	label: Bottom left
+            	value: lq-btn-bottom-left
 	-
 		id: local-quotes-button-indent-v
 		title: Vertical indent from corners
