@@ -127,7 +127,7 @@ test('checking code_block_customClass_regexp', () => {
 		['customClass class', true],
 		['customClass class_name', true],
 		['customClass class-name_1', true],
-		['customClass .class-with-dot', true],
+		['customClass .class-with-dot', false],
 		['customClass ..two_dots_now_allowed', false],
 		['customClass wrong-char!', false],
 		[' customClass class', false],
