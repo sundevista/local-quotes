@@ -44,7 +44,6 @@ settings:
         format: px
 */
 
-
 /*noinspection CssUnresolvedCustomProperty*/
 .block-language-localquote svg {
 	transition: all 0.6s ease !important;
@@ -57,6 +56,18 @@ settings:
 	opacity: 0;
 	min-width: var(--local-quotes-button-size, 16px);
 	min-height: var(--local-quotes-button-size, 16px);
+}
+
+.block-language-localquote:hover svg {
+	transition: all 0.6s ease !important;
+	opacity: 1;
+	cursor: pointer;
+}
+
+/*noinspection CssUnresolvedCustomProperty*/
+.block-language-localquote svg:active {
+	transition: all 0.6s ease;
+	color: var(--md-color-text-muted, var(--text-muted), gray);
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
@@ -95,17 +106,6 @@ settings:
 	position: relative;
 }
 
-.block-language-localquote:hover svg {
-	transition: all 0.6s ease !important;
-	opacity: 1;
-	cursor: pointer;
-}
-
-/*noinspection CssUnresolvedCustomProperty*/
-.block-language-localquote svg:active {
-	transition: all 0.6s ease;
-	color: var(--md-color-text-muted, var(--text-muted), gray);
-}
 
 .local-quotes-modal-button-container {
 	text-align: center;
