@@ -10,7 +10,7 @@ export const search_regexp: RegExp = /^(?:[^:|\s]| | \|\| )+$/m;
 export const code_block_id_regexp: RegExp = /^id [\w\-_]+$/m;
 export const code_block_search_regexp: RegExp = /^search (?:[^:|\s]| | \|\| )+$/m;
 export const code_block_refreshInterval_regexp: RegExp = /^refresh \d+[smhdwMy]$/m;
-export const code_block_customClass_regexp: RegExp = /^customClass \.?[\w\-_]+$/m;
+export const code_block_customClass_regexp: RegExp = /^customClass [\w\-_ ]+$/m;
 
 // Constant values for time (refresh) parsing
 export const sec_in_minute: number = 60;
