@@ -7,6 +7,7 @@ This plugin allows you to:
 - Renew your quotes by any interval (minute, day, week, month)
 - Apply custom classes to every quote
 - Choose your own quote's format
+- Use refresh button to get new content immediately
 
 ![demo](https://github.com/ka1tzyu/local-quotes/raw/master/assets/demo.gif)
 
@@ -89,8 +90,9 @@ search Kamina, TTGL
 ## 📉 Statistics
 You can get some info from Local Quote. Use `Open Statistics` command and research.
 
-### Another useful commands
-- `Refresh local quotes for active file`
+### Another useful abilities
+- `Refresh local quotes for active file` command
+- Stylize refresh button's corner, size and padding in `Style Settings` plugin
 
 ## ⏫ Future updates
 You can see what I am doing at the moment [here](https://github.com/ka1tzyu/local-quotes/projects/1). If you want some feature to be made first, like the first message in
