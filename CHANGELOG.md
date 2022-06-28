@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.1] - 2022/06/28
+## Fixed
+- Labels for corners in `Style Settings`
+
 ## [1.7.0] - 2022/06/28
 ## Added
 - Style the refresh button as you like in `Style Settings` plugin
