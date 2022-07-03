@@ -6,6 +6,14 @@ theme:
     name: material
     palette:
         primary: teal
+        - scheme: default
+          toggle:
+            icon: material/material/weather-sunny
+            name: Switch to dark mode
+        - scheme: slate
+          toggle:
+            icon: material/material/weather-night
+            name: Switch to light mode
     logo: assets/obsidian.png
     favicon: assets/obsidian.png
 nav:
