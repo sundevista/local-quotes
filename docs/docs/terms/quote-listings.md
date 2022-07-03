@@ -4,7 +4,7 @@ It's s way to organize your own quotes with a special syntax. You just write aut
 ## Requirements
 If you create a quote listing, you need to know note's and syntax requirements:
 1. A note must have the `quotes` (can be changed in settings) tag in it content or YAML frontmatter
-2. Author's line must be surrounded by `:::` (see [example](#Example))
+2. Author's line must be surrounded by `:::` (see example section)
 3. Quote's line starts with `-` or `1.` (not only 1, any digit 😄), just use markdown's ordered or unordered lists
 
 ### Multi-line quotes
