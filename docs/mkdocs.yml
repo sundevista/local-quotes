@@ -19,3 +19,10 @@ theme:
     favicon: assets/obsidian.png
 nav:
     - Overview: 'index.md'
+    - Features:
+        - Quote listing: 'terms/quote-listings.md'
+        - Search: 'terms/search.md'
+    - Types of blocks:
+        - One-time quote block: 'block-types/one-time-quote-block.md'
+    - Breaking changes:
+        - Moving from 0.x.x to 1.x.x: 'breaking/moving-from-0.x.x-to-1.x.x.md'
