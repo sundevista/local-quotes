@@ -1,5 +1,7 @@
 site_name: Local Quotes
 repo_url: https://github.com/ka1tzyu/local-quotes
+edit_uri: edit/master/docs/docs/
+
 theme:
     name: material
     palette:
