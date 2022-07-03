@@ -5,13 +5,14 @@ edit_uri: edit/master/docs/docs/
 theme:
     name: material
     palette:
-        primary: teal
         - scheme: default
           toggle:
+            primary: teal
             icon: material/material/weather-sunny
             name: Switch to dark mode
         - scheme: slate
           toggle:
+            primary: teal
             icon: material/material/weather-night
             name: Switch to light mode
     logo: assets/obsidian.png
