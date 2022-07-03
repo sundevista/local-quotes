@@ -27,7 +27,7 @@ It's important to write quotes line by line, because when empty line appears
 your quote series is breaking. Also, your note must have `quotes` tag (can be 
 changed in settings).
 
-Visit wiki page [How quote listings work](https://github.com/ka1tzyu/local-quotes/wiki/How-quote-listings-work) for more details.
+Visit page [Quote listings](https://ka1tzyu.github.io/local-quotes/terms/quote-listings/) for more details.
 
 ## ⚒️ Quote Maker
 The simplest way to create a quote block is 'Quote Maker' modal. You can summon it with
@@ -44,7 +44,7 @@ configure quote block:
 - `id` (required) - any string or number for quote identification (`1`,
 `d2f`, `my-quote1`).
 - `search` (required) - search query, may be only author's name, but you can use 
-[some operators](https://github.com/ka1tzyu/local-quotes/wiki/How-to-use-search) too.
+[some operators](https://ka1tzyu.github.io/local-quotes/terms/search/) too.
 - `refresh` (optional) - refresh interval, when this time passes plugin
 will update quote text with another random one (`1m`, `2d`, `30s`, [more 
 examples](#-refresh-intervals))
@@ -79,7 +79,7 @@ when you open note, and will not be changed later. Totally one-time.
 
 This feature comes with special modal `One-Time Quote Maker`.
 
-Learn [this wiki page](https://github.com/ka1tzyu/local-quotes/wiki/What-is-one-time-quote%3F) to get more detailed information.
+Learn [this page](https://ka1tzyu.github.io/local-quotes/block-types/one-time-quote-block/) to get more detailed information.
 
 ````
 ```localquote-once
