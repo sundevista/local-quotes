@@ -1,0 +1,10 @@
+site_name: Local Quotes
+repo_url: https://github.com/ka1tzyu/local-quotes
+theme:
+    name: material
+    palette:
+        primary: teal
+    logo: assets/obsidian.png
+    favicon: assets/obsidian.png
+nav:
+    - Overview: 'index.md'
