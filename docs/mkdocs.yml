@@ -8,12 +8,12 @@ theme:
         - scheme: default
           toggle:
             primary: teal
-            icon: material/material/weather-sunny
+            icon: material/weather-sunny
             name: Switch to dark mode
         - scheme: slate
           toggle:
             primary: teal
-            icon: material/material/weather-night
+            icon: material/weather-night
             name: Switch to light mode
     logo: assets/obsidian.png
     favicon: assets/obsidian.png
