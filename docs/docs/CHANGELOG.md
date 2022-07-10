@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 (update don't often, for actual changelog visit [this page](https://github.com/ka1tzyu/local-quotes/blob/master/CHANGELOG.md))
 
 ## [Unreleased]
+
+## [1.8.0] - 2022/07/10
 ## Added
 - Ability to use double tap on mobile to refresh quote block
 - Setting to disable double tap feature
