@@ -2,6 +2,7 @@
 The plugin uses code blocks and special code block language (`localquote`) to
 represent your quote block. There are some settings those allow you to
 configure quote block (required fields marked by `*`):
+
 - `id`* - any string or number for quote identification (`1`, `d2f`, `my-quote1`).
 - `search`* - search query, may be only author's name, but you can use
 [some operators](https://ka1tzyu.github.io/local-quotes/terms/search/) too.
