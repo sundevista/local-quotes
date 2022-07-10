@@ -35,3 +35,4 @@ nav:
         - Statistics: 'additional/statistics.md'
     - Breaking changes:
         - Moving from 0.x.x to 1.x.x: 'breaking/moving-from-0.x.x-to-1.x.x.md'
+    - Changelog: 'CHANGELOG.md'
