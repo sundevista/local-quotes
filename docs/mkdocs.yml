@@ -7,14 +7,14 @@ theme:
     palette:
         - scheme: default
           toggle:
-            primary: indigo
-            accent: indigo
+            primary: cyan
+            accent: cyan
             icon: material/weather-sunny
             name: Switch to dark mode
         - scheme: slate
           toggle:
-            primary: indigo
-            accent: indigo
+            primary: cyan
+            accent: cyan
             icon: material/weather-night
             name: Switch to light mode
     logo: assets/obsidian.png
