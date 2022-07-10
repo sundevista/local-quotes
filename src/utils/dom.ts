@@ -28,9 +28,10 @@ export function createDomLink(doc: HTMLElement, text: string, link: string): HTM
 export async function handlePossibleButtonClick(plugin: LocalQuotes, ev: MouseEvent): Promise<void> {
 	const htmlEl = <HTMLElement>ev.target;
 	if (htmlEl.matches('.block-language-localquote svg') && ev.type === 'click')
-		await refreshButtonAction(plugin, htmlEl);
-	else if (htmlEl.matchParent('.block-language-localquote') && ev.type === 'dblclick')
-		await refreshButtonAction(plugin, htmlEl);
+		await refreshButtonAction(plugin, <HTMLElement>htmlEl.matchParent('.block-language-localquote'));
+	else if (htmlEl.matchParent('.block-language-localquote') && ev.type === 'dblclick'
+		&& plugin.settings.enableDblClick && htmlEl.matchParent('.is-mobile'))
+		await refreshButtonAction(plugin, <HTMLElement>htmlEl.matchParent('.block-language-localquote'));
 }
 
 export async function renderQuoteBlock(
@@ -55,10 +56,7 @@ async function refreshButtonAction(plugin: LocalQuotes, el: HTMLElement): Promis
 	const mdView = app.workspace.getActiveViewOfType(MarkdownView);
 	const blockChild = plugin.settings.usePlainFormat ? 'div' : 'blockquote';
 
-	let bq = el.parentElement.find(blockChild);
-
-	// 'dblclick' case
-	if (bq === null) el.find(blockChild);
+	let bq = el.find(blockChild);
 
 	const id = bq.getAttr('local-quote-id');
 

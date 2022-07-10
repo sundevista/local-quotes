@@ -20,6 +20,7 @@ export interface LocalQuotesSettings {
 	quoteVault: Quote[];
 	templateFolder: string;
 	hideRefreshButton: boolean;
+	enableDblClick: boolean;
 }
 
 export const DEFAULT_SETTINGS: LocalQuotesSettings = {
@@ -37,6 +38,7 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteVault: [],
 	templateFolder: '',
 	hideRefreshButton: false,
+	enableDblClick: true,
 };
 
 export class LocalQuotesSettingTab extends PluginSettingTab {
@@ -134,6 +136,17 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 				.setValue(this.plugin.settings.hideRefreshButton)
 				.onChange(async (value) => {
 					this.plugin.settings.hideRefreshButton = value;
+					await this.plugin.saveSettings();
+				}));
+
+		new Setting(containerEl)
+			.setName('Handle double click on mobile')
+			.setDesc('If you turn it on, you can refresh quote block just with twice tap on it. Refresh button will ' +
+				'disappear (only on mobile).')
+			.addToggle(t => t
+				.setValue(this.plugin.settings.enableDblClick)
+				.onChange(async (value) => {
+					this.plugin.settings.enableDblClick = value;
 					await this.plugin.saveSettings();
 				}));
 

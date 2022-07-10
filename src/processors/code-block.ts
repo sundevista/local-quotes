@@ -19,8 +19,10 @@ export async function processCodeBlock(
 
 	el.appendChild(bq);
 	bq.setAttribute('local-quote-id', blockMetadata.id);
-	// @ts-ignore
-	if (!plugin.settings.hideRefreshButton) el.createEl('svg', {cls: 'reset'});
+
+	if (!plugin.settings.hideRefreshButton && !(plugin.settings.enableDblClick && el.matchParent('.is-mobile')))
+		// @ts-ignore
+		el.createEl('svg', {cls: 'reset'});
 
 	await renderQuoteBlock(plugin.settings, bq, blockMetadata);
 }
