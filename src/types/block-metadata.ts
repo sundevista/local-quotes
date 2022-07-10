@@ -1,6 +1,5 @@
 import LocalQuotes from '../main';
 import { parseCodeBlock } from '../utils/parser';
-import { getBlockMetadataIdx } from '../utils/scan';
 import { getCurrentSeconds } from '../utils/date';
 import { searchQuote } from './quote';
 
@@ -33,8 +32,8 @@ async function makeBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMet
 	return rawBlockMetadata;
 }
 
-async function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata): Promise<BlockMetadata> {
-	const bmIdx: number = getBlockMetadataIdx(plugin, rawBlockMetadata.id);
+async function updateBlockMetadata(plugin: LocalQuotes, rawBlockMetadata: BlockMetadata, bmIdx: number
+): Promise<BlockMetadata> {
 	const prevBm: BlockMetadata = plugin.settings.blockMetadata[bmIdx];
 
 	// Fields updating
@@ -91,7 +90,7 @@ export async function selectBlockMetadata(plugin: LocalQuotes, source: string): 
 			customClass: null, id: null, lastUpdate: 0, refresh: null, search: null
 		};
 	} else {
-		if (idx >= 0) return updateBlockMetadata(plugin, tmpBm);
+		if (idx >= 0) return updateBlockMetadata(plugin, tmpBm, idx);
 		else return makeBlockMetadata(plugin, tmpBm);
 	}
 }
