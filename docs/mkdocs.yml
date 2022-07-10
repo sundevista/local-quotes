@@ -19,6 +19,8 @@ theme:
             name: Switch to light mode
     logo: assets/obsidian.png
     favicon: assets/obsidian.png
+extra_css:
+    - assets/css/extra.css
 nav:
     - Overview: 'index.md'
     - Features:
