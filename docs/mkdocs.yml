@@ -23,6 +23,11 @@ nav:
         - Quote listing: 'terms/quote-listings.md'
         - Search: 'terms/search.md'
     - Types of blocks:
+        - Quote block: 'block-types/quote-block.md'
         - One-time quote block: 'block-types/one-time-quote-block.md'
+    - Additional:
+        - Quote Maker: 'additional/quote-maker.md'
+        - Refresh helpers: 'additional/refreshing-blocks.md'
+        - Statistics: 'additional/statistics.md'
     - Breaking changes:
         - Moving from 0.x.x to 1.x.x: 'breaking/moving-from-0.x.x-to-1.x.x.md'
