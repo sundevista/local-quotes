@@ -49,6 +49,11 @@ export default class LocalQuotes extends Plugin {
 			(ev: MouseEvent) => handlePossibleButtonClick(this, ev)
 		);
 
+		// Handle dblclick on mobile
+		this.registerDomEvent(document, 'dblclick',
+			(ev: MouseEvent) => handlePossibleButtonClick(this, ev)
+		);
+
 		/*
 		 * Adding necessary commands
 		 */

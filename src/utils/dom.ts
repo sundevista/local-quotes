@@ -1,12 +1,3 @@
-/*
- * Creates {@link HTMLElement} `<a>` with given text and link
- *
- * @param doc - root {@link HTMLElement} for creating another one
- * @param text - text inside the `<a>`
- * @param link - link to be placed in `href`
- *
- * @returns `<a>` elements with given params
- */
 import {MarkdownRenderer, MarkdownView} from "obsidian";
 import {QuotesMap, searchQuote} from "../types/quote";
 import {getBlockMetadataIdx} from "./scan";
@@ -17,6 +8,15 @@ import {OneTimeBlock} from "../types/one-time-block";
 import {formQuotesMap} from "../processors/code-block";
 import {getAuthorsCode} from "./quoteVault";
 
+/*
+ * Creates {@link HTMLElement} `<a>` with given text and link
+ *
+ * @param doc - root {@link HTMLElement} for creating another one
+ * @param text - text inside the `<a>`
+ * @param link - link to be placed in `href`
+ *
+ * @returns `<a>` elements with given params
+ */
 export function createDomLink(doc: HTMLElement, text: string, link: string): HTMLElement {
 	let a: HTMLAnchorElement = doc.createEl('a');
 	a.appendText(text);
@@ -27,7 +27,9 @@ export function createDomLink(doc: HTMLElement, text: string, link: string): HTM
 
 export async function handlePossibleButtonClick(plugin: LocalQuotes, ev: MouseEvent): Promise<void> {
 	const htmlEl = <HTMLElement>ev.target;
-	if (htmlEl.matches('.block-language-localquote svg'))
+	if (htmlEl.matches('.block-language-localquote svg') && ev.type === 'click')
+		await refreshButtonAction(plugin, htmlEl);
+	else if (htmlEl.matchParent('.block-language-localquote') && ev.type === 'dblclick')
 		await refreshButtonAction(plugin, htmlEl);
 }
 
@@ -53,7 +55,11 @@ async function refreshButtonAction(plugin: LocalQuotes, el: HTMLElement): Promis
 	const mdView = app.workspace.getActiveViewOfType(MarkdownView);
 	const blockChild = plugin.settings.usePlainFormat ? 'div' : 'blockquote';
 
-	const bq = el.parentElement.find(blockChild)
+	let bq = el.parentElement.find(blockChild);
+
+	// 'dblclick' case
+	if (bq === null) el.find(blockChild);
+
 	const id = bq.getAttr('local-quote-id');
 
 	const bmIdx = getBlockMetadataIdx(plugin, id);
