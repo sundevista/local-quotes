@@ -1,6 +1,6 @@
-# 📜 Local Quotes
-See full documentaion and guides [here](https://ka1tzyu.github.io/local-quotes/)
+THE ACTUAL AND COMPREHENSIVE DOCUMENTATION LOCATED [HERE](https://ka1tzyu.github.io/local-quotes/).
 
+# 📜 Local Quotes
 Collect your quotes from all over the vault and embed them in different locations.
 
 This plugin allows you to:
