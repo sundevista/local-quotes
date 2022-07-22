@@ -11,13 +11,17 @@ export function getBlockMetadataIdx(plugin: LocalQuotes, id: string): number {
 }
 
 export function checkFileTag(f: TFile, tag: string): boolean {
-	const fileCache = app.metadataCache.getFileCache(f);
-	const tagInContent = fileCache && fileCache.tags &&
-		(fileCache.tags.findIndex((t) => t.tag === `#${tag}`) >= 0);
-	if (tagInContent) return true;
-	return fileCache && fileCache.frontmatter &&
-		fileCache.frontmatter.tags &&
-		fileCache.frontmatter.tags.includes(tag);
+	try {
+		const fileCache = app.metadataCache.getFileCache(f);
+		const tagInContent = fileCache && fileCache.tags &&
+			(fileCache.tags.findIndex((t) => t.tag === `#${tag}`) >= 0);
+		if (tagInContent) return true;
+		const tagInFrontmatter = fileCache.frontmatter.tags.includes(tag);
+		return !!tagInFrontmatter;
+	} catch (e) {
+		if (e instanceof TypeError) return false;
+		else throw e;
+	}
 }
 
 export function findTaggedFiles(tag: string): TFile[] {
