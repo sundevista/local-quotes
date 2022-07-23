@@ -20,6 +20,7 @@ export interface LocalQuotesSettings {
 	quoteVault: Quote[];
 	templateFolder: string;
 	hideRefreshButton: boolean;
+	displayWarnings: boolean;
 	enableDblClick: boolean;
 }
 
@@ -38,6 +39,7 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
 	quoteVault: [],
 	templateFolder: '',
 	hideRefreshButton: false,
+	displayWarnings: true,
 	enableDblClick: true,
 };
 
@@ -195,6 +197,17 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
 				}));
 
 		containerEl.createEl('h2', {text: 'Danger Zone'});
+		new Setting(containerEl)
+			.setName('Display warnings')
+			.setDesc('If you turn it on plugin will display any warning those need your attention in the developer ' +
+				'console. If it\'s annoying and you don\'t agree with warnings or will not fix them, you can disable ' +
+				'this option.')
+			.addToggle(t => t
+				.setValue(this.plugin.settings.displayWarnings)
+				.onChange(async (value) => {
+					this.plugin.settings.displayWarnings = value;
+					await this.plugin.saveSettings();
+				}));
 
 		new Setting(containerEl)
 			.setName('Clear block metadata')

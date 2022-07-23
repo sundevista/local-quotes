@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.3] - 2022/07/23
+## Fixed
+- Warnings now displaying in the console and can be disabled in the settings
+
 ## [1.8.2] - 2022/07/23
 ## Fixed
 - Reducing `TypeError` with empty frontmatter (#19)
