@@ -1,7 +1,7 @@
 {
 	"id": "local-quotes",
 	"name": "Local Quotes",
-	"version": "1.8.2",
+	"version": "1.8.3",
 	"minAppVersion": "0.15.0",
 	"description": "Collect your quotes from all over the repository and embed them in different locations with refresh delays.",
 	"author": "ka1tzyu",
