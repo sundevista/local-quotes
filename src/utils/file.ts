@@ -4,7 +4,7 @@ import {checkFileTag, getAuthorIdx} from "./scan";
 import {Quote, updateQuotesVault} from "../types/quote";
 
 export async function onFileModify(plugin: LocalQuotes, file: TFile): Promise<void> {
-	if (checkFileTag(file, plugin.settings.quoteTag)) {
+	if (checkFileTag(file, plugin.settings.quoteTag, plugin.settings.displayWarnings)) {
 		clearFileEntries(plugin.settings.quoteVault, file.name);
 		await updateQuotesVault(plugin, [file]);
 	}

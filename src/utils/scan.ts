@@ -10,7 +10,7 @@ export function getBlockMetadataIdx(plugin: LocalQuotes, id: string): number {
 	return plugin.settings.blockMetadata.findIndex((e) => e.id === id);
 }
 
-export function checkFileTag(f: TFile, tag: string): boolean {
+export function checkFileTag(f: TFile, tag: string, displayWarnings: boolean = true): boolean {
 	try {
 		const fileCache = app.metadataCache.getFileCache(f);
 		const tagInContent = fileCache && fileCache.tags &&
@@ -21,14 +21,14 @@ export function checkFileTag(f: TFile, tag: string): boolean {
 		if (tagInFrontmatter) return true;
 	} catch (e) {
 		if (e instanceof TypeError) {
-			console.log('! This file may have invalid YAML: ' + f.name + ' (' + f.path + ').\nYou can disable warnings ' +
-				'in the settings of the Local Quotes plugin.');
+			if (displayWarnings) console.log('! This file may have invalid YAML: ' + f.name + ' (' + f.path + ').\n' +
+				'You can disable warnings in the settings of the Local Quotes plugin.');
 			return false;
 		}
 		else throw e;
 	}
 }
 
-export function findTaggedFiles(tag: string): TFile[] {
-	return app.vault.getMarkdownFiles().filter(file => checkFileTag(file, tag));
+export function findTaggedFiles(tag: string, displayWarnings: boolean = true): TFile[] {
+	return app.vault.getMarkdownFiles().filter(file => checkFileTag(file, tag, displayWarnings));
 }

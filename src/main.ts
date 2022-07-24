@@ -20,7 +20,7 @@ export default class LocalQuotes extends Plugin {
 		// Scan vault for the new quotes on startup when files are loaded
 		app.workspace.onLayoutReady(
 			() => {
-				updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
+				updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag, this.settings.displayWarnings));
 			}
 		);
 
@@ -61,7 +61,7 @@ export default class LocalQuotes extends Plugin {
 			id: 'rescan-local-quotes',
 			name: 'Rescan vault for local quotes',
 			callback: async () => {
-				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
+				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag, this.settings.displayWarnings));
 				new Notice('Your quote listings successfully updated!');
 			}
 		});
@@ -70,7 +70,7 @@ export default class LocalQuotes extends Plugin {
 			id: 'open-local-quotes-block-maker',
 			name: 'Open Quote Maker',
 			callback: async () => {
-				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
+				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag, this.settings.displayWarnings));
 				if (this.settings.quoteVault && this.settings.quoteVault.length > 0) {
 					new QuoteMakerModal(this).open();
 				} else {
@@ -83,7 +83,7 @@ export default class LocalQuotes extends Plugin {
 			id: 'open-local-quotes-one-time-block-maker',
 			name: 'Open One-Time Quote Maker',
 			callback: async () => {
-				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
+				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag, this.settings.displayWarnings));
 				if (this.settings.quoteVault && this.settings.quoteVault.length > 0) {
 					new OneTimeQuoteMakerModal(this).open();
 				} else {
@@ -104,7 +104,7 @@ export default class LocalQuotes extends Plugin {
 			id: 'open-local-quotes-statistics',
 			name: 'Open Statistics',
 			callback: async () => {
-				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag));
+				await updateQuotesVault(this, findTaggedFiles(this.settings.quoteTag, this.settings.displayWarnings));
 				if (this.settings.quoteVault && this.settings.quoteVault.length > 0) {
 					new StatisticsModal(this).open();
 				} else {
