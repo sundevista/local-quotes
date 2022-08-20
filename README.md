@@ -10,7 +10,7 @@ This plugin allows you to:
 - Choose your own quote's format
 - Use refresh button to get new content immediately
 
-![demo](https://github.com/ka1tzyu/local-quotes/raw/master/assets/demo.gif)
+![demo](https://github.com/decatetsu/local-quotes/raw/master/assets/demo.gif)
 
 ## 🎯 Purpose
 I started to create this plugin with only one idea — I wanted to see in my Index note
@@ -25,7 +25,7 @@ It's important to write quotes line by line, because when empty line appears
 your quote series is breaking. Also, your note must have `quotes` tag (can be 
 changed in settings).
 
-Visit page [Quote listings](https://ka1tzyu.github.io/local-quotes/terms/quote-listings/) for more details.
+Visit page [Quote listings](https://decatetsu.github.io/local-quotes/terms/quote-listings/) for more details.
 
 ## ⚒️ Quote Maker
 The simplest way to create a quote block is 'Quote Maker' modal. You can summon it with
@@ -33,7 +33,7 @@ The simplest way to create a quote block is 'Quote Maker' modal. You can summon 
 button. Then your quote block'll be inserted in your cursor position (remember that
 you need to be in **Editing** mode).
 
-![modal](https://github.com/ka1tzyu/local-quotes/raw/master/assets/modal.gif)
+![modal](https://github.com/decatetsu/local-quotes/raw/master/assets/modal.gif)
 
 ## ✍️ Making quote block by yourself
 Plugin using codeblock and special codeblock language (`localquote`) to
@@ -42,7 +42,7 @@ configure quote block:
 - `id` (required) - any string or number for quote identification (`1`,
 `d2f`, `my-quote1`).
 - `search` (required) - search query, may be only author's name, but you can use 
-[some operators](https://ka1tzyu.github.io/local-quotes/terms/search/) too.
+[some operators](https://decatetsu.github.io/local-quotes/terms/search/) too.
 - `refresh` (optional) - refresh interval, when this time passes plugin
 will update quote text with another random one (`1m`, `2d`, `30s`, [more 
 examples](#-refresh-intervals))
@@ -77,7 +77,7 @@ when you open note, and will not be changed later. Totally one-time.
 
 This feature comes with special modal `One-Time Quote Maker`.
 
-Learn [this page](https://ka1tzyu.github.io/local-quotes/block-types/one-time-quote-block/) to get more detailed information.
+Learn [this page](https://decatetsu.github.io/local-quotes/block-types/one-time-quote-block/) to get more detailed information.
 
 ````
 ```localquote-once
@@ -98,9 +98,9 @@ this feature's issue, I'll pay attention. Also, you can see unreleased but alrea
 
 ## ℹ️ Help
 If you have any question, feature idea, or you caught a bug, you can create 
-[Issue](https://github.com/ka1tzyu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
-experience you can also do [Pull Request](https://github.com/ka1tzyu/local-quotes/pulls.com).
+[Issue](https://github.com/decatetsu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
+experience you can also do [Pull Request](https://github.com/decatetsu/local-quotes/pulls.com).
 
 If you want to donate, you can use it:
 
-[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/ka1tzyu)
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/decatetsu)
