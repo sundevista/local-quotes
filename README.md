@@ -1,4 +1,4 @@
-[DOCUMENTATION](https://ka1tzyu.github.io/local-quotes/) / [ROADMAP](DOCUMENTATION)
+[DOCUMENTATION](https://ka1tzyu.github.io/local-quotes/) / [ROADMAP](https://trello.com/b/MqYn6s7h/obsidian-local-quotes)
 
 # 📜 Local Quotes
 Collect your quotes from all over the vault and embed them in different locations.
