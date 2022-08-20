@@ -1,4 +1,4 @@
-THE ACTUAL AND COMPREHENSIVE DOCUMENTATION LOCATED [HERE](https://ka1tzyu.github.io/local-quotes/).
+[DOCUMENTATION](https://ka1tzyu.github.io/local-quotes/) / [ROADMAP](DOCUMENTATION)
 
 # 📜 Local Quotes
 Collect your quotes from all over the vault and embed them in different locations.
@@ -93,7 +93,7 @@ You can get some info from Local Quote. Use `Open Statistics` command and resear
 - Stylize refresh button's corner, size and padding in `Style Settings` plugin
 
 ## ⏫ Future updates
-You can see what I am doing at the moment [here](https://github.com/ka1tzyu/local-quotes/projects/1). If you want some feature to be made first, like the first message in
+You can see what I am doing at the moment [here](https://trello.com/b/MqYn6s7h/obsidian-local-quotes). If you want some feature to be made first, like the first message in
 this feature's issue, I'll pay attention. Also, you can see unreleased but already done features and changes in [CHANGELOG](CHANGELOG.md), they'll be available in the next release.
 
 ## ℹ️ Help
