@@ -59,20 +59,21 @@ async function refreshButtonAction(plugin: LocalQuotes, el: HTMLElement): Promis
 	const blockChild = plugin.settings.usePlainFormat ? 'div' : 'blockquote';
 
 	let bq = el.find(blockChild);
-
 	const id = bq.getAttr('local-quote-id');
 
-	const bmIdx = getBlockMetadataIdx(plugin, id);
+	if (id != null) {
+		const bmIdx = getBlockMetadataIdx(plugin, id);
 
-	plugin.settings.blockMetadata[bmIdx].content = searchQuote(
-		plugin.settings.quoteVault,
-		plugin.settings.blockMetadata[bmIdx].search,
-		plugin.settings.useWeightedRandom
-	);
+		plugin.settings.blockMetadata[bmIdx].content = searchQuote(
+			plugin.settings.quoteVault,
+			plugin.settings.blockMetadata[bmIdx].search,
+			plugin.settings.useWeightedRandom
+		);
 
-	await plugin.saveSettings();
+		await plugin.saveSettings();
 
-	await rerenderAllQuotesForView(plugin, mdView);
+		await rerenderAllQuotesForView(plugin, mdView);
+	}
 }
 
 export async function rerenderAllQuotesForView(
