@@ -2,6 +2,7 @@
 export const author_regexp: RegExp = /^:::(?:[^:|\s]| )+:::$/m;
 export const quote_regexp: RegExp = /^\d+\..+$|^- .+$/m;
 export const quote_long_regexp: RegExp = /^\t.+$/m;
+export const quote_tag: RegExp = /#[a-zA-Z-_]{3,}/m;
 
 // Internal: search query
 export const search_regexp: RegExp = /^(?:[^:|\s]| | \|\| )+$/m;
