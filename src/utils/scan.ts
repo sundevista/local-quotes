@@ -1,6 +1,11 @@
 import {TFile} from 'obsidian';
 import LocalQuotes from '../main';
 import {Quote} from '../types/quote';
+import {quote_tag} from "../consts";
+
+export function extractTags(quoteString: string): string[] {
+	return quoteString.match(quote_tag);
+}
 
 export function getAuthorIdx(quoteVault: Quote[], author: string): number {
 	return quoteVault.findIndex((e) => e.author === author);
