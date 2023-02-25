@@ -2,7 +2,7 @@ import LocalQuotes from '../main';
 import { BlockMetadata, selectBlockMetadata } from '../types/block-metadata';
 import {QuotesMap} from '../types/quote';
 import { OneTimeBlock, selectOneTimeBlock } from '../types/one-time-block';
-import {MarkdownPostProcessorContext, MarkdownView} from 'obsidian';
+import {MarkdownPostProcessorContext, MarkdownView, setIcon} from 'obsidian';
 import {renderQuoteBlock} from "../utils/dom";
 import {LocalQuotesSettings} from "../settings";
 
@@ -20,9 +20,11 @@ export async function processCodeBlock(
 	el.appendChild(bq);
 	bq.setAttribute('local-quote-id', blockMetadata.id);
 
-	if (!plugin.settings.hideRefreshButton && !(plugin.settings.enableDblClick && el.matchParent('.is-mobile')))
+	if (!plugin.settings.hideRefreshButton && !(plugin.settings.enableDblClick && el.matchParent('.is-mobile'))) {
 		// @ts-ignore
-		el.createEl('svg', {cls: 'reset'});
+		const iconEl = el.createEl('a', {cls: 'reset-icon'});
+		setIcon(iconEl, 'lucide-rotate-ccw');
+	}
 
 	await renderQuoteBlock(plugin.settings, bq, blockMetadata);
 }

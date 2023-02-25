@@ -53,7 +53,7 @@ settings:
 */
 
 /*noinspection CssUnresolvedCustomProperty*/
-.block-language-localquote svg {
+.block-language-localquote a.reset-icon svg {
 	transition: all 0.6s ease !important;
 	display: inline;
 	position: absolute;
@@ -66,20 +66,20 @@ settings:
 	min-height: var(--local-quotes-button-size, 16px);
 }
 
-.block-language-localquote:hover svg {
+.block-language-localquote:hover a.reset-icon svg {
 	transition: all 0.6s ease !important;
 	opacity: 1;
 	cursor: pointer;
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
-.block-language-localquote svg:active {
+.block-language-localquote a.reset-icon svg:active {
 	transition: all 0.6s ease;
 	color: var(--md-color-text-muted, var(--text-muted), gray);
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
-.lq-btn-top-right .block-language-localquote svg {
+.lq-btn-top-right .block-language-localquote a.reset-icon svg {
 	top: var(--local-quotes-button-indent-v, 10px) !important;
 	bottom: unset !important;
 	right: var(--local-quotes-button-indent-h, 10px) !important;
@@ -87,7 +87,7 @@ settings:
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
-.lq-btn-top-left .block-language-localquote svg {
+.lq-btn-top-left .block-language-localquote a.reset-icon svg {
 	top: var(--local-quotes-button-indent-v, 10px) !important;
 	bottom: unset !important;
 	right: unset !important;
@@ -95,7 +95,7 @@ settings:
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
-.lq-btn-bottom-right .block-language-localquote svg {
+.lq-btn-bottom-right .block-language-localquote a.reset-icon svg {
 	top: unset !important;
 	bottom: var(--local-quotes-button-indent-v, 10px) !important;
 	right: var(--local-quotes-button-indent-h, 10px) !important;
@@ -103,7 +103,7 @@ settings:
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
-.lq-btn-bottom-left .block-language-localquote svg {
+.lq-btn-bottom-left .block-language-localquote a.reset-icon svg {
 	top: unset !important;
 	bottom: var(--local-quotes-button-indent-v, 10px) !important;
 	right: unset !important;
