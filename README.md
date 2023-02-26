@@ -1,4 +1,4 @@
-[DOCUMENTATION](https://decatetsu.github.io/local-quotes/) / [ROADMAP](https://trello.com/b/MqYn6s7h/obsidian-local-quotes)
+[DOCUMENTATION](https://decatetsu.github.io/local-quotes/) / [ROADMAP](https://github.com/users/decatetsu/projects/2/views/1)
 
 # 📜 Local Quotes
 Collect your quotes from all over the vault and embed them in different locations.
@@ -93,13 +93,13 @@ You can get some info from Local Quote. Use `Open Statistics` command and resear
 - Stylize refresh button's corner, size and padding in `Style Settings` plugin
 
 ## ⏫ Future updates
-You can see what I am doing at the moment [here](https://trello.com/b/MqYn6s7h/obsidian-local-quotes). If you want some feature to be made first, like the first message in
+You can see what I am doing at the moment [here](https://github.com/users/decatetsu/projects/2/views/1). If you want some feature to be made first, like the first message in
 this feature's issue, I'll pay attention. Also, you can see unreleased but already done features and changes in [CHANGELOG](CHANGELOG.md), they'll be available in the next release.
 
 ## ℹ️ Help
 If you have any question, feature idea, or you caught a bug, you can create 
 [Issue](https://github.com/decatetsu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
-experience you can also do [Pull Request](https://github.com/decatetsu/local-quotes/pulls.com).
+experience you can also do [Pull Request](https://github.com/decatetsu/local-quotes/pulls).
 
 If you want to donate, you can use it:
 
