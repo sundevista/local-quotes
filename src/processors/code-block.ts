@@ -2,7 +2,7 @@ import LocalQuotes from '../main';
 import { BlockMetadata, selectBlockMetadata } from '../types/block-metadata';
 import {QuotesMap} from '../types/quote';
 import { OneTimeBlock, selectOneTimeBlock } from '../types/one-time-block';
-import {MarkdownPostProcessorContext, MarkdownView, setIcon} from 'obsidian';
+import {MarkdownPostProcessorContext, MarkdownView, setIcon, View} from 'obsidian';
 import {renderQuoteBlock} from "../utils/dom";
 import {LocalQuotesSettings} from "../settings";
 
@@ -46,7 +46,7 @@ export async function processOneTimeCodeBlock(
 	await renderQuoteBlock(plugin.settings, bq, oneTimeBlock);
 }
 
-export function formQuotesMap(pluginSettings: LocalQuotesSettings, mdView: MarkdownView): QuotesMap {
+export function formQuotesMap(pluginSettings: LocalQuotesSettings, mdView: View): QuotesMap {
 	const blockChild = pluginSettings.usePlainFormat ? 'div' : 'blockquote';
 
 	let quotesMap = new Map<string,HTMLElement[]>();

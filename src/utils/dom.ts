@@ -1,4 +1,4 @@
-import {MarkdownRenderer, MarkdownView} from "obsidian";
+import {MarkdownRenderer, MarkdownView, View} from "obsidian";
 import {QuotesMap, searchQuote} from "../types/quote";
 import {getBlockMetadataIdx} from "./scan";
 import LocalQuotes from "../main";
@@ -55,7 +55,7 @@ export async function renderQuoteBlock(
 }
 
 async function refreshButtonAction(plugin: LocalQuotes, el: HTMLElement): Promise<void> {
-	const mdView = app.workspace.getActiveViewOfType(MarkdownView);
+	const mdView = app.workspace.getActiveViewOfType(View);
 	const blockChild = plugin.settings.usePlainFormat ? 'div' : 'blockquote';
 
 	let bq = el.find(blockChild);
@@ -78,7 +78,7 @@ async function refreshButtonAction(plugin: LocalQuotes, el: HTMLElement): Promis
 
 export async function rerenderAllQuotesForView(
 	plugin: LocalQuotes,
-	mdView: MarkdownView,
+	mdView: View,
 	quotesMap: QuotesMap = null
 ): Promise<void> {
 	if (quotesMap == null) quotesMap = formQuotesMap(plugin.settings, mdView);

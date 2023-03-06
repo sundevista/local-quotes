@@ -82,6 +82,7 @@ export async function selectBlockMetadata(plugin: LocalQuotes, source: string): 
 
 	// If author and/or id aren't set
 	if (!(tmpBm.id && tmpBm.search) || plugin.settings.quoteVault.length === 0) {
+		console.log(tmpBm);
 		return {
 			content: {
 				author: 'Local Quotes',
