@@ -118,4 +118,4 @@ experience you can also do [Pull Request](https://github.com/decatetsu/local-quo
 
 If you want to donate, you can use it:
 
-[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/decatetsu)
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/sundevista)
