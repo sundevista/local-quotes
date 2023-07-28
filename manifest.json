@@ -1,10 +1,10 @@
 {
-	"id": "local-quotes",
-	"name": "Local Quotes",
-	"version": "1.8.5",
-	"minAppVersion": "1.0.0",
-	"description": "Collect your quotes from all over the repository and embed them in different locations with refresh delays.",
-	"author": "decatetsu",
-	"authorUrl": "https://github.com/decatetsu",
-	"isDesktopOnly": false
+  "id": "local-quotes",
+  "name": "Local Quotes",
+  "version": "1.9.0",
+  "minAppVersion": "1.0.0",
+  "description": "Collect your quotes from all over the repository and embed them in different locations with refresh delays.",
+  "author": "decatetsu",
+  "authorUrl": "https://github.com/decatetsu",
+  "isDesktopOnly": false
 }
