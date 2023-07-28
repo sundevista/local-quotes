@@ -101,7 +101,7 @@ export async function selectBlockMetadata(
     return {
       content: {
         author: "Local Quotes",
-        text: "You caught an error! If you can't understand what is wrong you can write an issue on GitHub",
+        text: "You caught an error! Check if quote's author exists. If you can't understand what is wrong you can write an issue on GitHub",
       },
       customClass: null,
       id: null,
