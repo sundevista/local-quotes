@@ -1,5 +1,7 @@
 [DOCUMENTATION](https://decatetsu.github.io/local-quotes/) / [ROADMAP](https://github.com/users/decatetsu/projects/2/views/1)
 
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/sundevista)
+
 # 📜 Local Quotes
 
 Collect your quotes from all over the vault and embed them in different locations.
@@ -115,7 +117,3 @@ this feature's issue, I'll pay attention. Also, you can see unreleased but alrea
 If you have any question, feature idea, or you caught a bug, you can create
 [Issue](https://github.com/decatetsu/local-quotes/issues) and discuss it with me. I'm beginner so if you have more
 experience you can also do [Pull Request](https://github.com/decatetsu/local-quotes/pulls).
-
-If you want to donate, you can use it:
-
-[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/sundevista)
