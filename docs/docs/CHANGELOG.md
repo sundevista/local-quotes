@@ -15,8 +15,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ✨ Automatic quote refresh interval
 
-![](assets/lq190.mp4)
-
 ## Fixed
 
 - Update MarkdownRenderer options (fixes [#26](https://github.com/decatetsu/local-quotes/issues/26))
