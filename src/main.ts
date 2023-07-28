@@ -43,18 +43,18 @@ export default class LocalQuotes extends Plugin {
       if (this.settings.useAutomaticRefreshInterval) {
         this.settings._automaticRefreshIntervalObject = window.setInterval(
           () => {
-            console.log("refreshing");
-
             const formed = formQuotesMap(
               this.settings,
               this.app.workspace.getActiveViewOfType(View)
             );
 
-            _rerenderAllQuotesForView(
-              this,
-              this.app.workspace.getActiveViewOfType(View),
-              formed
-            );
+            if (formed.size > 0) {
+              _rerenderAllQuotesForView(
+                this,
+                this.app.workspace.getActiveViewOfType(View),
+                formed
+              );
+            }
           },
           this.settings.automaticRefreshInterval
         );
@@ -66,7 +66,7 @@ export default class LocalQuotes extends Plugin {
     // Watching modify events
     if (this.settings.updateFilesQuotesOnModify) {
       this.registerEvent(
-        app.metadataCache.on("changed", (f) => onFileModify(this, f))
+        this.app.metadataCache.on("changed", (f) => onFileModify(this, f))
       );
     }
 
