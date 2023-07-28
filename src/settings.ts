@@ -22,7 +22,9 @@ export interface LocalQuotesSettings {
   hideRefreshButton: boolean;
   displayWarnings: boolean;
   enableDblClick: boolean;
-  _refreshIntervalObject: ReturnType<typeof setInterval> | number;
+  useAutomaticRefreshInterval: boolean;
+  automaticRefreshInterval: number;
+  _automaticRefreshIntervalObject: ReturnType<typeof setInterval> | number;
 }
 
 export const DEFAULT_SETTINGS: LocalQuotesSettings = {
@@ -42,7 +44,9 @@ export const DEFAULT_SETTINGS: LocalQuotesSettings = {
   hideRefreshButton: false,
   displayWarnings: true,
   enableDblClick: true,
-  _refreshIntervalObject: null,
+  useAutomaticRefreshInterval: true,
+  automaticRefreshInterval: 1000,
+  _automaticRefreshIntervalObject: null,
 };
 
 export class LocalQuotesSettingTab extends PluginSettingTab {
@@ -59,6 +63,20 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
     containerEl.empty();
 
     containerEl.createEl("h2", { text: "General" });
+
+    new Setting(containerEl)
+      .setName("Use automatic refresh interval")
+      .setDesc(
+        "If you turn it on, your quotes will be refreshed automatically without reopening the note"
+      )
+      .addToggle((t) =>
+        t
+          .setValue(this.plugin.settings.useAutomaticRefreshInterval)
+          .onChange(async (value) => {
+            this.plugin.settings.useAutomaticRefreshInterval = value;
+            await this.plugin.saveSettings();
+          })
+      );
 
     new Setting(containerEl)
       .setName("Quote tag")
@@ -237,6 +255,22 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
       );
 
     containerEl.createEl("h2", { text: "Danger Zone" });
+
+    new Setting(containerEl)
+      .setName("Automatic refresh interval")
+      .setDesc(
+        "You can set default automatic refresh interval (in miliseconds)"
+      )
+      .addText((text) =>
+        text
+          .setPlaceholder(DEFAULT_SETTINGS.automaticRefreshInterval.toString())
+          .setValue(this.plugin.settings.automaticRefreshInterval.toString())
+          .onChange(async (value) => {
+            this.plugin.settings.automaticRefreshInterval = parseInt(value);
+            await this.plugin.saveSettings();
+          })
+      );
+
     new Setting(containerEl)
       .setName("Display warnings")
       .setDesc(

@@ -40,22 +40,27 @@ export default class LocalQuotes extends Plugin {
         )
       );
 
-      this.settings._refreshIntervalObject = window.setInterval(() => {
-        console.log("refreshing");
+      if (this.settings.useAutomaticRefreshInterval) {
+        this.settings._automaticRefreshIntervalObject = window.setInterval(
+          () => {
+            console.log("refreshing");
 
-        const formed = formQuotesMap(
-          this.settings,
-          this.app.workspace.getActiveViewOfType(View)
+            const formed = formQuotesMap(
+              this.settings,
+              this.app.workspace.getActiveViewOfType(View)
+            );
+
+            _rerenderAllQuotesForView(
+              this,
+              this.app.workspace.getActiveViewOfType(View),
+              formed
+            );
+          },
+          this.settings.automaticRefreshInterval
         );
 
-        _rerenderAllQuotesForView(
-          this,
-          this.app.workspace.getActiveViewOfType(View),
-          formed
-        );
-      }, 1000);
-
-      this.registerInterval(this.settings._refreshIntervalObject);
+        this.registerInterval(this.settings._automaticRefreshIntervalObject);
+      }
     });
 
     // Watching modify events
@@ -180,7 +185,7 @@ export default class LocalQuotes extends Plugin {
   }
 
   async onunload() {
-    clearInterval(this.settings._refreshIntervalObject);
+    clearInterval(this.settings._automaticRefreshIntervalObject);
   }
 
   async loadSettings() {
