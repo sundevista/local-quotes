@@ -1,4 +1,4 @@
-import { App, MarkdownRenderer, MarkdownView, Notice, View } from "obsidian";
+import { App, MarkdownRenderer, MarkdownView, View } from "obsidian";
 import { QuotesMap, searchQuote } from "../types/quote";
 import { getBlockMetadataIdx } from "./scan";
 import LocalQuotes from "../main";

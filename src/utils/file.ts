@@ -21,6 +21,7 @@ export async function onFileModify(
 }
 
 function clearFileEntries(quoteVault: Quote[], filename: string): void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   for (const [eIdx, _] of quoteVault.entries()) {
     quoteVault[eIdx].files = quoteVault[eIdx].files.filter(
       (f) => f.filename !== filename

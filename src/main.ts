@@ -127,7 +127,7 @@ export default class LocalQuotes extends Plugin {
         if (this.settings.quoteVault && this.settings.quoteVault.length > 0) {
           new QuoteMakerModal(this).open();
         } else {
-          new QuoteVaultErrorModal().open();
+          new QuoteVaultErrorModal(this.app).open();
         }
       },
     });
@@ -147,7 +147,7 @@ export default class LocalQuotes extends Plugin {
         if (this.settings.quoteVault && this.settings.quoteVault.length > 0) {
           new OneTimeQuoteMakerModal(this).open();
         } else {
-          new QuoteVaultErrorModal().open();
+          new QuoteVaultErrorModal(this.app).open();
         }
       },
     });
@@ -178,7 +178,7 @@ export default class LocalQuotes extends Plugin {
         if (this.settings.quoteVault && this.settings.quoteVault.length > 0) {
           new StatisticsModal(this).open();
         } else {
-          new QuoteVaultErrorModal().open();
+          new QuoteVaultErrorModal(this.app).open();
         }
       },
     });

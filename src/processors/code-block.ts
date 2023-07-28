@@ -31,7 +31,6 @@ export async function processCodeBlock(
     !plugin.settings.hideRefreshButton &&
     !(plugin.settings.enableDblClick && el.matchParent(".is-mobile"))
   ) {
-    // @ts-ignore
     const iconEl = el.createEl("a", { cls: "reset-icon" });
     setIcon(iconEl, "lucide-rotate-ccw");
   }

@@ -35,7 +35,7 @@ export class OneTimeQuoteMakerModal extends Modal {
       },
     };
 
-    let { contentEl } = this;
+    const { contentEl } = this;
 
     contentEl.createEl("h1", { text: "🗓 One-Time Quote Maker" });
 
@@ -72,7 +72,7 @@ export class OneTimeQuoteMakerModal extends Modal {
       .setName("Advanced search")
       .setDesc(
         createFragment((e) => {
-          let p = e.createEl("span");
+          const p = e.createEl("span");
           p.appendText("You can freely use '*' and || after reading ");
           p.appendChild(
             createDomLink(
@@ -116,7 +116,7 @@ export class OneTimeQuoteMakerModal extends Modal {
           })
       );
 
-    let buttonContainer: HTMLElement = contentEl.createEl("div");
+    const buttonContainer: HTMLElement = contentEl.createEl("div");
     buttonContainer.addClass("local-quotes-modal-button-container");
 
     new Setting(buttonContainer).addButton((btn) =>
