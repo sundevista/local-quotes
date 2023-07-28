@@ -1,6 +1,6 @@
 import LocalQuotes from "../main";
 import { TFile } from "obsidian";
-import { checkFileTag, getAuthorIdx } from "./scan";
+import { isTagPresented, getAuthorIdx } from "./scan";
 import { Quote, updateQuotesVault } from "../types/quote";
 
 export async function onFileModify(
@@ -8,7 +8,7 @@ export async function onFileModify(
   file: TFile
 ): Promise<void> {
   if (
-    checkFileTag(
+    isTagPresented(
       plugin.app,
       file,
       plugin.settings.quoteTag,

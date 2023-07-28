@@ -15,7 +15,7 @@ export function getBlockMetadataIdx(plugin: LocalQuotes, id: string): number {
   return plugin.settings.blockMetadata.findIndex((e) => e.id === id);
 }
 
-export function checkFileTag(
+export function isTagPresented(
   app: App,
   f: TFile,
   tag: string,
@@ -39,9 +39,9 @@ export function checkFileTag(
       if (displayWarnings)
         console.log(
           "! This file may have invalid YAML: " +
-            f.name +
+            f?.name +
             " (" +
-            f.path +
+            f?.path +
             ").\n" +
             "You can disable warnings in the settings of the Local Quotes plugin."
         );
@@ -57,5 +57,5 @@ export function findTaggedFiles(
 ): TFile[] {
   return app.vault
     .getMarkdownFiles()
-    .filter((file) => checkFileTag(app, file, tag, displayWarnings));
+    .filter((file) => isTagPresented(app, file, tag, displayWarnings));
 }
