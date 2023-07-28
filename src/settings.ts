@@ -67,7 +67,7 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Use automatic refresh interval")
       .setDesc(
-        "If you turn it on, your quotes will be refreshed automatically without reopening the note"
+        "If you turn it on, your quotes will be refreshed automatically without reopening the note. You need to restart Obsidian to make this option work."
       )
       .addToggle((t) =>
         t
@@ -259,7 +259,8 @@ export class LocalQuotesSettingTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Automatic refresh interval")
       .setDesc(
-        "You can set default automatic refresh interval (in miliseconds)"
+        "You can set default automatic refresh interval (in miliseconds)." +
+          " You need to restart Obsidian to make this option work."
       )
       .addText((text) =>
         text
