@@ -1,4 +1,4 @@
-[DOCUMENTATION](https://decatetsu.github.io/local-quotes/) / [ROADMAP](https://github.com/users/decatetsu/projects/2/views/1)
+[DOCUMENTATION](https://sundevista.github.io/local-quotes/) / [ROADMAP](https://github.com/users/sundevista/projects/2/views/1)
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/sundevista)
 
