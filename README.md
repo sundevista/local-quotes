@@ -17,6 +17,10 @@ This plugin allows you to:
 
 ![demo](https://github.com/decatetsu/local-quotes/raw/master/assets/demo.gif)
 
+## ⬇️ Installation
+
+Plugin is available on official community plugin marketplace. Just visit [this link](https://obsidian.md/plugins?search=local%20quotes#).
+
 ## 🎯 Purpose
 
 I started to create this plugin with only one idea — I wanted to see in my Index note
